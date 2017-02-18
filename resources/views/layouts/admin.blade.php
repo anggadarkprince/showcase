@@ -38,9 +38,13 @@
             <li><a href="{{ route('admin.category') }}" {{ Request::segment(2) == 'category' ? 'class=active' : '' }}>Categories</a></li>
             <li><a href="{{ route('admin.report') }}" {{ Request::segment(2) == 'report' ? 'class=active' : '' }}>Report</a></li>
             <li><a href="{{ url('/'.App::getLocale().'/contact') }}" {{ Request::segment(2) == 'contact' ? 'class=active' : '' }}>Contact</a></li>
+            <li><a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
         </ul>
     </div>
     <!-- /#sidebar-wrapper -->
+    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+        {{ csrf_field() }}
+    </form>
 
     <!-- Page Content -->
     <div id="page-content-wrapper">

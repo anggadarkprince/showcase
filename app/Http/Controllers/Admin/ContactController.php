@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
-class Contact extends Controller
+class ContactController extends Controller
 {
     /**
      * Show contact profile.

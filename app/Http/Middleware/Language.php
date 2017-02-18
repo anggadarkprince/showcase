@@ -29,6 +29,7 @@ class Language
 
         if ( ! array_key_exists($locale, config('app.locales'))) {
             $segments = $request->segments();
+
             array_unshift($segments, config('app.fallback_locale'));
 
             return $this->redirector->to(implode('/', $segments));

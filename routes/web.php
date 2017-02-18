@@ -15,56 +15,26 @@ Route::get('/', ['domain' => 'laravel.dev', function () {
     return view('welcome');
 }]);
 
-Route::match(['get', 'post'], '/about', function () {
+Route::match(['get', 'post'], '/about', ['domain' => 'laravel.dev', function () {
     return "Welcome to laravel 5.3 sandbox";
-});
+}]);
 
-Route::group(['domain' => 'account.laravel.dev', 'prefix' => '{user}'], function () {
-    Route::get('/', [
-        'as' => 'account.profile.show',
-        'uses' => 'UserController@show'
-    ]);
-    Route::get('/portfolio', [
-        'as' => 'account.profile.portfolio',
-        'uses' => 'UserController@portfolio'
-    ]);
-    Route::get('/about', [
-        'as' => 'account.profile.about',
-        'uses' => 'UserController@about'
-    ]);
-    Route::get('/contact', [
-        'as' => 'account.profile.contact',
-        'uses' => 'UserController@contact'
-    ]);
-});
-
-Route::group(['domain' => 'laravel.dev', 'prefix' => '{user}'], function () {
-    Route::get('/', [
-        'as' => 'profile.show',
-        'uses' => 'PageController@show'
-    ]);
-    Route::get('/portfolio', [
-        'as' => 'profile.portfolio',
-        'uses' => 'PageController@portfolio'
-    ]);
-    Route::get('/about', [
-        'as' => 'profile.about',
-        'uses' => 'PageController@about'
-    ]);
-    Route::get('/contact', [
-        'as' => 'profile.contact',
-        'uses' => 'PageController@contact'
-    ]);
-});
+Route::get('/home', 'HomeController@index');
 
 Route::group(['domain' => 'admin.laravel.dev', 'namespace' => 'Admin'], function () {
+    // Authentication Routes...
+    Route::get('login', 'Auth\LoginController@showLoginForm')->name('admin.login');
+    Route::post('login', 'Auth\LoginController@login');
+    Route::post('logout', 'Auth\LoginController@logout')->name('admin.logout');
+
     Route::get('/', function () {
-        return 'Admin Login';
-    });
+        return redirect('dashboard');
+    })->middleware('auth:admin');
 
     Route::get('dashboard', [
         'as' => 'admin.dashboard',
-        'uses' => 'Dashboard'
+        'uses' => 'DashboardController',
+        'middleware' => 'auth:admin'
     ]);
 
     Route::resource('user', 'UserController', [
@@ -114,11 +84,51 @@ Route::group(['domain' => 'admin.laravel.dev', 'namespace' => 'Admin'], function
 
     Route::get('report', [
         'as' => 'admin.report',
-        'uses' => 'Report@index'
+        'uses' => 'ReportController@index'
     ]);
 
     Route::any('contact', [
         'as' => 'admin.contact',
-        'uses' => 'Contact'
+        'uses' => 'ContactController'
     ]);
 });
+
+Route::group(['domain' => 'account.laravel.dev', 'prefix' => '{user}'], function () {
+    Route::get('/', [
+        'as' => 'account.profile.show',
+        'uses' => 'UserController@show'
+    ]);
+    Route::get('/portfolio', [
+        'as' => 'account.profile.portfolio',
+        'uses' => 'UserController@portfolio'
+    ]);
+    Route::get('/about', [
+        'as' => 'account.profile.about',
+        'uses' => 'UserController@about'
+    ]);
+    Route::get('/contact', [
+        'as' => 'account.profile.contact',
+        'uses' => 'UserController@contact'
+    ]);
+});
+
+Route::group(['domain' => 'laravel.dev', 'prefix' => '{user}'], function () {
+    Route::get('/', [
+        'as' => 'profile.show',
+        'uses' => 'PageController@show'
+    ]);
+    Route::get('/portfolio', [
+        'as' => 'profile.portfolio',
+        'uses' => 'PageController@portfolio'
+    ]);
+    Route::get('/about', [
+        'as' => 'profile.about',
+        'uses' => 'PageController@about'
+    ]);
+    Route::get('/contact', [
+        'as' => 'profile.contact',
+        'uses' => 'PageController@contact'
+    ]);
+});
+
+
