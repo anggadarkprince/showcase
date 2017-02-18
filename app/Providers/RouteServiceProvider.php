@@ -52,8 +52,13 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes($request)
     {
-        $locale = $request->segment(1);
-        $this->app->setLocale($locale);
+        $locale = $request->segment(1, '');
+        if(array_key_exists($locale, config('app.locales'))){
+            $this->app->setLocale($locale);
+        }
+        else{
+            $locale = '';
+        }
 
         Route::group([
             'middleware' => 'web',

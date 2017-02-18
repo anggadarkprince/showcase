@@ -26,7 +26,7 @@ class Language
     {
         // Make sure current locale exists.
         $locale = $request->segment(1);
-
+        /*
         if ( ! array_key_exists($locale, config('app.locales'))) {
             $segments = $request->segments();
 
@@ -36,6 +36,10 @@ class Language
         }
 
         $this->app->setLocale($locale);
+        */
+        if (array_key_exists($locale, config('app.locales'))) {
+            $this->app->setLocale($locale);
+        }
 
         return $next($request);
     }

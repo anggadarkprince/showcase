@@ -28,9 +28,17 @@
     <script defer>
         window.onload = function () {
             $('.locale').on('change', function () {
+                var locales = <?php echo json_encode(config('app.locales')) ?>;
                 var lang = this.value;
                 var pathname = window.location.pathname.replace(/^\//, "").split('/');
-                pathname.splice(0, 1, lang);
+                if(pathname.length > 0){
+                    if(locales[pathname[0]] != undefined){
+                        pathname.splice(0, 1, lang);
+                    }
+                    else{
+                        pathname.unshift(lang);
+                    }
+                }
                 var url = pathname.join('/');
                 var destUrl = window.location.protocol + "//" + window.location.host + '/' + url;
                 window.location.href = destUrl;

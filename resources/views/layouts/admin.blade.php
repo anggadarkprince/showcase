@@ -31,13 +31,20 @@
                     Showcase.dev
                 </a>
             </li>
-            <li><a href="{{ route('admin.dashboard') }}" {{ Request::segment(2) == 'dashboard' ? 'class=active' : '' }}>Dashboard</a></li>
-            <li><a href="{{ route('admin.user') }}" {{ Request::segment(2) == 'user' ? 'class=active' : '' }}>Users</a></li>
-            <li><a href="{{ route('admin.portfolio') }}" {{ Request::segment(2) == 'portfolio' ? 'class=active' : '' }}>Portfolio</a></li>
-            <li><a href="{{ route('admin.tag') }}" {{ Request::segment(2) == 'tag' ? 'class=active' : '' }}>Tags</a></li>
-            <li><a href="{{ route('admin.category') }}" {{ Request::segment(2) == 'category' ? 'class=active' : '' }}>Categories</a></li>
-            <li><a href="{{ route('admin.report') }}" {{ Request::segment(2) == 'report' ? 'class=active' : '' }}>Report</a></li>
-            <li><a href="{{ url('/'.App::getLocale().'/contact') }}" {{ Request::segment(2) == 'contact' ? 'class=active' : '' }}>Contact</a></li>
+            <?php
+                $segment = 1;
+                $locale = Request::segment(1, '');
+                if(array_key_exists($locale, config('app.locales'))){
+                    $segment = 2;
+                }
+            ?>
+            <li><a href="{{ route('admin.dashboard') }}" {{ Request::segment($segment) == 'dashboard' ? 'class=active' : '' }}>Dashboard</a></li>
+            <li><a href="{{ route('admin.user') }}" {{ Request::segment($segment) == 'user' ? 'class=active' : '' }}>Users</a></li>
+            <li><a href="{{ route('admin.portfolio') }}" {{ Request::segment($segment) == 'portfolio' ? 'class=active' : '' }}>Portfolio</a></li>
+            <li><a href="{{ route('admin.tag') }}" {{ Request::segment($segment) == 'tag' ? 'class=active' : '' }}>Tags</a></li>
+            <li><a href="{{ route('admin.category') }}" {{ Request::segment($segment) == 'category' ? 'class=active' : '' }}>Categories</a></li>
+            <li><a href="{{ route('admin.report') }}" {{ Request::segment($segment) == 'report' ? 'class=active' : '' }}>Report</a></li>
+            <li><a href="{{ url('/'.App::getLocale().'/contact') }}" {{ Request::segment($segment) == 'contact' ? 'class=active' : '' }}>Contact</a></li>
             <li><a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
         </ul>
     </div>
