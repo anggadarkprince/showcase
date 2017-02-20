@@ -44,12 +44,12 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         @if (Auth::check())
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Portfolio</a></li>
-                        <li><a href="#">Explore</a></li>
+                        <li><a href="{{ route('account.profile.show', [Auth::user()->username]) }}">Home</a></li>
+                        <li><a href="{{ route('account.profile.portfolio', [Auth::user()->username]) }}">Portfolio</a></li>
+                        <li><a href="{{ route('page.explore') }}">Explore</a></li>
                         @else
-                        <li><a href="#">Explore</a></li>
-                        <li><a href="#">Help</a></li>
+                        <li><a href="{{ route('page.explore') }}">Explore</a></li>
+                        <li><a href="{{ route('page.help') }}">Help</a></li>
                         @endif
                     </ul>
 
@@ -67,7 +67,7 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="#">Settings</a>
+                                        <a href="{{ route('account.profile.settings', [Auth::user()->username]) }}">Settings</a>
                                         <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
