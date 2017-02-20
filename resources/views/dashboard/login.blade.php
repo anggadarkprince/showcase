@@ -15,10 +15,10 @@
 
     <!-- Scripts -->
     <script>
-        window.Laravel = <?php echo json_encode([
+        window.Showcase = <?php echo json_encode([
                 'csrfToken' => csrf_token(),
         ]); ?>;
-        console.log('token: ' + window.Laravel.csrfToken);
+        console.log('token: ' + window.Showcase.csrfToken);
     </script>
 </head>
 <body>

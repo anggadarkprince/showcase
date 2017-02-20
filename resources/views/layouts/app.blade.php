@@ -15,7 +15,7 @@
 
     <!-- Scripts -->
     <script>
-        window.Laravel = <?php echo json_encode([
+        window.Showcase = <?php echo json_encode([
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>

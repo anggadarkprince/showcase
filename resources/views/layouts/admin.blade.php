@@ -11,8 +11,14 @@
 
     <title>Showcase - @yield('title')</title>
 
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/simple-sidebar.css') }}" rel="stylesheet">
+    <link href="{{ elixir('css/support.css') }}" rel="stylesheet">
+    <link href="{{ elixir('css/admin.css') }}" rel="stylesheet">
+
+    <script>
+        window.Showcase = <?php echo json_encode([
+                'csrfToken' => csrf_token(),
+        ]); ?>
+    </script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -63,8 +69,8 @@
 </div>
 <!-- /#wrapper -->
 
-<script src="{{ asset('js/jquery.js') }}"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ elixir('js/functions.js') }}"></script>
+<script src="{{ elixir('js/app.js') }}"></script>
 <script>
     $.ajaxSetup({
         headers: {

@@ -12,7 +12,7 @@ require('bootstrap-sass');
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
- * using reactive data binding and reusable components. Vue's API is clean
+ * using reactive data binding and reusable themes. Vue's API is clean
  * and simple, leaving you to focus on building your next great project.
  */
 
@@ -26,7 +26,7 @@ require('vue-resource');
  */
 
 Vue.http.interceptors.push((request, next) => {
-    request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
+    request.headers.set('X-CSRF-TOKEN', Showcase.csrfToken);
 
     next();
 });

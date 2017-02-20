@@ -1,4 +1,4 @@
-const elixir = require('laravel-elixir');
+var elixir = require('laravel-elixir');
 
 require('laravel-elixir-vue-2');
 
@@ -13,7 +13,31 @@ require('laravel-elixir-vue-2');
  |
  */
 
+// syntax ECMAscript 2015
 elixir((mix) => {
     mix.sass('app.scss')
        .webpack('app.js');
+});
+
+elixir(function(mix) {
+    // compile and combine admin (+css) sass files
+    mix.sass(['admin.scss', '../css/simple-sidebar.css'], 'public/css/admin.css');
+
+    // combine plain css
+    mix.styles(['helper.css','misc.css'], 'public/css/support.css');
+
+    // combine scripts
+    mix.scripts(['scrollto.js', 'functions.js'], 'public/js/functions.js');
+
+    // copy file
+    mix.copy('resources/assets/js/fontloader.js', 'public/js/fontloader.js');
+
+    // Versioning with hash like styles-a322t45.css
+    mix.version(['css/app.css', 'css/support.css', 'css/admin.css',
+        'js/app.js', 'js/functions.js', 'js/fontloader.js']);
+
+    // Auto refresh when run gulp watch
+    mix.browserSync({
+        proxy: 'laravel.dev:8080'
+    });
 });
