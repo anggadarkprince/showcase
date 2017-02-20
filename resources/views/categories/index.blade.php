@@ -21,7 +21,9 @@
             <th>Category</th>
             <th>Detail</th>
             <th>Portfolios</th>
+            @can('delete', \App\Category::class)
             <th width="120px">Action</th>
+            @endcan
         </tr>
         </thead>
         <tbody>
@@ -33,6 +35,9 @@
                 <td>{{ $category->category }}</td>
                 <td>{{ $category->detail }}</td>
                 <td>{{ $category->portfolios()->count() }}</td>
+
+                @can('delete', \App\Category::class)
+
                 <td>
                     <form action="{{ route('admin.category.destroy', [$category->id]) }}" method="post"
                           style="display: inline-block">
@@ -43,6 +48,9 @@
                         </button>
                     </form>
                 </td>
+
+                @endcan
+
             </tr>
         @empty
             <tr>

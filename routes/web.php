@@ -29,66 +29,68 @@ Route::group(['domain' => 'admin.laravel.dev', 'namespace' => 'Admin'], function
         return redirect('dashboard');
     })->middleware('auth:admin');
 
-    Route::get('dashboard', [
-        'as' => 'admin.dashboard',
-        'uses' => 'DashboardController',
-        'middleware' => 'auth:admin'
-    ]);
+    Route::group(['middleware' => 'auth:admin'], function () {
+        Route::get('dashboard', [
+            'as' => 'admin.dashboard',
+            'uses' => 'DashboardController',
+            'middleware' => 'auth:admin'
+        ]);
 
-    Route::resource('user', 'UserController', [
-        'names' => [
-            'index' => 'admin.user',
-            'create' => 'admin.user.create',
-            'store' => 'admin.user.store',
-            'edit' => 'admin.user.edit',
-            'update' => 'admin.user.update',
-            'show' => 'admin.user.show',
-            'destroy' => 'admin.user.destroy'
-        ]
-    ]);
+        Route::resource('user', 'UserController', [
+            'names' => [
+                'index' => 'admin.user',
+                'create' => 'admin.user.create',
+                'store' => 'admin.user.store',
+                'edit' => 'admin.user.edit',
+                'update' => 'admin.user.update',
+                'show' => 'admin.user.show',
+                'destroy' => 'admin.user.destroy'
+            ]
+        ]);
 
-    Route::resource('portfolio', 'PortfolioController', [
-        'names' => [
-            'index' => 'admin.portfolio',
-            'create' => 'admin.portfolio.create',
-            'store' => 'admin.portfolio.store',
-            'edit' => 'admin.portfolio.edit',
-            'update' => 'admin.portfolio.update',
-            'show' => 'admin.portfolio.show',
-            'destroy' => 'admin.portfolio.destroy'
-        ]
-    ]);
+        Route::resource('portfolio', 'PortfolioController', [
+            'names' => [
+                'index' => 'admin.portfolio',
+                'create' => 'admin.portfolio.create',
+                'store' => 'admin.portfolio.store',
+                'edit' => 'admin.portfolio.edit',
+                'update' => 'admin.portfolio.update',
+                'show' => 'admin.portfolio.show',
+                'destroy' => 'admin.portfolio.destroy'
+            ]
+        ]);
 
-    Route::resource('tag', 'TagController', [
-        'only' => ['index', 'store', 'destroy'],
-        'parameters' => [
-            'tag' => 'id'
-        ],
-        'names' => [
-            'index' => 'admin.tag',
-            'store' => 'admin.tag.store',
-            'destroy' => 'admin.tag.destroy'
-        ]
-    ]);
+        Route::resource('tag', 'TagController', [
+            'only' => ['index', 'store', 'destroy'],
+            'parameters' => [
+                'tag' => 'id'
+            ],
+            'names' => [
+                'index' => 'admin.tag',
+                'store' => 'admin.tag.store',
+                'destroy' => 'admin.tag.destroy'
+            ]
+        ]);
 
-    Route::resource('category', 'CategoryController', [
-        'except' => ['show', 'create', 'edit', 'update'],
-        'names' => [
-            'index' => 'admin.category',
-            'store' => 'admin.category.store',
-            'destroy' => 'admin.category.destroy'
-        ]
-    ]);
+        Route::resource('category', 'CategoryController', [
+            'except' => ['show', 'create', 'edit', 'update'],
+            'names' => [
+                'index' => 'admin.category',
+                'store' => 'admin.category.store',
+                'destroy' => 'admin.category.destroy'
+            ]
+        ]);
 
-    Route::get('report', [
-        'as' => 'admin.report',
-        'uses' => 'ReportController@index'
-    ]);
+        Route::get('report', [
+            'as' => 'admin.report',
+            'uses' => 'ReportController@index'
+        ]);
 
-    Route::any('contact', [
-        'as' => 'admin.contact',
-        'uses' => 'ContactController'
-    ]);
+        Route::any('contact', [
+            'as' => 'admin.contact',
+            'uses' => 'ContactController'
+        ]);
+    });
 });
 
 Auth::routes();

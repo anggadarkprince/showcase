@@ -45,7 +45,9 @@
                 }
             ?>
             <li><a href="{{ route('admin.dashboard') }}" {{ Request::segment($segment) == 'dashboard' ? 'class=active' : '' }}>Dashboard</a></li>
+            @can('view', \App\User::class)
             <li><a href="{{ route('admin.user') }}" {{ Request::segment($segment) == 'user' ? 'class=active' : '' }}>Users</a></li>
+            @endcan
             <li><a href="{{ route('admin.portfolio') }}" {{ Request::segment($segment) == 'portfolio' ? 'class=active' : '' }}>Portfolio</a></li>
             <li><a href="{{ route('admin.tag') }}" {{ Request::segment($segment) == 'tag' ? 'class=active' : '' }}>Tags</a></li>
             <li><a href="{{ route('admin.category') }}" {{ Request::segment($segment) == 'category' ? 'class=active' : '' }}>Categories</a></li>

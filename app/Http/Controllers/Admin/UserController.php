@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -154,6 +155,11 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        //$this->authorize('delete', $user);
+        if (Gate::denies('delete', $user)) {
+            abort(403, "Unauthorized to perform this action");
+        }
+
         if ($user->delete()) {
             return redirect(route('admin.user'))->with([
                 'action' => 'success',
