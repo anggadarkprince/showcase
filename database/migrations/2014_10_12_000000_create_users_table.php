@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->enum('gender', ['male', 'female'])->default('male');
             $table->enum('status', ['activated', 'pending', 'suspended'])->default('pending');
             $table->string('api_token', 60)->unique();
+            $table->string('token', 50)->unique();
             $table->rememberToken();
             $table->timestamps();
         });

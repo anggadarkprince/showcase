@@ -24,6 +24,7 @@ class UsersTableSeeder extends Seeder
             'about' => 'Introvert Engineer',
             'status' => 'activated',
             'api_token' => str_random(60),
+            'token' => str_random(50),
             'remember_token' => str_random(10),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()

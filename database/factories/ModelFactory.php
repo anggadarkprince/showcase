@@ -28,6 +28,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'gender' => $faker->randomElement(['male', 'female']),
         'status' => $faker->randomElement(['activated', 'pending', 'suspended']),
         'api_token' => str_random(60),
+        'token' => str_random(50),
         'remember_token' => str_random(10),
     ];
 });

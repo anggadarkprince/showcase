@@ -19,6 +19,8 @@ Route::match(['get', 'post'], '/about', ['domain' => 'laravel.dev', function () 
     return "Welcome to laravel 5.3 sandbox";
 }]);
 
+Auth::routes();
+Route::get('/activation/{token}', 'Auth\RegisterController@userActivation');
 Route::get('/home', 'HomeController@index');
 
 Route::group(['domain' => 'admin.laravel.dev', 'namespace' => 'Admin'], function () {
@@ -130,5 +132,4 @@ Route::group(['domain' => 'laravel.dev', 'prefix' => '{user}'], function () {
         'uses' => 'PageController@contact'
     ]);
 });
-
 

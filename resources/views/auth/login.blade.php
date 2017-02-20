@@ -10,11 +10,27 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                         {{ csrf_field() }}
 
+                        @if ($message = Session::get('success'))
+                            <div class="alert alert-success">
+                                <p>
+                                    {{ $message }}
+                                </p>
+                            </div>
+                        @endif
+                        @if ($message = Session::get('warning'))
+                            <div class="alert alert-warning">
+                                <p>
+                                    {{ $message }}
+                                </p>
+                            </div>
+                        @endif
+
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                                <input id="email" type="email" class="form-control" name="email"
+                                       value="{{ old('email') }}" placeholder="Email" required autofocus>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -28,7 +44,8 @@
                             <label for="password" class="col-md-4 control-label">Password</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <input id="password" type="password" class="form-control" name="password"
+                                       placeholder="Password" required>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
