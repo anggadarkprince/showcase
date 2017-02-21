@@ -143,7 +143,7 @@ Route::group(['domain' => 'account.laravel.dev'], function () {
     ]);
 });
 
-Route::group(['domain' => 'account.laravel.dev', 'prefix' => '{user}'], function () {
+Route::group(['domain' => 'account.laravel.dev', 'prefix' => '{user}', 'middleware' => 'account'], function () {
     Route::get('/', [
         'as' => 'account.show',
         'uses' => 'UserController@show'
@@ -166,10 +166,16 @@ Route::group(['domain' => 'account.laravel.dev', 'prefix' => '{user}'], function
         ]
     ]);
 
+    Route::put('/settings', [
+        'as' => 'account.settings.store',
+        'uses' => 'UserController@storeSettings'
+    ]);
+
     Route::get('/settings', [
         'as' => 'account.settings',
         'uses' => 'UserController@settings'
     ]);
+
 });
 
 Route::group(['domain' => 'laravel.dev', 'prefix' => '{user}'], function () {

@@ -7741,7 +7741,7 @@ a:hover {
   display: -webkit-box;
   display: flex;
   background: none;
-  border: 3px dashed #3097D1;
+  border: 2px dashed #3097D1;
 }
 
 .portfolio-item-create a {
@@ -7754,6 +7754,52 @@ a:hover {
   line-height: 530px;
   width: 100%;
   text-decoration: none;
+}
+
+.form-title h3, .form-title h4 {
+  margin-top: 0;
+}
+
+.field-group {
+  margin-bottom: 30px;
+}
+
+.form-control {
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.btn {
+  border-radius: 0;
+}
+
+.avatar-preview {
+  display: block;
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+footer {
+  margin-top: 50px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 0 !important;
+}
+
+.m-b-md {
+  margin-bottom: 30px;
+}
+
+.m-b-sm {
+  margin-bottom: 20px;
+}
+
+.m-t-md {
+  margin-top: 30px;
+}
+
+.m-t-sm {
+  margin-top: 20px;
 }
 
 /*# sourceMappingURL=app.css.map */

@@ -85,7 +85,13 @@
             </div>
         </nav>
 
-        @yield('content')
+        <div class="content-wrapper">
+            @yield('content')
+        </div>
+
+        <footer class="navbar navbar-default">
+            &copy; {{ date('Y') }} Showcase.dev all rights reserved
+        </footer>
     </div>
 
     <!-- Scripts -->

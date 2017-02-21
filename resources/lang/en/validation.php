@@ -86,6 +86,8 @@ return [
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
 
+    'authorized_password'   => 'Your password mismatch with current active user',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
