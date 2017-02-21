@@ -69,7 +69,7 @@
             @if (Route::has('account.login'))
                 <div class="top-right links">
                     @if (Auth::check())
-                        <a href="{{ route('account.profile.show', [Auth::user()->username]) }}">My Account</a>
+                        <a href="{{ route('account.show', [Auth::user()->username]) }}">My Account</a>
                     @else
                         <a href="{{ route('account.login') }}">Login</a>
                         <a href="{{ route('account.register') }}">Register</a>

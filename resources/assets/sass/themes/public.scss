@@ -1,0 +1,65 @@
+a:hover {
+  text-decoration: none;
+}
+
+.page-title {
+  font-size: 26px;
+  margin-bottom: 40px;
+}
+
+.portfolio-item, .portfolio-item-create {
+  margin-bottom: 30px;
+  padding: 0;
+  background: #ffffff;
+  height: 530px;
+
+  > img {
+    max-height: 360px;
+  }
+
+  .caption {
+    padding: 20px;
+  }
+
+  .title {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 20px;
+  }
+
+  .company {
+    display: block;
+    margin-bottom: 10px;
+    color: $text-color;
+
+    &:hover {
+      color: #3097D1;
+    }
+  }
+
+  time {
+    color: #999999;
+  }
+
+  hr {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+}
+
+.portfolio-item-create {
+  display: flex;
+  background: none;
+  border: 3px dashed #3097D1;
+
+  a {
+    display: block;
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
+    align-items: stretch;
+    line-height: 530px;
+    width: 100%;
+    text-decoration: none;
+  }
+}

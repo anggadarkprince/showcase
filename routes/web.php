@@ -19,15 +19,27 @@ Route::match(['get', 'post'], '/about', ['domain' => 'laravel.dev', function () 
     return "Welcome to laravel 5.3 sandbox";
 }])->name('page.about');
 
-Route::get('/explore', [
-    'as' => 'page.explore',
-    'uses' => 'PageController@explore'
-]);
+Route::group(['domain' => 'laravel.dev'], function () {
+    Route::get('/explore', [
+        'as' => 'page.explore',
+        'uses' => 'PageController@explore'
+    ]);
 
-Route::get('/help', [
-    'as' => 'page.help',
-    'uses' => 'PageController@help'
-]);
+    Route::get('/company/{company}', [
+        'as' => 'search.company',
+        'uses' => 'SearchController@searchByCompany'
+    ]);
+
+    Route::get('/category/{category}', [
+        'as' => 'search.category',
+        'uses' => 'SearchController@searchByCategory'
+    ]);
+
+    Route::get('/help', [
+        'as' => 'page.help',
+        'uses' => 'PageController@help'
+    ]);
+});
 
 Route::group(['domain' => 'admin.laravel.dev', 'namespace' => 'Admin'], function () {
     // Authentication Routes...
@@ -133,17 +145,29 @@ Route::group(['domain' => 'account.laravel.dev'], function () {
 
 Route::group(['domain' => 'account.laravel.dev', 'prefix' => '{user}'], function () {
     Route::get('/', [
-        'as' => 'account.profile.show',
+        'as' => 'account.show',
         'uses' => 'UserController@show'
     ]);
 
     Route::get('/portfolio', [
-        'as' => 'account.profile.portfolio',
-        'uses' => 'UserController@portfolio'
+        'as' => 'account.portfolio',
+        'uses' => 'PortfolioController@index'
+    ]);
+
+    Route::resource('portfolio', 'PortfolioController', [
+        'names' => [
+            'index' => 'account.portfolio',
+            'show' => 'account.portfolio.show',
+            'create' => 'account.portfolio.create',
+            'edit' => 'account.portfolio.edit',
+            'update' => 'account.portfolio.update',
+            'store' => 'account.portfolio.store',
+            'destroy' => 'account.portfolio.destroy'
+        ]
     ]);
 
     Route::get('/settings', [
-        'as' => 'account.profile.settings',
+        'as' => 'account.settings',
         'uses' => 'UserController@settings'
     ]);
 });

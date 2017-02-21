@@ -27,6 +27,10 @@ class PageController extends Controller
         return 'view : contact';
     }
 
+    function explore(){
+        return 'view : explore';
+    }
+
     /**
      * Change locale when is not using prefix like local.dev/en/dashboard
      * @param Request $request

@@ -11,7 +11,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+    <link href="{{ elixir('css/support.css') }}" rel="stylesheet">
+    <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -35,7 +36,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ route('index') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
@@ -44,8 +45,8 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         @if (Auth::check())
-                        <li><a href="{{ route('account.profile.show', [Auth::user()->username]) }}">Home</a></li>
-                        <li><a href="{{ route('account.profile.portfolio', [Auth::user()->username]) }}">Portfolio</a></li>
+                        <li><a href="{{ route('account.show', [Auth::user()->username]) }}">Home</a></li>
+                        <li><a href="{{ route('account.portfolio', [Auth::user()->username]) }}">Portfolio</a></li>
                         <li><a href="{{ route('page.explore') }}">Explore</a></li>
                         @else
                         <li><a href="{{ route('page.explore') }}">Explore</a></li>
@@ -67,7 +68,7 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="{{ route('account.profile.settings', [Auth::user()->username]) }}">Settings</a>
+                                        <a href="{{ route('account.settings', [Auth::user()->username]) }}">Settings</a>
                                         <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
@@ -88,6 +89,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="/js/app.js"></script>
+    <script src="{{ elixir('js/functions.js') }}"></script>
+    <script src="{{ elixir('js/app.js') }}"></script>
 </body>
 </html>

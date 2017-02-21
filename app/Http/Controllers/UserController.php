@@ -19,7 +19,7 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return redirect()->route('account.profile.show', ['user' => $user->username]);
+        return redirect()->route('account.show', ['user' => $user->username]);
     }
 
     public function show(User $user)
@@ -28,17 +28,12 @@ class UserController extends Controller
         if ($user->username == $loggedUser) {
             return view('home.home');
         } else {
-            return redirect()->route('account.profile.show', [$loggedUser]);
+            return redirect()->route('account.show', [$loggedUser]);
         }
-    }
-
-    public function portfolio(User $user)
-    {
-        return 'portfolio';
     }
 
     public function settings(User $user)
     {
-        return 'portfolio';
+        return 'settings';
     }
 }
