@@ -17,7 +17,8 @@ class CreatePortfolioTagsTable extends Migration
             $table->increments('id');
             $table->integer('portfolio_id')->unsigned();
             $table->integer('tag_id')->unsigned();
-            $table->timestamps();
+            $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
 
             $table->foreign('portfolio_id')->references('id')->on('portfolios')->onDelete('cascade');
             $table->foreign('tag_id')->references('id')->on('tags');

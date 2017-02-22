@@ -22,7 +22,7 @@ class CreatePortfoliosTable extends Migration
             $table->string('reference');
             $table->string('date');
             $table->string('company');
-            $table->integer('vote');
+            $table->integer('vote')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

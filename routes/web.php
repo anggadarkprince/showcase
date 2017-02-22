@@ -39,6 +39,11 @@ Route::group(['domain' => 'laravel.dev'], function () {
         'as' => 'page.help',
         'uses' => 'PageController@help'
     ]);
+
+    Route::get('/tag/search/{query}', [
+        'as' => 'tag.search',
+        'uses' => 'TagController@searchTag'
+    ]);
 });
 
 Route::group(['domain' => 'admin.laravel.dev', 'namespace' => 'Admin'], function () {
@@ -147,11 +152,6 @@ Route::group(['domain' => 'account.laravel.dev', 'prefix' => '{user}', 'middlewa
     Route::get('/', [
         'as' => 'account.show',
         'uses' => 'UserController@show'
-    ]);
-
-    Route::get('/portfolio', [
-        'as' => 'account.portfolio',
-        'uses' => 'PortfolioController@index'
     ]);
 
     Route::resource('portfolio', 'PortfolioController', [

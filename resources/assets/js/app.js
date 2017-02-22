@@ -17,9 +17,3 @@ Vue.component('example', require('./components/Example.vue'));
 const app = new Vue({
     el: '#app'
 });
-
-$(document).ready(function () {
-    if ($('.content-wrapper').outerHeight() < $(window).height() - 130) {
-        $('footer').addClass('navbar-fixed-bottom');
-    }
-});

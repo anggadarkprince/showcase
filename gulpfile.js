@@ -27,7 +27,7 @@ elixir(function(mix) {
     mix.styles(['helper.css','misc.css'], 'public/css/support.css');
 
     // combine scripts
-    mix.scripts(['scrollto.js', 'functions.js'], 'public/js/functions.js');
+    mix.scripts(['vendor/typeahead.bundle.js', 'scrollto.js', 'functions.js', 'scripts.js'], 'public/js/functions.js');
 
     // copy file
     mix.copy('resources/assets/js/fontloader.js', 'public/js/fontloader.js');

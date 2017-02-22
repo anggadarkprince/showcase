@@ -8,6 +8,15 @@ class Portfolio extends Model
 {
     protected $dates = ['created_at', 'updated_at', 'date'];
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title', 'description', 'category_id', 'date', 'company', 'reference', 'vote'
+    ];
+
     public function owner()
     {
         return $this->belongsTo(User::class);
@@ -25,6 +34,6 @@ class Portfolio extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'portfolio_tag');
+        return $this->belongsToMany(Tag::class, 'portfolio_tags');
     }
 }

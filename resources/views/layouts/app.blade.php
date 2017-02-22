@@ -18,6 +18,7 @@
     <script>
         window.Showcase = <?php echo json_encode([
             'csrfToken' => csrf_token(),
+            'rootUrl' => route('index')
         ]); ?>
     </script>
 </head>
@@ -95,7 +96,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ elixir('js/functions.js') }}"></script>
     <script src="{{ elixir('js/app.js') }}"></script>
+    <script src="{{ elixir('js/functions.js') }}"></script>
 </body>
 </html>

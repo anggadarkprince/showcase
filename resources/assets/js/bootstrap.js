@@ -43,3 +43,7 @@ Vue.http.interceptors.push((request, next) => {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+
+require('bootstrap-tagsinput');
+
+//var Typeahead = require('typeahead');
