@@ -7767,7 +7767,11 @@ a:hover {
   margin-bottom: 30px;
   padding: 0;
   background: #ffffff;
-  height: 530px;
+  height: 445px;
+}
+
+.portfolio-item .featured, .portfolio-item-create .featured {
+  height: 250px;
 }
 
 .portfolio-item > img, .portfolio-item-create > img {
@@ -7817,7 +7821,7 @@ a:hover {
   vertical-align: middle;
   -webkit-box-align: stretch;
   align-items: stretch;
-  line-height: 530px;
+  line-height: 445px;
   width: 100%;
   text-decoration: none;
 }

@@ -11,7 +11,11 @@ a:hover {
   margin-bottom: 30px;
   padding: 0;
   background: #ffffff;
-  height: 530px;
+  height: 445px;
+
+  .featured{
+    height: 250px;
+  }
 
   > img {
     max-height: 360px;
@@ -58,7 +62,7 @@ a:hover {
     text-align: center;
     vertical-align: middle;
     align-items: stretch;
-    line-height: 530px;
+    line-height: 445px;
     width: 100%;
     text-decoration: none;
   }

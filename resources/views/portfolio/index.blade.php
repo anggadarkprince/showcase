@@ -17,26 +17,58 @@
             @foreach($portfolios as $portfolio)
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail portfolio-item">
-                    <img src="{{ asset('storage/featured/placeholder-rect.jpg') }}" alt="{{ $portfolio->title }} Featured">
+                    <?php
+                    $screenshot = $portfolio->screenshots()->whereIsFeatured(1)->first();
+                        $caption = 'placeholder-rect.jpg';
+                        if(is_null($screenshot)){
+                            $featured = 'placeholder-rect.jpg';
+                        }
+                        else{
+                            $featured = $screenshot->source;
+                            $caption = $screenshot->caption;
+                        }
+                    ?>
+
+                    <div class="featured" style="background: url('{{ asset("storage/screenshots/{$featured}") }}') center center / cover;"></div>
+
                     <div class="caption">
                         <h3 class="title"><a href="{{ route('account.portfolio.show', [$user->username, str_slug($portfolio->title).'-'.$portfolio->id]) }}">{{ $portfolio->title }}</a></h3>
                         <a href="{{ route('search.company', [str_slug($portfolio->company)]) }}" class="company">{{ $portfolio->company }}</a>
-                        <p class="description">
-                            {{ Str::words($portfolio->description, 18) }} <a href="{{ route('account.portfolio.show', [Auth::user()->username, str_slug($portfolio->title).'-'.$portfolio->id]) }}"> More</a>
-                        </p>
                         <div class="timestamp clearfix">
                             <time class="pull-left">{{ $portfolio->date->diffForHumans() }}</time>
                             <span class="pull-right"><a href="{{ route('search.category', [str_slug($portfolio->category->category)]) }}">{{ $portfolio->category->category }}</a></span>
                         </div>
                         <hr>
                         <div class="control">
-                            <a href="#" class="btn btn-default" role="button">Edit</a>
-                            <a href="#" class="btn btn-default" role="button">Delete</a>
+                            <a href="{{ route('account.portfolio.edit', [$user->username, $portfolio->id]) }}" class="btn btn-default" role="button">Edit</a>
+                            <a href="#" class="btn btn-default btn-delete" role="button"
+                            onclick="return deletePortfolio('{{ route('account.portfolio.destroy', [$user->username, $portfolio->id]) }}')">Delete</a>
                         </div>
                     </div>
                 </div>
             </div>
             @endforeach
+
+            <script>
+                $('.btn-delete').on('click', function(e){
+                    e.preventDefault();
+                });
+
+                function deletePortfolio(url){
+                    var answer = confirm('Are you sure want to delete?');
+                    if(answer){
+                        var form = document.getElementById('delete-form');
+                        form.setAttribute('action', url);
+                        form.submit();
+                    }
+                    return answer;
+                }
+            </script>
+            <form id="delete-form" action="#" method="POST" style="display: none;">
+                {{ csrf_field() }}
+                {{ method_field('delete') }}
+            </form>
+
         </div>
     </div>
 @endsection

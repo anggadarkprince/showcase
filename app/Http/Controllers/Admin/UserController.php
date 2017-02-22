@@ -167,7 +167,6 @@ class UserController extends Controller
             ]);
         }
         return redirect()->back()->withErrors([
-            'action' => 'danger',
             'message' => 'Failed to perform delete user'
         ]);
     }

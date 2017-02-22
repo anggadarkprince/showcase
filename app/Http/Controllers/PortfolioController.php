@@ -97,18 +97,18 @@ class PortfolioController extends Controller
                 $screenshotData = [];
                 $screenshots = $request->file('screenshots');
                 $count = 0;
-                foreach ($screenshots as $screenshot):
-                    $name = $screenshot->hashName();
-                    $path = $screenshot->storeAs('public/screenshots', $name);
+                if(count($screenshots) > 0) {
+                    foreach ($screenshots as $screenshot):
+                        $name = $screenshot->hashName();
+                        $path = $screenshot->storeAs('public/screenshots', $name);
 
-                    array_push($screenshotData, [
-                        'caption' => $screenshot->getClientOriginalName(),
-                        'source' => $name,
-                        'is_featured' => ($count++ == 0)
-                    ]);
-                endforeach;
+                        array_push($screenshotData, [
+                            'caption' => $screenshot->getClientOriginalName(),
+                            'source' => $name,
+                            'is_featured' => ($count++ == 0)
+                        ]);
+                    endforeach;
 
-                if(count($screenshotData) > 0){
                     $portfolio->screenshots()->createMany($screenshotData);
                 }
 
@@ -134,7 +134,7 @@ class PortfolioController extends Controller
      */
     public function show($id)
     {
-        //
+        dd('show');
     }
 
     /**
@@ -145,7 +145,7 @@ class PortfolioController extends Controller
      */
     public function edit($id)
     {
-        //
+        dd('edit');
     }
 
     /**
@@ -157,17 +157,37 @@ class PortfolioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        dd('update');
     }
 
     /**
      * Remove the specified resource from storage.
      *
+     * @param User $user
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user, $id)
     {
-        //
+        $portfolio = Portfolio::findOrFail($id);
+
+        $this->authorize('delete', $portfolio);
+try {
+    $title = $portfolio->title;
+    if ($portfolio->delete()) {
+        return redirect(route('account.portfolio', [$user->username]))->with([
+            'action' => 'success',
+            'message' => "{$title} was successfully deleted"
+        ]);
+    }
+}
+catch (\Exception $e){
+    dd($e->getMessage());
+}
+dd($portfolio->trashed());
+        return redirect()->back()->withErrors([
+            'message' => "Failed to delete {$title}"
+        ]);
     }
 }

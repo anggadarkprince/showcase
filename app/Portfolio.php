@@ -3,10 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Portfolio extends Model
 {
-    protected $dates = ['created_at', 'updated_at', 'date'];
+    use SoftDeletes;
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['created_at', 'updated_at', 'deleted_at', 'date'];
 
     /**
      * The attributes that are mass assignable.
@@ -14,7 +22,7 @@ class Portfolio extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'description', 'category_id', 'date', 'company', 'reference', 'vote'
+        'title', 'description', 'category_id', 'date', 'company', 'reference', 'vote', 'deleted_at'
     ];
 
     public function owner()
