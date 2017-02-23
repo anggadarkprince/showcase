@@ -7888,6 +7888,10 @@ a:hover {
   display: block;
 }
 
+.screenshot-item.screenshot-uploaded .screenshot-preview {
+  border: none;
+}
+
 .screenshot-item .screenshot-preview {
   background-position: center;
   background-size: cover;

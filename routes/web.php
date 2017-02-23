@@ -25,19 +25,24 @@ Route::group(['domain' => 'laravel.dev'], function () {
         'uses' => 'PageController@explore'
     ]);
 
-    Route::get('/company/{company}', [
-        'as' => 'search.company',
-        'uses' => 'SearchController@searchByCompany'
-    ]);
-
-    Route::get('/category/{category}', [
-        'as' => 'search.category',
-        'uses' => 'SearchController@searchByCategory'
-    ]);
-
     Route::get('/help', [
         'as' => 'page.help',
         'uses' => 'PageController@help'
+    ]);
+
+    Route::get('/portfolio/company/{company}', [
+        'as' => 'portfolio.search.company',
+        'uses' => 'SearchController@searchByCompany'
+    ]);
+
+    Route::get('/portfolio/category/{category}', [
+        'as' => 'portfolio.search.category',
+        'uses' => 'SearchController@searchByCategory'
+    ]);
+
+    Route::get('/portfolio/tag/{tag}', [
+        'as' => 'portfolio.search.tag',
+        'uses' => 'SearchController@searchByTag'
     ]);
 
     Route::get('/tag/search/{query}', [
@@ -148,7 +153,7 @@ Route::group(['domain' => 'account.laravel.dev'], function () {
     ]);
 });
 
-Route::group(['domain' => 'account.laravel.dev', 'prefix' => '{user}', 'middleware' => 'account'], function () {
+Route::group(['domain' => 'account.laravel.dev', 'prefix' => '{user}', 'middleware' => ['account', 'auth']], function () {
     Route::get('/', [
         'as' => 'account.show',
         'uses' => 'UserController@show'
@@ -164,6 +169,11 @@ Route::group(['domain' => 'account.laravel.dev', 'prefix' => '{user}', 'middlewa
             'store' => 'account.portfolio.store',
             'destroy' => 'account.portfolio.destroy'
         ]
+    ]);
+
+    Route::delete('/screenshot/delete/{screenshot}', [
+        'as' => 'account.screenshot.destroy',
+        'uses' => 'ScreenshotController@deleteScreenshot'
     ]);
 
     Route::put('/settings', [

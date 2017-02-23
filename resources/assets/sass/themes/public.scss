@@ -137,6 +137,13 @@ a:hover {
     display: block;
   }
 
+
+  &.screenshot-uploaded{
+    .screenshot-preview {
+      border: none;
+    }
+  }
+
   .screenshot-preview {
     background-position: center;
     background-size: cover;

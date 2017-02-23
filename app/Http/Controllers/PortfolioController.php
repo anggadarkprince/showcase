@@ -8,6 +8,7 @@ use App\Tag;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class PortfolioController extends Controller
@@ -38,17 +39,8 @@ class PortfolioController extends Controller
         return view('portfolio.create', compact('user', 'categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param User $user
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request, User $user)
+    private function portfolioValidation($data)
     {
-        $data = $request->all();
-
         // turn tags to array
         $tags = explode(',', $data['tags']);
         $data['tags'] = count($tags);
@@ -65,13 +57,55 @@ class PortfolioController extends Controller
 
         Validator::make($data, $rules)->validate();
 
+        return $tags;
+    }
+
+    private function populatePortfolioInput($request)
+    {
+        $except = ['tags', 'screenshots', 'category'];
+        $category_id = $request->input('category');
+        $inputs = $request->except($except);
+        $inputs['category_id'] = $category_id;
+
+        return $inputs;
+    }
+
+    function uploadScreenshots($portfolio, $screenshots)
+    {
+        $screenshotData = [];
+        $count = 0;
+        if (count($screenshots) > 0) {
+            foreach ($screenshots as $screenshot):
+                $name = $screenshot->hashName();
+                $path = $screenshot->storeAs('public/screenshots', $name);
+
+                array_push($screenshotData, [
+                    'caption' => $screenshot->getClientOriginalName(),
+                    'source' => $name,
+                    'is_featured' => ($count++ == 0)
+                ]);
+            endforeach;
+
+            $portfolio->screenshots()->createMany($screenshotData);
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request, User $user)
+    {
+        // perform validation and return tags
+        $tags = $this->portfolioValidation($request->all());
+
         return DB::transaction(function () use ($user, $request, $tags) {
             try {
                 // populating data and some adjustment (change field category into category_id
-                $except = ['tags', 'screenshots', 'category'];
-                $category_id = $request->input('category');
-                $inputs = $request->except($except);
-                $inputs['category_id'] = $category_id;
+                $inputs = $this->populatePortfolioInput($request);
 
                 // insert portfolio
                 $portfolio = $user->portfolios()->create($inputs);
@@ -94,23 +128,7 @@ class PortfolioController extends Controller
                 $portfolio->tags()->attach($existingTagsId);
 
                 // insert screenshot
-                $screenshotData = [];
-                $screenshots = $request->file('screenshots');
-                $count = 0;
-                if(count($screenshots) > 0) {
-                    foreach ($screenshots as $screenshot):
-                        $name = $screenshot->hashName();
-                        $path = $screenshot->storeAs('public/screenshots', $name);
-
-                        array_push($screenshotData, [
-                            'caption' => $screenshot->getClientOriginalName(),
-                            'source' => $name,
-                            'is_featured' => ($count++ == 0)
-                        ]);
-                    endforeach;
-
-                    $portfolio->screenshots()->createMany($screenshotData);
-                }
+                $this->uploadScreenshots($portfolio, $request->file('screenshots'));
 
                 // all good, send success message
                 return redirect()->route('account.portfolio', [$user->username])->with([
@@ -140,54 +158,102 @@ class PortfolioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param User $user
+     * @param Portfolio $portfolio
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user, Portfolio $portfolio)
     {
-        dd('edit');
+        $this->authorize('view', $portfolio);
+
+        $categories = Category::all()->pluck('category', 'id');
+
+        return view('portfolio.edit', compact('user', 'categories', 'portfolio'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param User $user
+     * @param Portfolio $portfolio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user, Portfolio $portfolio)
     {
+        $this->authorize('update', $portfolio);
 
-        dd('update');
+        // perform validation and return tags
+        $tags = $this->portfolioValidation($request->all());
+
+        return DB::transaction(function () use ($user, $request, $tags, $portfolio) {
+            try {
+                // populating data and some adjustment (change field category into category_id
+                $inputs = $this->populatePortfolioInput($request);
+
+                // update portfolio
+                $portfolio->update($inputs);
+
+                // persist tags into table (new or old one)
+                $tagsTobeSync = [];
+                foreach ($tags as $tag){
+                    $oldOrNewTag = Tag::firstOrCreate(['tag' => $tag]);
+                    array_push($tagsTobeSync, $oldOrNewTag->id);
+                }
+
+                // sync portfolio with collection of tags
+                $portfolio->tags()->sync($tagsTobeSync);
+
+                // insert screenshot
+                $this->uploadScreenshots($portfolio, $request->file('screenshots'));
+
+                // all good, send success message
+                return redirect()->route('account.portfolio', [$user->username])->with([
+                    'action' => 'success',
+                    'message' => "Portfolio {$portfolio->title} was updated"
+                ]);
+            }
+            catch (\Exception $e) {
+                // something goes wrong
+                return redirect()->back()
+                    ->withErrors(['error' => env('APP_DEBUG') ? $e->getMessage() : "Something went wrong"])
+                    ->withInput();
+            }
+        }, 5);
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param User $user
-     * @param  int $id
+     * @param Portfolio $portfolio
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user, $id)
+    public function destroy(User $user, Portfolio $portfolio)
     {
-        $portfolio = Portfolio::findOrFail($id);
-
         $this->authorize('delete', $portfolio);
-try {
-    $title = $portfolio->title;
-    if ($portfolio->delete()) {
-        return redirect(route('account.portfolio', [$user->username]))->with([
-            'action' => 'success',
-            'message' => "{$title} was successfully deleted"
-        ]);
-    }
-}
-catch (\Exception $e){
-    dd($e->getMessage());
-}
-dd($portfolio->trashed());
-        return redirect()->back()->withErrors([
-            'message' => "Failed to delete {$title}"
-        ]);
+
+        return DB::transaction(function () use ($user, $portfolio) {
+            try {
+                $screenshots = $portfolio->screenshots;
+                $title = $portfolio->title;
+                if ($portfolio->delete()) {
+                    foreach ($screenshots as $screenshot) {
+                        Storage::delete("public/screenshots/{$screenshot->source}");
+                    }
+                    return redirect(route('account.portfolio', [$user->username]))->with([
+                        'action' => 'success',
+                        'message' => "{$title} was successfully deleted"
+                    ]);
+                }
+            } catch (\Exception $e) {
+                logger($e->getMessage());
+                return redirect()->back()
+                    ->withErrors([
+                        'error' => env('APP_DEBUG') ? $e->getMessage() : "Something went wrong"
+                    ]);
+            }
+        });
     }
 }
