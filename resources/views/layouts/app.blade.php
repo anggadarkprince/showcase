@@ -47,20 +47,36 @@
                     <ul class="nav navbar-nav">
                         @if (Auth::check())
                         <li><a href="{{ route('account.show', [Auth::user()->username]) }}">Home</a></li>
+                        @if(url('/') == route('account.profile'))
                         <li><a href="{{ route('account.portfolio', [Auth::user()->username]) }}">Portfolio</a></li>
+                        @endif
                         <li><a href="{{ route('page.explore') }}">Explore</a></li>
                         @else
                         <li><a href="{{ route('page.explore') }}">Explore</a></li>
                         <li><a href="{{ route('page.help') }}">Help</a></li>
                         @endif
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                Categories <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                @foreach($categoryMenu as $category)
+                                <li>
+                                    <a href="{{ route('portfolio.search.category', [str_slug($category->category)]) }}">
+                                        {{ $category->category }}
+                                    </a>
+                                </li>
+                                @endforeach
+                            </ul>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ url('/login') }}">Login</a></li>
-                            <li><a href="{{ url('/register') }}">Register</a></li>
+                            <li><a href="{{ route('account.login') }}">Login</a></li>
+                            <li><a href="{{ route('account.register') }}">Register</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -69,12 +85,13 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                        <a href="{{ route('account.show', [Auth::user()->username]) }}">My Account</a>
                                         <a href="{{ route('account.settings', [Auth::user()->username]) }}">Settings</a>
-                                        <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <a href="{{ route('account.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
 
-                                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                        <form id="logout-form" action="{{ route('account.logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
                                     </li>

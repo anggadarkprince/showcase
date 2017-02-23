@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Portfolio;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -27,8 +28,16 @@ class PageController extends Controller
         return 'view : contact';
     }
 
-    function explore(){
-        return 'view : explore';
+    public function help()
+    {
+        return view('home.help');
+    }
+
+    public function explore(){
+        $portfolios = new Portfolio();
+        $portfolios = $portfolios->explore();
+        $title = 'Discover Masterpiece';
+        return view('portfolio.discover', compact('portfolios', 'title'));
     }
 
     /**

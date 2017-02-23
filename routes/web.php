@@ -30,25 +30,49 @@ Route::group(['domain' => 'laravel.dev'], function () {
         'uses' => 'PageController@help'
     ]);
 
-    Route::get('/portfolio/company/{company}', [
-        'as' => 'portfolio.search.company',
-        'uses' => 'SearchController@searchByCompany'
-    ]);
-
-    Route::get('/portfolio/category/{category}', [
-        'as' => 'portfolio.search.category',
-        'uses' => 'SearchController@searchByCategory'
-    ]);
-
-    Route::get('/portfolio/tag/{tag}', [
-        'as' => 'portfolio.search.tag',
-        'uses' => 'SearchController@searchByTag'
-    ]);
-
     Route::get('/tag/search/{query}', [
         'as' => 'tag.search',
         'uses' => 'TagController@searchTag'
     ]);
+
+    Route::group(['prefix' => 'portfolio'], function () {
+        Route::get('/company/{company}', [
+            'as' => 'portfolio.search.company',
+            'uses' => 'SearchController@searchByCompany'
+        ]);
+
+        Route::get('/category/{category}', [
+            'as' => 'portfolio.search.category',
+            'uses' => 'SearchController@searchByCategory'
+        ]);
+
+        Route::get('/tag/{tag}', [
+            'as' => 'portfolio.search.tag',
+            'uses' => 'SearchController@searchByTag'
+        ]);
+    });
+
+    Route::group(['prefix' => '{user}'], function () {
+        Route::get('/', [
+            'as' => 'profile.show',
+            'uses' => 'PageController@show'
+        ]);
+
+        Route::get('/portfolio', [
+            'as' => 'profile.portfolio',
+            'uses' => 'PageController@portfolio'
+        ]);
+
+        Route::get('/portfolio/{portfolio}', [
+            'as' => 'profile.portfolio.show',
+            'uses' => 'PageController@portfolio'
+        ]);
+
+        Route::get('/contact', [
+            'as' => 'profile.contact',
+            'uses' => 'PageController@contact'
+        ]);
+    });
 });
 
 Route::group(['domain' => 'admin.laravel.dev', 'namespace' => 'Admin'], function () {
@@ -151,62 +175,39 @@ Route::group(['domain' => 'account.laravel.dev'], function () {
         'as' => 'account.profile',
         'uses' => 'UserController@index'
     ]);
-});
 
-Route::group(['domain' => 'account.laravel.dev', 'prefix' => '{user}', 'middleware' => ['account', 'auth']], function () {
-    Route::get('/', [
-        'as' => 'account.show',
-        'uses' => 'UserController@show'
-    ]);
+    Route::group(['prefix' => '{user}', 'middleware' => ['account', 'auth']], function(){
+        Route::get('/', [
+            'as' => 'account.show',
+            'uses' => 'UserController@show'
+        ]);
 
-    Route::resource('portfolio', 'PortfolioController', [
-        'names' => [
-            'index' => 'account.portfolio',
-            'show' => 'account.portfolio.show',
-            'create' => 'account.portfolio.create',
-            'edit' => 'account.portfolio.edit',
-            'update' => 'account.portfolio.update',
-            'store' => 'account.portfolio.store',
-            'destroy' => 'account.portfolio.destroy'
-        ]
-    ]);
+        Route::resource('portfolio', 'PortfolioController', [
+            'names' => [
+                'index' => 'account.portfolio',
+                'show' => 'account.portfolio.show',
+                'create' => 'account.portfolio.create',
+                'edit' => 'account.portfolio.edit',
+                'update' => 'account.portfolio.update',
+                'store' => 'account.portfolio.store',
+                'destroy' => 'account.portfolio.destroy'
+            ]
+        ]);
 
-    Route::delete('/screenshot/delete/{screenshot}', [
-        'as' => 'account.screenshot.destroy',
-        'uses' => 'ScreenshotController@deleteScreenshot'
-    ]);
+        Route::delete('/screenshot/delete/{screenshot}', [
+            'as' => 'account.screenshot.destroy',
+            'uses' => 'ScreenshotController@deleteScreenshot'
+        ]);
 
-    Route::put('/settings', [
-        'as' => 'account.settings.store',
-        'uses' => 'UserController@storeSettings'
-    ]);
+        Route::put('/settings', [
+            'as' => 'account.settings.store',
+            'uses' => 'UserController@storeSettings'
+        ]);
 
-    Route::get('/settings', [
-        'as' => 'account.settings',
-        'uses' => 'UserController@settings'
-    ]);
-
-});
-
-Route::group(['domain' => 'laravel.dev', 'prefix' => '{user}'], function () {
-    Route::get('/', [
-        'as' => 'profile.show',
-        'uses' => 'PageController@show'
-    ]);
-
-    Route::get('/portfolio', [
-        'as' => 'profile.portfolio',
-        'uses' => 'PageController@portfolio'
-    ]);
-
-    Route::get('/about', [
-        'as' => 'profile.about',
-        'uses' => 'PageController@about'
-    ]);
-
-    Route::get('/contact', [
-        'as' => 'profile.contact',
-        'uses' => 'PageController@contact'
-    ]);
+        Route::get('/settings', [
+            'as' => 'account.settings',
+            'uses' => 'UserController@settings'
+        ]);
+    });
 });
 
