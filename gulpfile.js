@@ -31,7 +31,8 @@ elixir(function(mix) {
 
     // copy file
     mix.copy('resources/assets/js/fontloader.js', 'public/js/fontloader.js')
-        .copy('node_modules/bootstrap-sass/assets/fonts/*', 'public/fonts');
+        .copy('node_modules/bootstrap-sass/assets/fonts/*', 'public/fonts')
+        .copy('resources/assets/img/*', 'public/img');
 
     // Versioning with hash like styles-a322t45.css
     mix.version(['css/app.css', 'css/support.css', 'css/admin.css',

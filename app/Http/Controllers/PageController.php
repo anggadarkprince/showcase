@@ -13,11 +13,6 @@ class PageController extends Controller
         return "view : show {$user->username}";
     }
 
-    public function help()
-    {
-        return view('home.help');
-    }
-
     public function explore(){
         $portfolios = new Portfolio();
         $portfolios = $portfolios->explore();

@@ -42,7 +42,7 @@ $factory->define(App\Portfolio::class, function (Faker\Generator $faker) {
         'reference' => $faker->url,
         'date' => $faker->date(),
         'company' => $faker->company,
-        'vote' => rand(1, 200)
+        'view' => rand(1, 20000)
     ];
 });
 

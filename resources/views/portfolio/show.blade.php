@@ -7,51 +7,51 @@
                 @include('layouts.profile')
             </div>
             <div class="col-md-8 col-lg-9">
-                <div class="row">
-                    @foreach($portfolios as $portfolio)
+                <div class="showcase">
+                    <h3 class="showcase-label">SHOWCASE</h3>
 
-                        <div class="col-sm-6 col-lg-4">
-                            <div class="thumbnail portfolio-item">
-                                <?php
-                                $screenshot = $portfolio->screenshots()->whereIsFeatured(1)->first();
-                                $featured = is_null($screenshot) ? 'placeholder.jpg' : $screenshot->source;
+                    <div class="view-wrapper">
+                        <small>VIEWS</small>
+                        <?php
+                            $views = $portfolio->view;
+                            if($views >= 10000){
+                                $views = number_format($views/1000, 1).'K';
+                            }
+                        ?>
+                        <h3>{{ $views }}</h3>
+                    </div>
+                    <div class="title-wrapper">
+                        <h1 class="title">{{ $portfolio->title }}</h1>
+                        <p class="company lead"><a href="{{ route('portfolio.search.company', [urlencode($portfolio->company)]) }}">{{ $portfolio->company }}</a></p>
+                    </div>
+                    <p class="text-muted m-b-sm">Published At {{ $portfolio->date->format('d F Y') }}</p>
 
-                                $portfolioSlug = str_slug($portfolio->title).'-'.$portfolio->id;
-                                $categorySlug = str_slug($portfolio->category->category).'-'.$portfolio->category->id;
-                                ?>
+                    <p><strong>DESCRIPTION</strong></p>
+                    <p>{{ $portfolio->description }}</p>
 
-                                <div class="featured" style="background: url('{{ asset("storage/screenshots/{$featured}") }}') center center / cover;"></div>
+                    <div class="showcase-tags">
+                        <p><strong>TAGS</strong></p>
+                        @foreach($portfolio->tags as $tag)
+                            <a href="{{ route('portfolio.search.tag', [str_slug($tag->tag)]) }}" class="label">{{ $tag->tag }}</a>
+                        @endforeach
+                    </div>
 
-                                <div class="caption">
-                                    <div class="title-wrapper">
-                                        <h3 class="title">
-                                            <a href="{{ route('profile.portfolio.show', [$portfolio->user->username, $portfolioSlug]) }}">
-                                                {{ $portfolio->title }}
-                                            </a>
-                                        </h3>
-                                        <a href="{{ route('portfolio.search.company', [urlencode($portfolio->company)]) }}" class="company">
-                                            {{ $portfolio->company }}
-                                        </a>
-                                    </div>
-                                    <hr>
-                                    <div class="timestamp clearfix">
-                                        <time class="pull-left">
-                                            {{ $portfolio->date->diffForHumans() }}
-                                        </time>
-                                        <span class="pull-right">
-                                            <a href="{{ route('portfolio.search.category', [$categorySlug]) }}">
-                                                {{ str_limit($portfolio->category->category, 17) }}
-                                            </a>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
+                    <div class="showcase-screenshots">
+                        <p><strong>SCREENSHOTS</strong></p>
+                        @foreach($portfolio->screenshots as $screenshot)
+                            <img src="{{ asset("storage/screenshots/{$screenshot->source}") }}"
+                                 alt="{{ $screenshot->caption }}" class="img-responsive">
+                        @endforeach
+                    </div>
 
-                <div class="center-block">
-                    {{ $portfolios->links() }}
+                    <div class="showcase-share">
+                        <strong>SHARE</strong>
+                        <ul class="list-inline">
+                            <li><a href="#"><img src="{{ asset('img/layout/icon-facebook.jpg') }}" alt="Share Facebook"></a></li>
+                            <li><a href="#"><img src="{{ asset('img/layout/icon-twitter.jpg') }}" alt="Share Twitter"></a></li>
+                            <li><a href="#"><img src="{{ asset('img/layout/icon-google.jpg') }}" alt="Share Google"></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

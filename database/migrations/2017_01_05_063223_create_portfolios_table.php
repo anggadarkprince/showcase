@@ -22,7 +22,7 @@ class CreatePortfoliosTable extends Migration
             $table->string('reference');
             $table->string('date');
             $table->string('company');
-            $table->integer('vote')->default(0);
+            $table->integer('view')->default(0);
             $table->softDeletes();
             $table->timestamps();
 

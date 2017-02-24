@@ -7764,7 +7764,8 @@ a:hover {
 }
 
 .profile-sidebar {
-  margin-bottom: 30px;
+  margin-top: 0;
+  margin-bottom: 20px;
   padding: 20px;
   background-color: #fff;
   border: 1px solid #d3e0e9;
@@ -7868,7 +7869,7 @@ a:hover {
 
 .portfolio-item hr, .portfolio-item-create hr {
   margin-top: 10px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .portfolio-item .control, .portfolio-item-create .control {
@@ -7892,6 +7893,88 @@ a:hover {
   line-height: 342px;
   width: 100%;
   text-decoration: none;
+}
+
+.showcase {
+  background-color: #fff;
+  border: 1px solid #d3e0e9;
+  padding: 20px;
+  margin-top: 0;
+}
+
+.showcase .showcase-label {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.showcase .title-wrapper {
+  padding-right: 70px;
+}
+
+.showcase .title {
+  font-size: 22px;
+  margin-bottom: 8px;
+  margin-top: 20px;
+}
+
+.showcase .company {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.showcase .view-wrapper {
+  text-align: center;
+  width: 70px;
+  float: right;
+  margin-top: 20px;
+}
+
+.showcase .view-wrapper h3 {
+  margin: 0;
+}
+
+.showcase-screenshots {
+  margin-top: 20px;
+}
+
+.showcase-screenshots img {
+  width: 100%;
+  margin: 0 auto 20px;
+}
+
+.showcase-tags .label {
+  font-size: 16px;
+  vertical-align: middle;
+  border-radius: 0;
+  margin-right: 7px;
+  background-color: #fff;
+  border: 1px solid #d3e0e9;
+  color: inherit;
+  font-weight: normal;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.showcase-tags .label:last-child {
+  margin-right: 0;
+}
+
+.showcase-tags .label:hover {
+  background: #3097D1;
+  border-color: transparent;
+}
+
+.showcase-share strong {
+  display: block;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.showcase-share ul {
+  margin: auto;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .form-title {
@@ -8151,12 +8234,22 @@ fieldset[disabled]
 
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+  .profile-sidebar {
+    margin-top: 10px;
+    margin-bottom: 30px;
+  }
   .profile-sidebar .profile {
     margin-bottom: 20px;
   }
   .profile-sidebar .profile .avatar {
     height: 210px;
     width: auto;
+  }
+  .showcase {
+    margin-top: 10px;
+  }
+  .showcase-screenshots img {
+    margin: 0 auto 30px;
   }
 }
 

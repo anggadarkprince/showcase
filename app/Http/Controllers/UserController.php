@@ -98,6 +98,6 @@ class UserController extends Controller
     public function portfolio(User $user)
     {
         $portfolios = $user->portfolios()->paginate(12);
-        return view('portfolio.show', compact('user', 'portfolios'));
+        return view('users.profile', compact('user', 'portfolios'));
     }
 }
