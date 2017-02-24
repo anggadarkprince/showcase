@@ -5,13 +5,27 @@ $(document).ready(function () {
     if ($('.content-wrapper').outerHeight() < $(window).height() - 130) {
         $('footer').addClass('navbar-fixed-bottom');
     }
-//alert(window.Showcase.rootUrl + '/tag/search/%QUERY');
+
+    $('.btn-icon-search').on('click', function (e) {
+        e.preventDefault();
+        $(this).fadeOut(100, function(){
+            $('.form-search-wrapper').show(100)
+                .find("input[type=search]").focus();
+        });
+    });
+
+    $('.form-search-wrapper input[type=search]').on('focusout', function () {
+        $('.form-search-wrapper').hide(100, function () {
+            $('.btn-icon-search').fadeIn(100);
+        });
+    });
+
     var tagsData = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('tag'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
-        local: [{tag:'design'}, {tag:'art'}, {tag:'ui'}, {tag:'ux'}, {tag:'visual'}, {tag:'graphic'}, {tag:'technology'}, {tag:'medical'}, {tag:'architecture'}],
+        local: [{tag: 'design'}, {tag: 'art'}, {tag: 'ui'}, {tag: 'ux'}, {tag: 'visual'}, {tag: 'graphic'}, {tag: 'technology'}, {tag: 'medical'}, {tag: 'architecture'}],
         remote: {
-            url: window.Showcase.rootUrl+'/tag/search/%QUERY',
+            url: window.Showcase.rootUrl + '/tag/search/%QUERY',
             wildcard: '%QUERY'
         }
     });
@@ -21,7 +35,7 @@ $(document).ready(function () {
         typeaheadjs: [{
             minLength: 1,
             highlight: true,
-        },{
+        }, {
             minlength: 1,
             name: 'tags',
             displayKey: 'tag',
@@ -30,17 +44,17 @@ $(document).ready(function () {
         }],
         freeInput: true
     });
-/*
-    $('input[name=tags]').typeahead({
-            hint: true,
-            highlight: true,
-            minLength: 1
-        },
-        {
-            name: 'states',
-            source: states
-        });
-*/
+    /*
+     $('input[name=tags]').typeahead({
+     hint: true,
+     highlight: true,
+     minLength: 1
+     },
+     {
+     name: 'states',
+     source: states
+     });
+     */
     if ($('.screenshot-wrapper').length) {
         var totalScreenshots = $('.screenshot-wrapper').children().length - 1;
         var limitImage = 8;
@@ -136,5 +150,4 @@ $(document).ready(function () {
             });
         }
     }
-
 });

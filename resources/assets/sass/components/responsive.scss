@@ -54,4 +54,14 @@
       margin: 0 auto 30px;
     }
   }
+
+  .search-container{
+    .search-option{
+      margin-top: 15px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
 }

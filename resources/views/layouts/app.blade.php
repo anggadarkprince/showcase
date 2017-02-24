@@ -66,11 +66,11 @@
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 @foreach($categoryMenu as $category)
-                                <li @if(isset($categoryActive) && $categoryActive->category == $category->category) class='active' @endif>
-                                    <a href="{{ route('portfolio.search.category', [str_slug($category->category).'-'.$category->id]) }}">
-                                        {{ $category->category }}
-                                    </a>
-                                </li>
+                                    <li @if(isset($categoryActive) && $categoryActive->category == $category->category) class='active' @endif>
+                                        <a href="{{ route('portfolio.search.category', [str_slug($category->category).'-'.$category->id]) }}">
+                                            {{ $category->category }}
+                                        </a>
+                                    </li>
                                 @endforeach
                             </ul>
                         </li>
@@ -78,6 +78,18 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <form action="{{ route('page.search') }}" method="get">
+                                <div class="form-search-wrapper">
+                                    <input type="search" name="q" value="{{ request('q') }}" placeholder="Search">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                    <button type="submit" style="display: none">Search</button>
+                                </div>
+                            </form>
+                            <a href="#" class="btn-icon-search"><i class="glyphicon glyphicon-search"></i>
+                                <span class="hidden-lg hidden-md hidden-sm">&nbsp;Search</span>
+                            </a>
+                        </li>
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ route('account.login') }}">Login</a></li>

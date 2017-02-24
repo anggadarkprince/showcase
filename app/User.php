@@ -74,4 +74,13 @@ class User extends Authenticatable
             })
             ->paginate(10);
     }
+
+    public function search($query)
+    {
+        return $this->where('username', 'like', "%{$query}%")
+            ->orWhere('email', 'like', "%{$query}%")
+            ->orWhere('name', 'like', "%{$query}%")
+            ->orWhere('about', 'like', "%{$query}%")
+            ->paginate(12);
+    }
 }

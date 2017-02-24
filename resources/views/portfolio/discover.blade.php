@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <h1 class="page-title">{!! $title !!}
-            @include('partials._portfolio_showing')
+            @include('partials._stats_showing', ['data' => $portfolios])
         </h1>
         @include('errors.common')
 

@@ -48,3 +48,23 @@
 }
 
 // end of input file
+
+.form-search-wrapper {
+  position: relative;
+  margin: 8px;
+  display: none;
+
+  input[type=search] {
+    padding-left: 30px;
+  }
+
+  i {
+    background: none;
+    border: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 11px 12px 8px;
+    color: #aaaaaa;
+  }
+}

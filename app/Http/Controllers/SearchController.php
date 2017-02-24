@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Portfolio;
+use App\User;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -36,8 +37,19 @@ class SearchController extends Controller
         return view('portfolio.discover', compact('portfolios', 'title'));
     }
 
-    function searchQuery($query)
+    function searchQuery(Request $request)
     {
+        $query = $request->get('q');
+        $type = $request->get('type', 'showcase');
 
+        if ($type == 'showcase') {
+            $portfolio = new Portfolio();
+            $portfolios = $portfolio->search($query);
+            return view('misc.search', compact('portfolios'));
+        } else {
+            $user = new User();
+            $users = $user->search($query);
+            return view('misc.search', compact('users'));
+        }
     }
 }

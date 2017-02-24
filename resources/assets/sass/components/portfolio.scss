@@ -68,3 +68,27 @@
     text-decoration: none;
   }
 }
+
+.people-item {
+  text-align: center;
+
+  .featured {
+    margin: 20px auto;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+  }
+
+  .name {
+    font-size: 18px;
+    margin: 0;
+  }
+
+  .username {
+    margin-bottom: 15px;
+  }
+
+  hr{
+    margin: 10px 0;
+  }
+}

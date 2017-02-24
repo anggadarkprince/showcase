@@ -58,7 +58,7 @@
                     <div class="showcase-related m-t-md">
                         <h4 class="m-b-md">Related Work
                             @if($totalPortfolio > 3)
-                                <a href="{{ route('account.profile', [$user->username]) }}" class="pull-right">
+                                <a href="{{ route('profile.show', [$user->username]) }}" class="pull-right">
                                     <small>See All ({{ $user->portfolios()->count() }})</small>
                                 </a>
                             @endif

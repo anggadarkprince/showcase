@@ -7,8 +7,8 @@
                 @include('partials._profile_sidebar')
             </div>
             <div class="col-md-8 col-lg-9">
-                <h1 class="page-title m-b-sm">SHOWCASE
-                    @include('partials._portfolio_showing')
+                <h1 class="page-title m-b-sm m-t-n">Showcases
+                    @include('partials._stats_showing', ['data' => $portfolios])
                 </h1>
                 <div class="row">
                     @include('partials._portfolio_card', ['columns' => 'col-sm-6 col-lg-4'])

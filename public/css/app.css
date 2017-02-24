@@ -7768,8 +7768,24 @@ a:hover {
   margin-bottom: 40px;
 }
 
+.page-title small {
+  margin-top: 6px;
+}
+
 .btn {
   border-radius: 0;
+}
+
+.search-container {
+  position: relative;
+}
+
+.search-container .search-option {
+  margin-bottom: 35px;
+}
+
+.search-container .search-option .search-label {
+  margin-top: 5px;
 }
 
 footer {
@@ -7879,6 +7895,26 @@ footer {
 .inputfile:focus + label {
   outline: 1px dotted #000;
   outline: -webkit-focus-ring-color auto 5px;
+}
+
+.form-search-wrapper {
+  position: relative;
+  margin: 8px;
+  display: none;
+}
+
+.form-search-wrapper input[type=search] {
+  padding-left: 30px;
+}
+
+.form-search-wrapper i {
+  background: none;
+  border: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 11px 12px 8px;
+  color: #aaaaaa;
 }
 
 .screenshot-filename {
@@ -7994,6 +8030,30 @@ footer {
   text-decoration: none;
 }
 
+.people-item {
+  text-align: center;
+}
+
+.people-item .featured {
+  margin: 20px auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.people-item .name {
+  font-size: 18px;
+  margin: 0;
+}
+
+.people-item .username {
+  margin-bottom: 15px;
+}
+
+.people-item hr {
+  margin: 10px 0;
+}
+
 .showcase {
   background-color: #fff;
   border: 1px solid #d3e0e9;
@@ -8083,12 +8143,60 @@ footer {
   margin-bottom: 20px;
 }
 
+.m-b-xs {
+  margin-bottom: 10px;
+}
+
+.m-b-n {
+  margin-bottom: 0;
+}
+
 .m-t-md {
   margin-top: 30px;
 }
 
 .m-t-sm {
   margin-top: 20px;
+}
+
+.m-t-xs {
+  margin-top: 10px;
+}
+
+.m-t-n {
+  margin-top: 0;
+}
+
+.m-r-md {
+  margin-right: 30px;
+}
+
+.m-r-sm {
+  margin-right: 20px;
+}
+
+.m-r-xs {
+  margin-right: 10px;
+}
+
+.m-r-n {
+  margin-right: 0;
+}
+
+.m-l-md {
+  margin-left: 30px;
+}
+
+.m-l-sm {
+  margin-left: 20px;
+}
+
+.m-l-xs {
+  margin-left: 10px;
+}
+
+.m-l-n {
+  margin-left: 0;
 }
 
 /* Small devices (tablets, 768px and up) */
@@ -8134,6 +8242,14 @@ footer {
   }
   .showcase-screenshots img {
     margin: 0 auto 30px;
+  }
+  .search-container .search-option {
+    margin-top: 15px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
   }
 }
 

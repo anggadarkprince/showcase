@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Portfolio extends Model
 {
@@ -50,7 +51,7 @@ class Portfolio extends Model
     {
         $isLoggedIn = Auth::check();
 
-        if($isLoggedIn){
+        if ($isLoggedIn) {
             $user = Auth::user();
             $relatedTags = $user->portfolios()
                 ->join('portfolio_tags', 'portfolios.id', '=', 'portfolio_tags.portfolio_id')
@@ -107,5 +108,20 @@ class Portfolio extends Model
     public function discover()
     {
         return $this->latest()->take(6)->get();
+    }
+
+    public function search($query)
+    {
+        return $this->select(DB::raw('portfolios.*'))
+            ->join('portfolio_tags', 'portfolios.id', '=', 'portfolio_tags.portfolio_id')
+            ->join('tags', 'tags.id', '=', 'portfolio_tags.tag_id')
+            ->join('users', 'users.id', '=', 'portfolios.user_id')
+            ->where('title', 'like', "%$query%")
+            ->orWhere('company', 'like', "%$query%")
+            ->orWhere('tag', 'like', "%$query%")
+            ->orWhere('name', 'like', "%$query%")
+            ->orderBy('view', 'desc')
+            ->distinct()
+            ->paginate(12);
     }
 }

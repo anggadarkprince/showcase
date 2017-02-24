@@ -35,6 +35,11 @@ Route::group(['domain' => 'laravel.dev'], function () {
         'uses' => 'TagController@searchTag'
     ]);
 
+    Route::get('/search', [
+        'as' => 'page.search',
+        'uses' => 'SearchController@searchQuery'
+    ]);
+
     Route::group(['prefix' => 'portfolio'], function () {
         Route::get('/company/{company}', [
             'as' => 'portfolio.search.company',
