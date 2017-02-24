@@ -9,7 +9,14 @@
             <div class="col-md-8 col-lg-9">
                 <h1 class="page-title m-b-sm">SHOWCASE
                     <small class="pull-right"><span class="hidden-xs">Showing</span>
-                        <?php $show = $portfolios->total() < $portfolios->perPage() ? $portfolios->total() : $portfolios->currentPage() * $portfolios->perPage() ?>
+                        <?php
+                        $show = 0;
+                        if ($portfolios->total() < $portfolios->perPage() || $portfolios->currentPage() == $portfolios->lastPage()) {
+                            $show = $portfolios->total();
+                        } else {
+                            $show = $portfolios->currentPage() * $portfolios->perPage();
+                        }
+                        ?>
                         {{ $show }} of {{ $portfolios->total() }}
                     </small>
                 </h1>
