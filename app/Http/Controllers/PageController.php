@@ -8,17 +8,18 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function show(User $user)
+    public function explore()
     {
-        return "view : show {$user->username}";
-    }
-
-    public function explore(){
         $portfolios = new Portfolio();
         $portfolios = $portfolios->explore();
         $title = 'Discover Masterpiece';
         $explore_active = true;
         return view('portfolio.discover', compact('portfolios', 'title', 'explore_active'));
+    }
+
+    public function help()
+    {
+        return view('welcome');
     }
 
     /**

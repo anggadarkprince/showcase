@@ -16,7 +16,7 @@ Route::get('/', ['domain' => 'laravel.dev', function () {
 }])->name('index');
 
 Route::match(['get', 'post'], '/about', ['domain' => 'laravel.dev', function () {
-    return "Welcome to laravel 5.3 sandbox";
+    return view('welcome');
 }])->name('page.about');
 
 Route::group(['domain' => 'laravel.dev'], function () {

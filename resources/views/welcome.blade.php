@@ -8,17 +8,27 @@
         <title>Laravel</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
                 color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
+                font-family: 'Lato', sans-serif;
+                font-weight: 300;
                 height: 100vh;
                 margin: 0;
+                background: #f5f8fa url("{{ asset('img/layout/workspace.jpg') }}") center center / cover;
+            }
+
+            body:before{
+                content: '';
+                display: block;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                position: absolute;
+                top: 0;
             }
 
             .full-height {
@@ -35,6 +45,12 @@
                 position: relative;
             }
 
+            .top-left {
+                position: absolute;
+                left: 10px;
+                top: 18px;
+            }
+
             .top-right {
                 position: absolute;
                 right: 10px;
@@ -46,29 +62,71 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 40px;
+                color: #fff;
+            }
+
+            .title a {
+                text-decoration: none;
+                color: #fff;
+            }
+
+            .title a:hover {
+                color: #3097D1;
             }
 
             .links > a {
-                color: #636b6f;
-                padding: 0 25px;
+                color: #fff;
+                padding: 0 5px;
                 font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
+                font-weight: bold;
+                letter-spacing: .05rem;
                 text-decoration: none;
                 text-transform: uppercase;
+            }
+
+            footer {
+                color: #fff;
+                text-align: center;
+                position: absolute;
+                bottom: 25px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 100%;
             }
 
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .btn-create {
+                display: none;
+            }
+
+            /* Small devices (tablets, 768px and up) */
+            @media (min-width: 768px) {
+                .title {
+                    font-size: 84px;
+                }
+                .links > a {
+                    padding: 0 20px;
+                    letter-spacing: .1rem;
+                }
+                .btn-create {
+                    display: inline-block;
+                }
+            }
         </style>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
+            <div class="top-left links">
+                <a href="{{ route('page.explore') }}">Explore</a>
+            </div>
             @if (Route::has('account.login'))
                 <div class="top-right links">
                     @if (Auth::check())
+                        <a href="{{ route('account.portfolio.create', [Auth::user()->username]) }}" class="btn-create">Create Portfolio</a>
                         <a href="{{ route('account.show', [Auth::user()->username]) }}">My Account</a>
                     @else
                         <a href="{{ route('account.login') }}">Login</a>
@@ -79,7 +137,21 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Showcase.dev
+                    @if(Request::url('/') == route('page.about'))
+                        <small>Crafted by
+                            <a href="https://twitter.com/anggadarkprince">
+                                @anggadarkprince
+                            </a>
+                        </small>
+                    @elseif(Request::url('/') == route('page.help'))
+                        <small>Ask question?
+                            <a href="tel:+6285655479868">
+                                +Contact Me
+                            </a>
+                        </small>
+                    @else
+                        Showcase.dev
+                    @endif
                 </div>
 
                 <div class="links">
@@ -89,6 +161,8 @@
                     <a href="https://github.com/anggadarkprince/showcase">GitHub</a>
                 </div>
             </div>
+
+            <footer>&copy {{ date('Y') }} <strong>Showcase.dev</strong> all rights reserved.</footer>
         </div>
     </body>
 </html>
