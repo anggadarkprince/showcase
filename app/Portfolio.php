@@ -93,4 +93,14 @@ class Portfolio extends Model
 
         return $portfolios;
     }
+
+    public function portfolioRelated(User $user)
+    {
+        $related = $user->portfolios()
+            ->where('portfolios.id', '!=', $this->id)
+            ->inRandomOrder()
+            ->take(3)
+            ->get();
+        return $related;
+    }
 }

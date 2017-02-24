@@ -17,7 +17,8 @@ class PageController extends Controller
         $portfolios = new Portfolio();
         $portfolios = $portfolios->explore();
         $title = 'Discover Masterpiece';
-        return view('portfolio.discover', compact('portfolios', 'title'));
+        $explore_active = true;
+        return view('portfolio.discover', compact('portfolios', 'title', 'explore_active'));
     }
 
     /**

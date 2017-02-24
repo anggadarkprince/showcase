@@ -91,6 +91,18 @@ class LoginController extends Controller
     }
 
     /**
+     * The user has been authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        return redirect()->route('account.show', [$user->username]);
+    }
+
+    /**
      * Get the needed authorization credentials from the request.
      *
      * @param  \Illuminate\Http\Request $request

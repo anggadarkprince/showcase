@@ -21,10 +21,10 @@ class SearchController extends Controller
         $slugPart = explode('-', $categorySlug);
         $id = array_pop($slugPart);
 
-        $category = Category::find($id);
-        $portfolios = $category->portfolios()->paginate(12);
-        $title = "Category: <strong>{$category->category}</strong>";
-        return view('portfolio.discover', compact('portfolios', 'title'));
+        $categoryActive = Category::find($id);
+        $portfolios = $categoryActive->portfolios()->paginate(12);
+        $title = "Category: <strong>{$categoryActive->category}</strong>";
+        return view('portfolio.discover', compact('portfolios', 'title', 'categoryActive'));
     }
 
     function searchByTag($tagSlug)

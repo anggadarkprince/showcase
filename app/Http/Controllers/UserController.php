@@ -27,7 +27,7 @@ class UserController extends Controller
     {
         $loggedUser = Auth::user()->username;
         if ($user->username == $loggedUser) {
-            return view('home.home');
+            return view('users.dashboard', ["dashboard_active" => true]);
         } else {
             return redirect()->route('account.show', [$loggedUser]);
         }

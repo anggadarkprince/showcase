@@ -22,8 +22,9 @@ class PortfolioController extends Controller
     public function index(User $user)
     {
         $portfolios = $user->portfolios()->orderBy('date', 'desc')->paginate(11);
+        $portfolio_active = true;
 
-        return view('portfolio.index', compact('user', 'portfolios'));
+        return view('portfolio.index', compact('user', 'portfolios', 'portfolio_active'));
     }
 
     /**
@@ -157,7 +158,10 @@ class PortfolioController extends Controller
         $id = array_pop($slugPart);
 
         $portfolio = Portfolio::findOrFail($id);
-        return view('portfolio.show', compact('user', 'portfolio'));
+
+        $portfolios = $portfolio->portfolioRelated($user);
+
+        return view('portfolio.show', compact('user', 'portfolio', 'portfolios'));
     }
 
     /**

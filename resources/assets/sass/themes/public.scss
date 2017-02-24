@@ -2,6 +2,10 @@
 a:hover {
   text-decoration: none;
 }
+.navbar-default .navbar-nav > li.active > a{
+  background: transparent;
+  border-bottom: 2px solid;
+}
 
 .page-title {
   font-size: 20px;

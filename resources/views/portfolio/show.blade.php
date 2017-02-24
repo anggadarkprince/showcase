@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-lg-3">
-                @include('layouts.profile')
+                @include('partials._profile_sidebar')
             </div>
             <div class="col-md-8 col-lg-9">
                 <div class="showcase">
@@ -53,6 +53,21 @@
                         </ul>
                     </div>
                 </div>
+                <?php $totalPortfolio = $user->portfolios()->count(); ?>
+                @if($totalPortfolio > 0)
+                    <div class="showcase-related m-t-md">
+                        <h4 class="m-b-md">Related Work
+                            @if($totalPortfolio > 3)
+                                <a href="{{ route('account.profile', [$user->username]) }}" class="pull-right">
+                                    <small>See All ({{ $user->portfolios()->count() }})</small>
+                                </a>
+                            @endif
+                        </h4>
+                        <div class="row">
+                            @include('partials._portfolio_card', ['columns' => 'col-sm-6 col-lg-4'])
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
 

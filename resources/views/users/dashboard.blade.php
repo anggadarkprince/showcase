@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Help</div>
+                <div class="panel-heading">Showcase Today</div>
 
                 <div class="panel-body">
-                    Help here!!
+                    You are logged in!
                 </div>
             </div>
         </div>

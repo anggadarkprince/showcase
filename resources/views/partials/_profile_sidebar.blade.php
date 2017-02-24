@@ -1,4 +1,4 @@
-<div class="profile-sidebar">
+<div class="panel panel-default profile-sidebar">
     <div class="profile">
         <div class="avatar" style="background-image: url('{{ asset("storage/avatars/{$user->avatar}") }}')"></div>
         <div class="profile-wrapper">

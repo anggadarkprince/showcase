@@ -46,21 +46,27 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         @if (Auth::check())
-                        <li><a href="{{ route('account.show', [Auth::user()->username]) }}">Home</a></li>
+                        <li @if(isset($dashboard_active)) class='active' @endif>
+                            <a href="{{ route('account.show', [Auth::user()->username]) }}">Dashboard</a>
+                        </li>
 
                             @if(url('/') == route('account.profile'))
-                            <li><a href="{{ route('account.portfolio', [Auth::user()->username]) }}">My Portfolio</a></li>
+                                <li @if(isset($portfolio_active)) class='active' @endif>
+                                    <a href="{{ route('account.portfolio', [Auth::user()->username]) }}">My Portfolio</a>
+                                </li>
                             @endif
 
                         @endif
-                        <li><a href="{{ route('page.explore') }}">Explore</a></li>
+                        <li @if(isset($explore_active)) class='active' @endif>
+                            <a href="{{ route('page.explore') }}">Explore</a>
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 Categories <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 @foreach($categoryMenu as $category)
-                                <li>
+                                <li @if(isset($categoryActive) && $categoryActive->category == $category->category) class='active' @endif>
                                     <a href="{{ route('portfolio.search.category', [str_slug($category->category).'-'.$category->id]) }}">
                                         {{ $category->category }}
                                     </a>
@@ -84,7 +90,8 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="{{ route('account.show', [Auth::user()->username]) }}">My Account</a>
+                                        <a href="{{ route('account.show', [Auth::user()->username]) }}">Dashboard</a>
+                                        <a href="{{ route('account.portfolio', [Auth::user()->username]) }}">Portfolio</a>
                                         <a href="{{ route('account.settings', [Auth::user()->username]) }}">Settings</a>
                                         <a href="{{ route('account.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             Logout
