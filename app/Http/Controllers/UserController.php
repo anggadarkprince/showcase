@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Portfolio;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +28,10 @@ class UserController extends Controller
     {
         $loggedUser = Auth::user()->username;
         if ($user->username == $loggedUser) {
-            return view('users.dashboard', ["dashboard_active" => true]);
+            $portfolio = new Portfolio();
+            $portfolios = $portfolio->discover();
+            $dashboard_active = true;
+            return view('users.dashboard', compact('dashboard_active', 'user', 'portfolios'));
         } else {
             return redirect()->route('account.show', [$loggedUser]);
         }

@@ -2,11 +2,17 @@
     <div class="profile">
         <div class="avatar" style="background-image: url('{{ asset("storage/avatars/{$user->avatar}") }}')"></div>
         <div class="profile-wrapper">
-            <h3 class="name">{{ $user->name }}</h3>
+            <a href="{{ route('profile.show', [$user->username]) }}" class="name">{{ $user->name }}</a>
             <p class="username">{{ "@{$user->username}" }}</p>
             <p class="location"><span class="glyphicon glyphicon-map-marker"></span> {{ $user->location }}</p>
             <p class="about hidden-xs">{{ $user->about }}</p>
         </div>
+        @if(Auth::check())
+            <?php $loggedUser = Auth::user(); ?>
+            @if($user->username == $loggedUser->username)
+                <a href="{{ route('account.portfolio.create', [$loggedUser->username]) }}" class="btn btn-primary btn-block">CREATE PORTFOLIO</a>
+            @endif
+        @endif
     </div>
     <ul class="info list-group hidden-xs hidden-sm">
         <li class="list-group-item">

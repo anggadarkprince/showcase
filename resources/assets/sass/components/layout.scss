@@ -1,0 +1,23 @@
+a:hover {
+  text-decoration: none;
+}
+.navbar-default .navbar-nav > li.active > a{
+  background: transparent;
+  border-bottom: 2px solid;
+}
+
+.page-title {
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+
+.btn {
+  border-radius: 0;
+}
+
+footer {
+  margin-top: 50px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 0 !important;
+}

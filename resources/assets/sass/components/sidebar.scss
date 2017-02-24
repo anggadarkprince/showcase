@@ -1,0 +1,58 @@
+.profile-sidebar {
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #d3e0e9;
+
+  .profile {
+    text-align: left;
+
+    .avatar {
+      border-radius: 3px;
+      background-position: center;
+      background-size: cover;
+      height: 60px;
+      width: 60px;
+      float: left;
+    }
+
+    .profile-wrapper {
+      padding-left: 80px;
+    }
+
+    .name {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .username {
+      color: #999999;
+      margin-bottom: 0;
+    }
+
+    .location {
+      margin-bottom: 0;
+    }
+  }
+
+  .info {
+    margin-top: 20px;
+    margin-bottom: 0;
+
+    .list-group-item {
+      padding: 8px 15px;
+
+      strong {
+        text-transform: uppercase;
+        font-size: 12px;
+        letter-spacing: 1px;
+      }
+
+      p {
+        margin-bottom: 0;
+        line-height: 1.2;
+        margin-bottom: 5px;
+      }
+    }
+  }
+}

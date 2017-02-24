@@ -1,0 +1,70 @@
+.portfolio-item, .portfolio-item-create {
+  height: 342px;
+  margin-bottom: 30px;
+  padding: 0;
+  background: #ffffff;
+  overflow: hidden;
+
+  .featured {
+    height: 200px;
+  }
+
+  .caption {
+    padding: 15px;
+  }
+
+  .title-wrapper {
+    height: 70px;
+
+    .title {
+      margin-top: 0;
+      margin-bottom: 5px;
+      font-size: 18px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .company {
+      display: block;
+      margin-bottom: 10px;
+      color: $text-color;
+
+      &:hover {
+        color: #3097D1;
+      }
+    }
+  }
+
+  time {
+    color: #999999;
+  }
+
+  hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .control {
+    padding: 15px;
+  }
+}
+
+.portfolio-item-create {
+  display: flex;
+  background: none;
+  border: 2px dashed #3097D1;
+
+  a {
+    display: block;
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
+    align-items: stretch;
+    line-height: 342px;
+    width: 100%;
+    text-decoration: none;
+  }
+}

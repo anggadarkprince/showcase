@@ -1,0 +1,50 @@
+.form-title {
+  margin-bottom: 20px;
+
+  h3, h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  p {
+    color: #999999;
+  }
+}
+
+.field-group {
+  margin-bottom: 30px;
+}
+
+.form-control {
+  box-shadow: none;
+  border-radius: 0;
+}
+
+// Input file
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + label {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+
+}
+
+.inputfile:focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+// end of input file

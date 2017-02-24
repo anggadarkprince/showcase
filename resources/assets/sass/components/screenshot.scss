@@ -1,0 +1,41 @@
+.screenshot-filename {
+  margin-bottom: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.screenshot-item {
+  margin-bottom: 20px;
+
+  .control-label {
+    display: block;
+  }
+
+  &.screenshot-uploaded {
+    .screenshot-preview {
+      border: none;
+    }
+  }
+
+  .screenshot-preview {
+    background-position: center;
+    background-size: cover;
+    overflow: hidden;
+    height: 200px;
+    display: block;
+    box-sizing: border-box;
+    border: 2px dashed #999999;
+    vertical-align: middle;
+    line-height: 200px;
+    text-align: center;
+    cursor: pointer;
+    margin: 10px 0 20px;
+  }
+}
+
+.avatar-preview {
+  display: block;
+  width: 100px;
+  margin-bottom: 20px;
+}

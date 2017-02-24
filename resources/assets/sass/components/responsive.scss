@@ -1,0 +1,57 @@
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .profile-sidebar {
+    .profile {
+      text-align: center;
+
+      .avatar {
+        height: 100px;
+        width: 100px;
+        float: none;
+        margin: 0 auto 20px;
+      }
+
+      .profile-wrapper {
+        padding-left: 0;
+      }
+
+      .name {
+        margin-bottom: 5px;
+        font-size: 20px;
+      }
+
+      .username {
+        margin-bottom: 5px;
+      }
+
+      .location {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .profile-sidebar {
+    margin-bottom: 30px;
+
+    .profile {
+      margin-bottom: 20px;
+
+      .avatar {
+        height: 210px;
+        width: auto;
+      }
+    }
+  }
+  .showcase {
+    margin-top: 10px;
+  }
+
+  .showcase-screenshots {
+    img {
+      margin: 0 auto 30px;
+    }
+  }
+}

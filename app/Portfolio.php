@@ -103,4 +103,9 @@ class Portfolio extends Model
             ->get();
         return $related;
     }
+
+    public function discover()
+    {
+        return $this->latest()->take(6)->get();
+    }
 }

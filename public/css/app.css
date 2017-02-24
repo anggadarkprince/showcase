@@ -7768,8 +7768,18 @@ a:hover {
   margin-bottom: 40px;
 }
 
+.btn {
+  border-radius: 0;
+}
+
+footer {
+  margin-top: 50px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 0 !important;
+}
+
 .profile-sidebar {
-  margin-top: 0;
   margin-bottom: 20px;
   padding: 20px;
   background-color: #fff;
@@ -7828,11 +7838,95 @@ a:hover {
   margin-bottom: 5px;
 }
 
+.form-title {
+  margin-bottom: 20px;
+}
+
+.form-title h3, .form-title h4 {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.form-title p {
+  color: #999999;
+}
+
+.field-group {
+  margin-bottom: 30px;
+}
+
+.form-control {
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + label {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.inputfile:focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.screenshot-filename {
+  margin-bottom: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.screenshot-item {
+  margin-bottom: 20px;
+}
+
+.screenshot-item .control-label {
+  display: block;
+}
+
+.screenshot-item.screenshot-uploaded .screenshot-preview {
+  border: none;
+}
+
+.screenshot-item .screenshot-preview {
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+  height: 200px;
+  display: block;
+  box-sizing: border-box;
+  border: 2px dashed #999999;
+  vertical-align: middle;
+  line-height: 200px;
+  text-align: center;
+  cursor: pointer;
+  margin: 10px 0 20px;
+}
+
+.avatar-preview {
+  display: block;
+  width: 100px;
+  margin-bottom: 20px;
+}
+
 .portfolio-item, .portfolio-item-create {
   height: 342px;
   margin-bottom: 30px;
   padding: 0;
   background: #ffffff;
+  overflow: hidden;
 }
 
 .portfolio-item .featured, .portfolio-item-create .featured {
@@ -7981,100 +8075,6 @@ a:hover {
   margin-bottom: 20px;
 }
 
-.form-title {
-  margin-bottom: 20px;
-}
-
-.form-title h3, .form-title h4 {
-  margin-top: 0;
-  margin-bottom: 5px;
-  font-weight: bold;
-  font-size: 20px;
-}
-
-.form-title p {
-  color: #999999;
-}
-
-.field-group {
-  margin-bottom: 30px;
-}
-
-.form-control {
-  box-shadow: none;
-  border-radius: 0;
-}
-
-.inputfile {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
-}
-
-.inputfile + label {
-  display: inline-block;
-  cursor: pointer;
-}
-
-.inputfile:focus + label {
-  outline: 1px dotted #000;
-  outline: -webkit-focus-ring-color auto 5px;
-}
-
-.btn {
-  border-radius: 0;
-}
-
-.screenshot-filename {
-  margin-bottom: 10px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.screenshot-item {
-  margin-bottom: 20px;
-}
-
-.screenshot-item .control-label {
-  display: block;
-}
-
-.screenshot-item.screenshot-uploaded .screenshot-preview {
-  border: none;
-}
-
-.screenshot-item .screenshot-preview {
-  background-position: center;
-  background-size: cover;
-  overflow: hidden;
-  height: 200px;
-  display: block;
-  box-sizing: border-box;
-  border: 2px dashed #999999;
-  vertical-align: middle;
-  line-height: 200px;
-  text-align: center;
-  cursor: pointer;
-  margin: 10px 0 20px;
-}
-
-.avatar-preview {
-  display: block;
-  width: 100px;
-  margin-bottom: 20px;
-}
-
-footer {
-  margin-top: 50px;
-  padding: 20px;
-  text-align: center;
-  margin-bottom: 0 !important;
-}
-
 .m-b-md {
   margin-bottom: 30px;
 }
@@ -8089,6 +8089,52 @@ footer {
 
 .m-t-sm {
   margin-top: 20px;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .profile-sidebar .profile {
+    text-align: center;
+  }
+  .profile-sidebar .profile .avatar {
+    height: 100px;
+    width: 100px;
+    float: none;
+    margin: 0 auto 20px;
+  }
+  .profile-sidebar .profile .profile-wrapper {
+    padding-left: 0;
+  }
+  .profile-sidebar .profile .name {
+    margin-bottom: 5px;
+    font-size: 20px;
+  }
+  .profile-sidebar .profile .username {
+    margin-bottom: 5px;
+  }
+  .profile-sidebar .profile .location {
+    margin-bottom: 10px;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .profile-sidebar {
+    margin-bottom: 30px;
+  }
+  .profile-sidebar .profile {
+    margin-bottom: 20px;
+  }
+  .profile-sidebar .profile .avatar {
+    height: 210px;
+    width: auto;
+  }
+  .showcase {
+    margin-top: 10px;
+  }
+  .showcase-screenshots img {
+    margin: 0 auto 30px;
+  }
 }
 
 .bootstrap-tagsinput,
@@ -8208,53 +8254,6 @@ fieldset[disabled]
 
 .tt-suggestion p {
   margin: 0;
-}
-
-/* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-  .profile-sidebar .profile {
-    text-align: center;
-  }
-  .profile-sidebar .profile .avatar {
-    height: 100px;
-    width: 100px;
-    float: none;
-    margin: 0 auto 20px;
-  }
-  .profile-sidebar .profile .profile-wrapper {
-    padding-left: 0;
-  }
-  .profile-sidebar .profile .name {
-    margin-bottom: 5px;
-    font-size: 20px;
-  }
-  .profile-sidebar .profile .username {
-    margin-bottom: 5px;
-  }
-  .profile-sidebar .profile .location {
-    margin-bottom: 10px;
-  }
-}
-
-/* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-  .profile-sidebar {
-    margin-top: 10px;
-    margin-bottom: 30px;
-  }
-  .profile-sidebar .profile {
-    margin-bottom: 20px;
-  }
-  .profile-sidebar .profile .avatar {
-    height: 210px;
-    width: auto;
-  }
-  .showcase {
-    margin-top: 10px;
-  }
-  .showcase-screenshots img {
-    margin: 0 auto 30px;
-  }
 }
 
 /*# sourceMappingURL=app.css.map */
