@@ -13,21 +13,6 @@ class PageController extends Controller
         return "view : show {$user->username}";
     }
 
-    public function portfolio()
-    {
-        return 'view : portfolio';
-    }
-
-    public function about()
-    {
-        return 'view : about';
-    }
-
-    public function contact()
-    {
-        return 'view : contact';
-    }
-
     public function help()
     {
         return view('home.help');

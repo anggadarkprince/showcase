@@ -86,7 +86,7 @@ class Portfolio extends Model
         $portfolios = $this->select()
             ->join('portfolio_tags', 'portfolios.id', '=', 'portfolio_tags.portfolio_id')
             ->join('tags', 'tags.id', '=', 'portfolio_tags.tag_id')
-            ->where('tag', 'like', $tag)
+            ->where('tag', 'like', "%{$tag}%")
             ->orderBy('portfolios.created_at', 'desc')
             ->distinct()
             ->paginate(12);

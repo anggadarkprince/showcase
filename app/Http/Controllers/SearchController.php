@@ -8,30 +8,36 @@ use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
-    function searchByCompany($companySlug){
-        $companyGuess = str_replace('-', ' ', $companySlug);
-        $portfolios = Portfolio::where('company', 'like', "{$companyGuess}%")->paginate(12);
-        $title = "Company: {$companyGuess}";
+    function searchByCompany($companySlug)
+    {
+        $companyGuess = urldecode($companySlug);
+        $portfolios = Portfolio::where('company', 'like', "%{$companyGuess}%")->paginate(12);
+        $title = "Company: <strong>{$companyGuess}</strong>";
         return view('portfolio.discover', compact('portfolios', 'title'));
     }
 
-    function searchByCategory($categorySlug){
-        $categoryGuess = str_replace('-', ' ', $categorySlug);
-        $category = Category::where('category', 'like', "{$categoryGuess}%")->firstOrFail();
+    function searchByCategory($categorySlug)
+    {
+        $slugPart = explode('-', $categorySlug);
+        $id = array_pop($slugPart);
+
+        $category = Category::find($id);
         $portfolios = $category->portfolios()->paginate(12);
-        $title = "Category: {$category->category}";
+        $title = "Category: <strong>{$category->category}</strong>";
         return view('portfolio.discover', compact('portfolios', 'title'));
     }
 
-    function searchByTag($tagSlug){
+    function searchByTag($tagSlug)
+    {
         $tagGuess = str_replace('-', ' ', $tagSlug);
         $portfolio = new Portfolio();
         $portfolios = $portfolio->portfolioByTag($tagGuess);
-        $title = "Tag: {$tagGuess}";
+        $title = "Tag: <strong>{$tagGuess}</strong>";
         return view('portfolio.discover', compact('portfolios', 'title'));
     }
 
-    function searchQuery($query){
+    function searchQuery($query)
+    {
 
     }
 }

@@ -20,7 +20,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'username' => $faker->userName,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
-        'avatar' => 'avatar_'.rand(1, 5).'.jpg',
+        'avatar' => 'avatar-'.rand(1, 5).'.jpg',
         'birthday' => $faker->date(),
         'location' => $faker->city.' '.$faker->country,
         'contact' => $faker->phoneNumber,
@@ -37,8 +37,8 @@ $factory->define(App\Portfolio::class, function (Faker\Generator $faker) {
     return [
         'user_id' => rand(1, 30),
         'category_id' => rand(1, 13),
-        'title' => $faker->words(3, true),
-        'description' => $faker->sentences(10, true),
+        'title' => $faker->catchPhrase(),
+        'description' => $faker->realText(),
         'reference' => $faker->url,
         'date' => $faker->date(),
         'company' => $faker->company,
@@ -48,8 +48,8 @@ $factory->define(App\Portfolio::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Screenshot::class, function (Faker\Generator $faker) {
     return [
-        'portfolio_id' => rand(1, 100),
-        'caption' => $faker->words(3, true),
+        'portfolio_id' => rand(1, 500),
+        'caption' => $faker->catchPhrase(),
         'source' => 'screenshot_'.rand(1, 5).'.jpg',
         'is_featured' => $faker->boolean()
     ];
@@ -57,13 +57,21 @@ $factory->define(App\Screenshot::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Tag::class, function (Faker\Generator $faker) {
     return [
-        'tag' => $faker->words(2, true)
+        'tag' => $faker->randomElement([
+            'design', 'medical', 'art', 'education',
+            'text', 'trending', 'typo', 'feeling',
+            'engineer', 'programming', 'web', 'internet', 'quote', 'red',
+            'colorful', 'beautiful', 'flat', 'tech', 'flower',
+            'world', 'happy people', 'environment', 'fun', 'vintage',
+            'house', 'public', 'system', 'worker', 'freedom', 'troll',
+            'migrate', 'bird', 'cat', 'sun', 'evergreen', 'simple'
+        ])
     ];
 });
 
 $factory->define(App\PortfolioTag::class, function (Faker\Generator $faker) {
     return [
-        'portfolio_id' => rand(1, 100),
+        'portfolio_id' => rand(1, 500),
         'tag_id' => rand(1, 10)
     ];
 });

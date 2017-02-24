@@ -47,14 +47,13 @@
                     <ul class="nav navbar-nav">
                         @if (Auth::check())
                         <li><a href="{{ route('account.show', [Auth::user()->username]) }}">Home</a></li>
-                        @if(url('/') == route('account.profile'))
-                        <li><a href="{{ route('account.portfolio', [Auth::user()->username]) }}">Portfolio</a></li>
+
+                            @if(url('/') == route('account.profile'))
+                            <li><a href="{{ route('account.portfolio', [Auth::user()->username]) }}">My Portfolio</a></li>
+                            @endif
+
                         @endif
                         <li><a href="{{ route('page.explore') }}">Explore</a></li>
-                        @else
-                        <li><a href="{{ route('page.explore') }}">Explore</a></li>
-                        <li><a href="{{ route('page.help') }}">Help</a></li>
-                        @endif
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 Categories <span class="caret"></span>
@@ -62,7 +61,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 @foreach($categoryMenu as $category)
                                 <li>
-                                    <a href="{{ route('portfolio.search.category', [str_slug($category->category)]) }}">
+                                    <a href="{{ route('portfolio.search.category', [str_slug($category->category).'-'.$category->id]) }}">
                                         {{ $category->category }}
                                     </a>
                                 </li>

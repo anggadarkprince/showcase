@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('portfolio');
     }
 
     public function index()
@@ -93,5 +93,11 @@ class UserController extends Controller
         return redirect()->back()->withErrors([
             'error' => 'Update setting failed, Try again!'
         ]);
+    }
+
+    public function portfolio(User $user)
+    {
+        $portfolios = $user->portfolios()->paginate(12);
+        return view('portfolio.show', compact('user', 'portfolios'));
     }
 }

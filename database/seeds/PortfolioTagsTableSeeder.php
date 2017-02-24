@@ -11,6 +11,6 @@ class PortfolioTagsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\PortfolioTag::class, 200)->create();
+        factory(App\PortfolioTag::class, 2000)->create();
     }
 }

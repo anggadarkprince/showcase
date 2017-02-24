@@ -2,6 +2,8 @@
 // Body
 $body-bg: #f5f8fa;
 
+$icon-font-path: "../../fonts/bootstrap/";
+
 // Borders
 $laravel-border-color: darken($body-bg, 10%);
 $list-group-border: $laravel-border-color;
@@ -14,7 +16,7 @@ $brand-primary: #3097D1;
 $brand-success: #2ab27b;
 
 // Typography
-$font-family-sans-serif: "Raleway", sans-serif;
+$font-family-sans-serif: "Lato", sans-serif;
 $font-size-base: 14px;
 $line-height-base: 1.6;
 $text-color: #636b6f;

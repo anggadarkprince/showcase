@@ -21,7 +21,7 @@ class PortfolioController extends Controller
      */
     public function index(User $user)
     {
-        $portfolios = $user->portfolios()->orderBy('date', 'desc')->get();
+        $portfolios = $user->portfolios()->orderBy('date', 'desc')->paginate(11);
 
         return view('portfolio.index', compact('user', 'portfolios'));
     }
@@ -147,12 +147,17 @@ class PortfolioController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param User $user
+     * @param $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user, $slug)
     {
-        dd('show');
+        $slugPart = explode('-', $slug);
+        $id = array_pop($slugPart);
+
+        $portfolio = Portfolio::findOrFail($id);
+        return view('portfolio.show', compact('user', 'portfolio'));
     }
 
     /**

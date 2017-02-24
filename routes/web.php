@@ -55,22 +55,12 @@ Route::group(['domain' => 'laravel.dev'], function () {
     Route::group(['prefix' => '{user}'], function () {
         Route::get('/', [
             'as' => 'profile.show',
-            'uses' => 'PageController@show'
-        ]);
-
-        Route::get('/portfolio', [
-            'as' => 'profile.portfolio',
-            'uses' => 'PageController@portfolio'
+            'uses' => 'UserController@portfolio'
         ]);
 
         Route::get('/portfolio/{portfolio}', [
             'as' => 'profile.portfolio.show',
-            'uses' => 'PageController@portfolio'
-        ]);
-
-        Route::get('/contact', [
-            'as' => 'profile.contact',
-            'uses' => 'PageController@contact'
+            'uses' => 'PortfolioController@show'
         ]);
     });
 });

@@ -30,14 +30,15 @@ elixir(function(mix) {
     mix.scripts(['vendor/typeahead.bundle.js', 'scrollto.js', 'functions.js', 'scripts.js'], 'public/js/functions.js');
 
     // copy file
-    mix.copy('resources/assets/js/fontloader.js', 'public/js/fontloader.js');
+    mix.copy('resources/assets/js/fontloader.js', 'public/js/fontloader.js')
+        .copy('node_modules/bootstrap-sass/assets/fonts/*', 'public/fonts');
 
     // Versioning with hash like styles-a322t45.css
     mix.version(['css/app.css', 'css/support.css', 'css/admin.css',
         'js/app.js', 'js/functions.js', 'js/fontloader.js']);
 
     // Auto refresh when run gulp watch
-    mix.browserSync({
-        proxy: 'laravel.dev:8080'
-    });
+    //mix.browserSync({
+    //    proxy: 'laravel.dev:8080'
+    //});
 });

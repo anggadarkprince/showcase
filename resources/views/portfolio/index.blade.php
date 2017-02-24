@@ -7,7 +7,7 @@
         @include('errors.common')
 
         <div class="row">
-            <div class="col-sm-6 col-md-4">
+            <div class="col-sm-6 col-md-4 col-lg-3">
                 <div class="thumbnail portfolio-item-create">
                     <a href="{{ route('account.portfolio.create', [$user->username]) }}">
                         CREATE PORTFOLIO
@@ -15,38 +15,54 @@
                 </div>
             </div>
             @foreach($portfolios as $portfolio)
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail portfolio-item">
-                    <?php
-                    $screenshot = $portfolio->screenshots()->whereIsFeatured(1)->first();
-                        $caption = 'placeholder-rect.jpg';
-                        if(is_null($screenshot)){
-                            $featured = 'placeholder-rect.jpg';
-                        }
-                        else{
-                            $featured = $screenshot->source;
-                            $caption = $screenshot->caption;
-                        }
-                    ?>
 
-                    <div class="featured" style="background: url('{{ asset("storage/screenshots/{$featured}") }}') center center / cover;"></div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="thumbnail portfolio-item">
+                        <?php
+                        $screenshot = $portfolio->screenshots()->whereIsFeatured(1)->first();
+                        $featured = is_null($screenshot) ? 'placeholder.jpg' : $screenshot->source;
 
-                    <div class="caption">
-                        <h3 class="title"><a href="{{ route('account.portfolio.show', [$user->username, str_slug($portfolio->title).'-'.$portfolio->id]) }}">{{ $portfolio->title }}</a></h3>
-                        <a href="{{ route('portfolio.search.company', [str_slug($portfolio->company)]) }}" class="company">{{ $portfolio->company }}</a>
-                        <div class="timestamp clearfix">
-                            <time class="pull-left">{{ $portfolio->date->diffForHumans() }}</time>
-                            <span class="pull-right"><a href="{{ route('portfolio.search.category', [str_slug($portfolio->category->category)]) }}">{{ $portfolio->category->category }}</a></span>
+                        $portfolioSlug = str_slug($portfolio->title).'-'.$portfolio->id;
+                        $categorySlug = str_slug($portfolio->category->category).'-'.$portfolio->category->id;
+                        ?>
+
+                        <div class="featured" style="background: url('{{ asset("storage/screenshots/{$featured}") }}') center center / cover;">
+                            <div class="control">
+                                <a href="{{ route('account.portfolio.edit', [$user->username, $portfolio->id]) }}" class="btn btn-default" role="button">
+                                    <i class="glyphicon glyphicon-edit"></i> Edit
+                                </a>
+                                <a href="#" class="btn btn-default btn-delete" role="button"
+                                   onclick="return deletePortfolio(event, '{{ route('account.portfolio.destroy', [$user->username, $portfolio->id]) }}')">
+                                    <i class="glyphicon glyphicon-trash"></i > Delete
+                                </a>
+                            </div>
                         </div>
-                        <hr>
-                        <div class="control">
-                            <a href="{{ route('account.portfolio.edit', [$user->username, $portfolio->id]) }}" class="btn btn-default" role="button">Edit</a>
-                            <a href="#" class="btn btn-default btn-delete" role="button"
-                            onclick="return deletePortfolio(event, '{{ route('account.portfolio.destroy', [$user->username, $portfolio->id]) }}')">Delete</a>
+
+                        <div class="caption">
+                            <div class="title-wrapper">
+                                <h3 class="title">
+                                    <a href="{{ route('profile.portfolio.show', [$portfolio->user->username, $portfolioSlug]) }}">
+                                        {{ $portfolio->title }}
+                                    </a>
+                                </h3>
+                                <a href="{{ route('portfolio.search.company', [urlencode($portfolio->company)]) }}" class="company">
+                                    {{ $portfolio->company }}
+                                </a>
+                            </div>
+                            <hr>
+                            <div class="timestamp clearfix">
+                                <time class="pull-left">
+                                    {{ $portfolio->date->diffForHumans() }}
+                                </time>
+                                <span class="pull-right">
+                                    <a href="{{ route('portfolio.search.category', [$categorySlug]) }}">
+                                        {{ str_limit($portfolio->category->category, 15) }}
+                                    </a>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             @endforeach
 
             <script>
@@ -65,6 +81,10 @@
                 {{ method_field('delete') }}
             </form>
 
+        </div>
+
+        <div class="center-block">
+            {{ $portfolios->links() }}
         </div>
     </div>
 @endsection

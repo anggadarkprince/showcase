@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400,600);
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -297,8 +297,8 @@ th {
 
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url("../fonts/bootstrap/glyphicons-halflings-regular.eot");
-  src: url("../fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/bootstrap/glyphicons-halflings-regular.woff2") format("woff2"), url("../fonts/bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
+  src: url("../../fonts/bootstrap/glyphicons-halflings-regular.eot");
+  src: url("../../fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../../fonts/bootstrap/glyphicons-halflings-regular.woff2") format("woff2"), url("../../fonts/bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("../../fonts/bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("../../fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
 }
 
 .glyphicon {
@@ -1377,7 +1377,7 @@ html {
 }
 
 body {
-  font-family: "Raleway", sans-serif;
+  font-family: "Lato", sans-serif;
   font-size: 14px;
   line-height: 1.6;
   color: #636b6f;
@@ -6867,7 +6867,7 @@ button.close {
   position: absolute;
   z-index: 1070;
   display: block;
-  font-family: "Raleway", sans-serif;
+  font-family: "Lato", sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -7001,7 +7001,7 @@ button.close {
   display: none;
   max-width: 276px;
   padding: 1px;
-  font-family: "Raleway", sans-serif;
+  font-family: "Lato", sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -7759,42 +7759,106 @@ a:hover {
 }
 
 .page-title {
-  font-size: 26px;
+  font-size: 20px;
   margin-bottom: 40px;
 }
 
+.profile-sidebar {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #d3e0e9;
+}
+
+.profile-sidebar .profile {
+  text-align: left;
+}
+
+.profile-sidebar .profile .avatar {
+  border-radius: 3px;
+  background-position: center;
+  background-size: cover;
+  height: 60px;
+  width: 60px;
+  float: left;
+}
+
+.profile-sidebar .profile .profile-wrapper {
+  padding-left: 80px;
+}
+
+.profile-sidebar .profile .name {
+  margin: 0;
+  font-size: 16px;
+}
+
+.profile-sidebar .profile .username {
+  color: #999999;
+  margin-bottom: 0;
+}
+
+.profile-sidebar .profile .location {
+  margin-bottom: 0;
+}
+
+.profile-sidebar .info {
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+.profile-sidebar .info .list-group-item {
+  padding: 8px 15px;
+}
+
+.profile-sidebar .info .list-group-item strong {
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.profile-sidebar .info .list-group-item p {
+  margin-bottom: 0;
+  line-height: 1.2;
+  margin-bottom: 5px;
+}
+
 .portfolio-item, .portfolio-item-create {
+  height: 342px;
   margin-bottom: 30px;
   padding: 0;
   background: #ffffff;
-  height: 445px;
 }
 
 .portfolio-item .featured, .portfolio-item-create .featured {
-  height: 250px;
-}
-
-.portfolio-item > img, .portfolio-item-create > img {
-  max-height: 360px;
+  height: 200px;
 }
 
 .portfolio-item .caption, .portfolio-item-create .caption {
-  padding: 20px;
+  padding: 15px;
 }
 
-.portfolio-item .title, .portfolio-item-create .title {
+.portfolio-item .title-wrapper, .portfolio-item-create .title-wrapper {
+  height: 70px;
+}
+
+.portfolio-item .title-wrapper .title, .portfolio-item-create .title-wrapper .title {
   margin-top: 0;
   margin-bottom: 5px;
-  font-size: 20px;
+  font-size: 18px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.portfolio-item .company, .portfolio-item-create .company {
+.portfolio-item .title-wrapper .company, .portfolio-item-create .title-wrapper .company {
   display: block;
   margin-bottom: 10px;
   color: #636b6f;
 }
 
-.portfolio-item .company:hover, .portfolio-item-create .company:hover {
+.portfolio-item .title-wrapper .company:hover, .portfolio-item-create .title-wrapper .company:hover {
   color: #3097D1;
 }
 
@@ -7803,8 +7867,12 @@ a:hover {
 }
 
 .portfolio-item hr, .portfolio-item-create hr {
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 10px;
+  margin-bottom: 12px;
+}
+
+.portfolio-item .control, .portfolio-item-create .control {
+  padding: 15px;
 }
 
 .portfolio-item-create {
@@ -7821,7 +7889,7 @@ a:hover {
   vertical-align: middle;
   -webkit-box-align: stretch;
   align-items: stretch;
-  line-height: 445px;
+  line-height: 342px;
   width: 100%;
   text-decoration: none;
 }
@@ -8053,6 +8121,43 @@ fieldset[disabled]
 
 .tt-suggestion p {
   margin: 0;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .profile-sidebar .profile {
+    text-align: center;
+  }
+  .profile-sidebar .profile .avatar {
+    height: 100px;
+    width: 100px;
+    float: none;
+    margin: 0 auto 20px;
+  }
+  .profile-sidebar .profile .profile-wrapper {
+    padding-left: 0;
+  }
+  .profile-sidebar .profile .name {
+    margin-bottom: 5px;
+    font-size: 20px;
+  }
+  .profile-sidebar .profile .username {
+    margin-bottom: 5px;
+  }
+  .profile-sidebar .profile .location {
+    margin-bottom: 10px;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .profile-sidebar .profile {
+    margin-bottom: 20px;
+  }
+  .profile-sidebar .profile .avatar {
+    height: 210px;
+    width: auto;
+  }
 }
 
 /*# sourceMappingURL=app.css.map */

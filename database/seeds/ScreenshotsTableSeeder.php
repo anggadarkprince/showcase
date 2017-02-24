@@ -11,6 +11,6 @@ class ScreenshotsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Screenshot::class, 200)->create();
+        factory(App\Screenshot::class, 1000)->create();
     }
 }
