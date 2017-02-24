@@ -47,9 +47,21 @@
                     <div class="showcase-share">
                         <strong>SHARE</strong>
                         <ul class="list-inline">
-                            <li><a href="#"><img src="{{ asset('img/layout/icon-facebook.jpg') }}" alt="Share Facebook"></a></li>
-                            <li><a href="#"><img src="{{ asset('img/layout/icon-twitter.jpg') }}" alt="Share Twitter"></a></li>
-                            <li><a href="#"><img src="{{ asset('img/layout/icon-google.jpg') }}" alt="Share Google"></a></li>
+                            <li>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::url('/')) }}">
+                                    <img src="{{ asset('img/layout/icon-facebook.jpg') }}" alt="Share Facebook">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/home?status={{ urlencode('Hey, i found creative work at '.Request::url('/').' @showcase.dev') }}">
+                                    <img src="{{ asset('img/layout/icon-twitter.jpg') }}" alt="Share Twitter">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://plus.google.com/share?url={{ urlencode(Request::url('/')) }}">
+                                    <img src="{{ asset('img/layout/icon-google.jpg') }}" alt="Share Google">
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
