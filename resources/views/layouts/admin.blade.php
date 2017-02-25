@@ -27,7 +27,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body id="app">
 <div id="wrapper">
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
@@ -50,18 +50,32 @@
                 </a>
             </li>
             @can('view', \App\User::class)
-            <li {{ Request::segment($segment) == 'user' ? 'class=active' : '' }}>
+            <li {{ Request::segment($segment) == 'users' ? 'class=active' : '' }}>
                 <a href="{{ route('admin.user') }}">
                     <i class="glyphicon glyphicon-user"></i>Users
                 </a>
             </li>
             @endcan
-            <li><a href="{{ route('admin.portfolio') }}" {{ Request::segment($segment) == 'portfolio' ? 'class=active' : '' }}><i class="glyphicon glyphicon-folder-open"></i>Portfolio</a></li>
-            <li><a href="{{ route('admin.tag') }}" {{ Request::segment($segment) == 'tag' ? 'class=active' : '' }}><i class="glyphicon glyphicon-tags"></i>Tags</a></li>
-            <li><a href="{{ route('admin.category') }}" {{ Request::segment($segment) == 'category' ? 'class=active' : '' }}><i class="glyphicon glyphicon-list"></i>Categories</a></li>
-            <li><a href="{{ route('admin.report') }}" {{ Request::segment($segment) == 'report' ? 'class=active' : '' }}><i class="glyphicon glyphicon-stats"></i>Report</a></li>
-            <li><a href="{{ url('/'.App::getLocale().'/contact') }}" {{ Request::segment($segment) == 'contact' ? 'class=active' : '' }}><i class="glyphicon glyphicon-envelope"></i>Contact</a></li>
-            <li><a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="glyphicon glyphicon-log-out"></i>Logout</a></li>
+            <li {{ Request::segment($segment) == 'portfolios' ? 'class=active' : '' }}>
+                <a href="{{ route('admin.portfolio') }}"><i class="glyphicon glyphicon-folder-open"></i>Portfolio</a>
+            </li>
+            <li {{ Request::segment($segment) == 'tags' ? 'class=active' : '' }}>
+                <a href="{{ route('admin.tag') }}"><i class="glyphicon glyphicon-tags"></i>Tags</a>
+            </li>
+            <li {{ Request::segment($segment) == 'categories' ? 'class=active' : '' }}>
+                <a href="{{ route('admin.category') }}"><i class="glyphicon glyphicon-list"></i>Categories</a>
+            </li>
+            <li {{ Request::segment($segment) == 'report' ? 'class=active' : '' }}>
+                <a href="{{ route('admin.report') }}"><i class="glyphicon glyphicon-stats"></i>Report</a>
+            </li>
+            <li {{ Request::segment($segment) == 'contact' ? 'class=active' : '' }}>
+                <a href="{{ url('/'.App::getLocale().'/contact') }}"><i class="glyphicon glyphicon-envelope"></i>Contact</a>
+            </li>
+            <li>
+                <a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="glyphicon glyphicon-log-out"></i>Logout
+                </a>
+            </li>
         </ul>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -73,6 +87,9 @@
     <div id="page-content-wrapper">
         <div class="container-fluid">
             @yield('content')
+            <footer>
+                &copy; {{ date('Y') }} Showcase.dev all rights reserved
+            </footer>
         </div>
     </div>
     <!-- /#page-content-wrapper -->

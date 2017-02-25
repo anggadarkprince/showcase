@@ -6,6 +6,10 @@ $(document).ready(function () {
         $('footer').addClass('navbar-fixed-bottom');
     }
 
+    if ($('#page-content-wrapper').outerHeight() < $(window).height()) {
+        $('footer').addClass('fixed');
+    }
+
     $('.btn-icon-search').on('click', function (e) {
         e.preventDefault();
         $(this).fadeOut(100, function(){

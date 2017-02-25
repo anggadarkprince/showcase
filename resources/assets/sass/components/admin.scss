@@ -3,3 +3,38 @@
   margin-bottom: 20px;
   margin-top: 10px;
 }
+
+.navbar-toggle {
+  display: inline-block;
+  float: left;
+  margin: 0 10px 0 0;
+  padding-left: 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
+
+  .icon-bar {
+    background: $text-color;
+  }
+}
+
+.stats-card {
+  height: 135px;
+
+  .lead {
+    margin-bottom: 10px;
+  }
+  .stats {
+    margin: 0 0 5px;
+  }
+}
+
+footer {
+  margin-top: 20px;
+  padding: 10px 0;
+  text-align: left;
+
+  &.fixed {
+    position: fixed;
+    bottom: 20px;
+  }
+}

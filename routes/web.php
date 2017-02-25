@@ -19,6 +19,25 @@ Route::match(['get', 'post'], '/about', ['domain' => 'laravel.dev', function () 
     return view('welcome');
 }])->name('page.about');
 
+// Download Route
+Route::get('download/{filename}', function($filename)
+{
+    // Check if file exists in app/storage/file folder
+    $file_path = storage_path() .'/logs/'. $filename;
+    if (file_exists($file_path))
+    {
+        // Send Download
+        return Response::download($file_path, $filename, [
+            'Content-Length: '. filesize($file_path)
+        ]);
+    }
+    else
+    {
+        // Error
+        exit('Requested file does not exist on our server!');
+    }
+})->where('filename', '[A-Za-z0-9\-\_\.]+');
+
 Route::group(['domain' => 'laravel.dev'], function () {
     Route::get('/explore', [
         'as' => 'page.explore',
@@ -80,6 +99,14 @@ Route::group(['domain' => 'admin.laravel.dev', 'namespace' => 'Admin'], function
         return redirect('dashboard');
     })->middleware('auth:admin');
 
+    Route::post('/trash/empty', function () {
+        App\Portfolio::onlyTrashed()->forceDelete();
+        return redirect('dashboard')->with([
+            'action' => 'warning',
+            'message' => 'All trashed data was deleted permanently'
+        ]);
+    })->middleware('auth:admin');
+
     Route::group(['middleware' => 'auth:admin'], function () {
         Route::get('dashboard', [
             'as' => 'admin.dashboard',
@@ -87,7 +114,7 @@ Route::group(['domain' => 'admin.laravel.dev', 'namespace' => 'Admin'], function
             'middleware' => 'auth:admin'
         ]);
 
-        Route::resource('user', 'UserController', [
+        Route::resource('users', 'UserController', [
             'names' => [
                 'index' => 'admin.user',
                 'create' => 'admin.user.create',
@@ -99,7 +126,7 @@ Route::group(['domain' => 'admin.laravel.dev', 'namespace' => 'Admin'], function
             ]
         ]);
 
-        Route::resource('portfolio', 'PortfolioController', [
+        Route::resource('portfolios', 'PortfolioController', [
             'names' => [
                 'index' => 'admin.portfolio',
                 'create' => 'admin.portfolio.create',
@@ -111,7 +138,7 @@ Route::group(['domain' => 'admin.laravel.dev', 'namespace' => 'Admin'], function
             ]
         ]);
 
-        Route::resource('tag', 'TagController', [
+        Route::resource('tags', 'TagController', [
             'only' => ['index', 'store', 'destroy'],
             'parameters' => [
                 'tag' => 'id'
@@ -123,7 +150,7 @@ Route::group(['domain' => 'admin.laravel.dev', 'namespace' => 'Admin'], function
             ]
         ]);
 
-        Route::resource('category', 'CategoryController', [
+        Route::resource('categories', 'CategoryController', [
             'except' => ['show', 'create', 'edit', 'update'],
             'names' => [
                 'index' => 'admin.category',
