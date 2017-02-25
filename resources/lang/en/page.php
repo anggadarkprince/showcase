@@ -16,15 +16,19 @@ return [
     ],
     'title' => [
         'user' => 'Account Management',
+        'tag' => 'Tags Management',
     ],
     'subtitle' => [
         'user' => 'Create and modify user account',
+        'user_form' => 'Public account who shared their portfolio',
+        'tag' => 'Create and modify tag',
     ],
     'action' => [
         'create' => 'Create',
         'edit' => 'Edit',
         'delete' => 'Delete',
         'save' => 'Save',
+        'saving' => 'Saving',
         'update' => 'Update',
         'cancel' => 'Cancel',
         'close' => 'Close',
@@ -50,7 +54,8 @@ return [
         'suspended' => 'Suspended',
         'status' => 'Status',
         'portfolio' => 'Portfolio',
-        'screenshot' => 'Screenshot'
+        'screenshot' => 'Screenshot',
+        'tag' => 'Tag'
     ],
     'dashboard' => [
         'contributors' => 'CONTRIBUTORS',
@@ -80,10 +85,14 @@ return [
         'download' => 'Download log file',
     ],
     'user' => [
-        'description' => 'Member user that capable to create portfolio'
+        'description' => 'Member user that capable to create portfolio',
+        'empty' => 'No users available',
     ],
     'footer' => 'Showcase.dev all rights reserved',
     'message' => [
-        'error' => 'Whoops! Something went wrong!'
+        'error' => 'Whoops! Something went wrong!',
+        'error_related' => 'You cannot delete tag with existing related data',
+        'delete' => 'Are you sure want to delete this :item?',
+        'deleted' => ':item was successfully deleted',
     ]
 ];

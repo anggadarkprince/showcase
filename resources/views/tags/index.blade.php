@@ -3,64 +3,73 @@
 @section('title', 'Tags')
 
 @section('content')
-    <div class="section-title">
-        <h3>Manage Tags
-            <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#create-modal">Create New
-                Tag
-            </button>
-        </h3>
-        <p>Create and modify keywords</p>
-    </div>
+    @php
+        $title = [
+            trans('page.menu.dashboard'),
+            trans('page.menu.tag')
+        ];
+    @endphp
 
-    @include('errors.common')
+    @include('partials._admin_title', ['title' => implode(',', $title)])
 
-    <div id="alert-wrapper"></div>
+    <div class="panel panel-default panel-table">
+        <div class="panel-body">
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>No</th>
-            <th>Tag</th>
-            <th>Portfolios</th>
-            <th width="120px">Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php $no = ($tags->currentPage() - 1) * 10 ?>
-        @forelse ($tags as $tag)
-            <?php $no = $no + 1 ?>
-            <tr>
-                <td>{{ $no }}</td>
-                <td>{{ $tag->tag }}</td>
-                <td>{{ $tag->portfolios()->count() }}</td>
-                <td>
-                    <form action="{{ route('admin.tag.destroy', [$tag->id]) }}" method="post"
-                          style="display: inline-block">
-                        {{ method_field('delete') }}
-                        {{ csrf_field() }}
-                        <button class="btn btn-danger" type="submit"
-                                onclick="return confirm('Are you sure want to delete this tag?')">DELETE
-                        </button>
-                    </form>
-                </td>
-            </tr>
-        @empty
-            <tr>
-                <td colspan="4" class="text-center">No tags</td>
-            </tr>
-        @endforelse
-        </tbody>
-    </table>
-    <div class="clearfix">
-        <?php
-        $shownItems = (($tags->currentPage() - 1) * $tags->perPage()) + $tags->count();
-        $totalItems = $tags->total();
-        ?>
-        <div class="pagination pull-left">
-            Shown data {{ $shownItems }} of {{ $totalItems }}
-        </div>
-        <div class="pull-right">
-            {{ $tags->links() }}
+            <div class="section-title">
+                <h3>
+                    @lang('page.title.tag')
+                    <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#create-modal">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        {{ strtoupper(trans('page.action.create').' '.trans('page.menu.tag')) }}
+                    </button>
+                </h3>
+                <p class="text-muted">@lang('page.subtitle.tag')</p>
+            </div>
+
+            @include('errors.common')
+
+            <div id="alert-wrapper"></div>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>No</th>
+                    <th>@lang('page.field.tag')</th>
+                    <th>@lang('page.field.portfolio')</th>
+                    <th width="120px">@lang('page.action.action')</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php $no = ($tags->currentPage() - 1) * 10 ?>
+                @forelse ($tags as $tag)
+                    <?php $no = $no + 1 ?>
+                    <tr>
+                        <td>{{ $no }}</td>
+                        <td><a href="{{ route('portfolio.search.tag', [str_slug($tag->tag)]) }}">{{ $tag->tag }}</a></td>
+                        <td>{{ $tag->portfolios()->count() }}</td>
+                        <td>
+                            <form action="{{ route('admin.tag.destroy', [$tag->id]) }}" method="post"
+                                  style="display: inline-block">
+                                {{ method_field('delete') }}
+                                {{ csrf_field() }}
+                                <button class="btn btn-danger" type="submit"
+                                        onclick="return confirm('{{ trans('page.message.delete', ['item' => strtolower(trans('page.menu.tag'))]) }}')">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                    {{ strtoupper(trans('page.action.delete')) }}
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="4" class="text-center">No tags</td>
+                    </tr>
+                @endforelse
+                </tbody>
+            </table>
+
+            @include('partials._admin_paging', ['data' => $tags])
+
         </div>
     </div>
 
@@ -73,19 +82,23 @@
                     {{ csrf_field() }}
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Create New Tag</h4>
+                        <h4 class="modal-title">@lang('page.action.create') @lang('page.menu.tag')</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group {{ $errors->has('category') ? 'has-error' : '' }}">
-                            <label for="tag" class="control-label">Tag</label>
-                            <input type="text" name="tag" id="tag" placeholder="Tag"
-                                   class="form-control" maxlength="255" value="{{ old('category') }}">
-                            {!! $errors->first('category', '<span class="help-block">:message</span>') !!}
+                        <div class="form-group {{ $errors->has('tag') ? 'has-error' : '' }}">
+                            <label for="tag" class="control-label">@lang('page.menu.tag')</label>
+                            <input type="text" name="tag" id="tag" placeholder="@lang('page.menu.tag')"
+                                   class="form-control" maxlength="255" value="{{ old('tag') }}">
+                            {!! $errors->first('tag', '<span class="help-block">:message</span>') !!}
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" data-loading-text="Saving...">Save
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            @lang('page.action.close')
+                        </button>
+                        <button type="submit" class="btn btn-primary"
+                                data-loading-text="{{ trans('page.action.saving') }}...">
+                            @lang('page.action.save') @lang('page.menu.tag')
                         </button>
                     </div>
                 </form>
@@ -93,6 +106,7 @@
         </div>
     </div>
 
+    @push('scripts')
     <script defer>
         window.onload = function () {
             var modalCreate = $('#create-modal');
@@ -124,6 +138,7 @@
                         var action = data.action;
                         var message = data.message;
                         setTimeout(function(){
+                            window.location.reload(false);
                             alertWrapper.html("<div class='alert alert-" + action + "'>" + message + "</div>");
                         }, 300);
                         tagInput.val('');
@@ -158,4 +173,5 @@
             });
         }
     </script>
+    @endpush
 @endsection

@@ -68,23 +68,13 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="text-center">No users</td>
+                        <td colspan="6" class="text-center">@lang('page.user.empty')</td>
                     </tr>
                 @endforelse
                 </tbody>
             </table>
-            <div class="clearfix">
-                <?php
-                $shownItems = (($users->currentPage() - 1) * $users->perPage()) + $users->count();
-                $totalItems = $users->total();
-                ?>
-                <div class="pagination pull-left">
-                    @lang('pagination.show', ['current' => $shownItems, 'total' => $totalItems])
-                </div>
-                <div class="pull-right">
-                    {{ $users->links() }}
-                </div>
-            </div>
+
+            @include('partials._admin_paging', ['data' => $users])
 
         </div>
     </div>

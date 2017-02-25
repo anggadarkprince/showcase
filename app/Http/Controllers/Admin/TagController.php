@@ -7,6 +7,7 @@ use App\Tag;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Validator;
 
 class TagController extends Controller
@@ -35,7 +36,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = $this->tag->paginate(10);
+        $tags = $this->tag->latest()->paginate(10);
         return view('tags.index', compact('tags'));
 
     }
@@ -101,14 +102,14 @@ class TagController extends Controller
             if ($tag->delete()) {
                 return redirect(route('admin.tag'))->with([
                     'action' => 'success',
-                    'message' => "Tag {$tag->tag} was successfully deleted"
+                    'message' => Lang::get('page.message.deleted', ['item' => ucfirst($tag->tag)])
                 ]);
             }
         } catch (QueryException $e) {
             logger('Failed delete tag', $e->errorInfo);
-            if($e->errorInfo[0] == 23000){
+            if ($e->errorInfo[0] == 23000) {
                 return redirect()->back()->withErrors([
-                    'message' => 'You cannot delete tag with existing related data'
+                    'message' => trans('page.message.error_related')
                 ]);
             }
         }

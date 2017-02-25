@@ -7782,7 +7782,7 @@ a:hover {
 }
 
 .btn {
-  border-radius: 0;
+  border-radius: 3px;
 }
 
 .search-container {

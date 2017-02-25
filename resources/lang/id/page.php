@@ -7,8 +7,8 @@ return [
     'menu' => [
         'dashboard' => 'Dasbor',
         'user' => 'Akun',
-        'portfolio' => 'Karya',
-        'tag' => 'Tanda',
+        'portfolio' => 'Portofolio',
+        'tag' => 'Kata Kunci',
         'category' => 'Kategori',
         'report' => 'Laporan',
         'contact' => 'Kontak',
@@ -16,16 +16,19 @@ return [
     ],
     'title' => [
         'user' => 'Pengelolaan Akun',
+        'tag' => 'Pengelolaan Kata Kunci',
     ],
     'subtitle' => [
         'user' => 'Membuat dan menyunting akun pengguna',
-        'user_form' => 'Anggota publik yang bisa mendaftarkan portfolionya'
+        'user_form' => 'Anggota publik yang bisa mendaftarkan portfolionya',
+        'tag' => 'Membuat dan menyunting akun pengguna',
     ],
     'action' => [
         'create' => 'Buat',
         'edit' => 'Sunting',
         'delete' => 'Hapus',
         'save' => 'Simpan',
+        'saving' => 'Menyimpan',
         'cancel' => 'Batal',
         'close' => 'Tutup',
         'action' => 'Aksi',
@@ -49,12 +52,13 @@ return [
         'activated' => 'Diaktifkan',
         'suspended' => 'Diblokir',
         'status' => 'Status',
-        'portfolio' => 'Karya',
-        'screenshot' => 'Foto'
+        'portfolio' => 'Portofolio',
+        'screenshot' => 'Foto',
+        'tag' => 'Kata Kunci',
     ],
     'dashboard' => [
         'contributors' => 'PENGGUNA',
-        'showcases' => 'KARYA',
+        'showcases' => 'PORTOFOLIO',
         'screenshots' => 'GAMBAR',
         'companies' => 'PERUSAHAAN',
         'categories' => 'KATEGORI',
@@ -79,8 +83,15 @@ return [
         'clear' => 'Kosongkan Tempat Sampah',
         'download' => 'Unduh dokumen log',
     ],
+    'user' => [
+        'description' => 'Member yang dapat membuat portofolio',
+        'empty' => 'Tidak ada data pengguna',
+    ],
     'footer' => 'Showcase.dev hak cipta dilindungi',
     'message' => [
-        'error' => 'Ops! Ada sesuatu yang salah!'
+        'error' => 'Ops! Ada sesuatu yang salah!',
+        'error_related' => 'Data tidak bisa dihapus karena berkaitan dengan data lain',
+        'delete' => 'Anda yakin ingin menghapus :item ini?',
+        'deleted' => ':item telah berhasil dihapus',
     ]
 ];
