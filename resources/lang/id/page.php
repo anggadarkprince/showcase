@@ -17,11 +17,13 @@ return [
     'title' => [
         'user' => 'Pengelolaan Akun',
         'tag' => 'Pengelolaan Kata Kunci',
+        'category' => 'Pengelolaan Kategori',
     ],
     'subtitle' => [
         'user' => 'Membuat dan menyunting akun pengguna',
         'user_form' => 'Anggota publik yang bisa mendaftarkan portfolionya',
         'tag' => 'Membuat dan menyunting akun pengguna',
+        'category' => 'Membuat dan menyunting kategori kategori',
     ],
     'action' => [
         'create' => 'Buat',
@@ -55,6 +57,8 @@ return [
         'portfolio' => 'Portofolio',
         'screenshot' => 'Foto',
         'tag' => 'Kata Kunci',
+        'category' => 'Kategori',
+        'detail' => 'Rincian',
     ],
     'dashboard' => [
         'contributors' => 'PENGGUNA',
@@ -86,6 +90,12 @@ return [
     'user' => [
         'description' => 'Member yang dapat membuat portofolio',
         'empty' => 'Tidak ada data pengguna',
+    ],
+    'tag' => [
+        'empty' => 'Tidak ada data kata kunci',
+    ],
+    'category' => [
+        'empty' => 'Tidak ada data kategori',
     ],
     'footer' => 'Showcase.dev hak cipta dilindungi',
     'message' => [

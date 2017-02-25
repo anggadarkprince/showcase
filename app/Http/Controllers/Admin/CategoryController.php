@@ -8,6 +8,7 @@ use App\Http\Requests\StoreCategoryRequest;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Lang;
 
 class CategoryController extends Controller
 {
@@ -25,7 +26,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = $this->category->paginate(10);
+        $categories = $this->category->latest()->paginate(10);
         return view('categories.index', compact('categories'));
     }
 
@@ -63,14 +64,14 @@ class CategoryController extends Controller
             if ($category->delete()) {
                 return redirect(route('admin.category'))->with([
                     'action' => 'success',
-                    'message' => "Category {$category->category} was successfully deleted"
+                    'message' => Lang::get('page.message.deleted', ['item' => ucfirst($category->category)])
                 ]);
             }
         } catch (QueryException $e) {
             logger('Failed delete category', $e->errorInfo);
             if($e->errorInfo[0] == 23000){
                 return redirect()->back()->withErrors([
-                    'message' => 'You cannot delete category with existing related data'
+                    'message' => trans('page.message.error_related')
                 ]);
             }
         }

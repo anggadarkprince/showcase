@@ -62,7 +62,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="4" class="text-center">No tags</td>
+                        <td colspan="4" class="text-center">@lang('page.tag.empty')</td>
                     </tr>
                 @endforelse
                 </tbody>

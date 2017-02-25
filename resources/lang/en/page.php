@@ -17,11 +17,13 @@ return [
     'title' => [
         'user' => 'Account Management',
         'tag' => 'Tags Management',
+        'category' => 'Category Management',
     ],
     'subtitle' => [
         'user' => 'Create and modify user account',
         'user_form' => 'Public account who shared their portfolio',
         'tag' => 'Create and modify tag',
+        'category' => 'Create and modify showcase\'s topic',
     ],
     'action' => [
         'create' => 'Create',
@@ -55,7 +57,9 @@ return [
         'status' => 'Status',
         'portfolio' => 'Portfolio',
         'screenshot' => 'Screenshot',
-        'tag' => 'Tag'
+        'tag' => 'Tag',
+        'category' => 'Category',
+        'detail' => 'Detail',
     ],
     'dashboard' => [
         'contributors' => 'CONTRIBUTORS',
@@ -87,6 +91,12 @@ return [
     'user' => [
         'description' => 'Member user that capable to create portfolio',
         'empty' => 'No users available',
+    ],
+    'tag' => [
+        'empty' => 'No tags available',
+    ],
+    'category' => [
+        'empty' => 'No categories available',
     ],
     'footer' => 'Showcase.dev all rights reserved',
     'message' => [

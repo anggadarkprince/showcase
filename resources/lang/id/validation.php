@@ -115,15 +115,17 @@ return [
     */
 
     'attributes' => [
-        'name' => 'nama',
-        'username' => 'nama user',
-        'password' => 'kata sandi',
-        'password_confirmation' => 'konfirmasi kata sandi',
-        'email' => 'alamat email',
-        'about' => 'tentang',
-        'birthday' => 'tanggal lahir',
-        'location' => 'lokasi',
-        'contact' => 'kontak',
+        'name' => 'Nama',
+        'username' => 'Nama user',
+        'password' => 'Kata sandi',
+        'password_confirmation' => 'Konfirmasi kata sandi',
+        'email' => 'Alamat email',
+        'about' => 'Tentang',
+        'birthday' => 'Tanggal lahir',
+        'location' => 'Lokasi',
+        'contact' => 'Kontak',
+        'category' => 'Category',
+        'detail' => 'Rincian',
     ],
 
 ];
