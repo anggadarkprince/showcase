@@ -33,7 +33,7 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
-                <a href="#">
+                <a href="{{ route('index') }}">
                     Showcase.dev
                 </a>
             </li>
@@ -44,16 +44,24 @@
                     $segment = 2;
                 }
             ?>
-            <li><a href="{{ route('admin.dashboard') }}" {{ Request::segment($segment) == 'dashboard' ? 'class=active' : '' }}>Dashboard</a></li>
+            <li {{ Request::segment($segment) == 'dashboard' ? 'class=active' : '' }}>
+                <a href="{{ route('admin.dashboard') }}">
+                    <i class="glyphicon glyphicon-dashboard"></i>Dashboard
+                </a>
+            </li>
             @can('view', \App\User::class)
-            <li><a href="{{ route('admin.user') }}" {{ Request::segment($segment) == 'user' ? 'class=active' : '' }}>Users</a></li>
+            <li {{ Request::segment($segment) == 'user' ? 'class=active' : '' }}>
+                <a href="{{ route('admin.user') }}">
+                    <i class="glyphicon glyphicon-user"></i>Users
+                </a>
+            </li>
             @endcan
-            <li><a href="{{ route('admin.portfolio') }}" {{ Request::segment($segment) == 'portfolio' ? 'class=active' : '' }}>Portfolio</a></li>
-            <li><a href="{{ route('admin.tag') }}" {{ Request::segment($segment) == 'tag' ? 'class=active' : '' }}>Tags</a></li>
-            <li><a href="{{ route('admin.category') }}" {{ Request::segment($segment) == 'category' ? 'class=active' : '' }}>Categories</a></li>
-            <li><a href="{{ route('admin.report') }}" {{ Request::segment($segment) == 'report' ? 'class=active' : '' }}>Report</a></li>
-            <li><a href="{{ url('/'.App::getLocale().'/contact') }}" {{ Request::segment($segment) == 'contact' ? 'class=active' : '' }}>Contact</a></li>
-            <li><a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+            <li><a href="{{ route('admin.portfolio') }}" {{ Request::segment($segment) == 'portfolio' ? 'class=active' : '' }}><i class="glyphicon glyphicon-folder-open"></i>Portfolio</a></li>
+            <li><a href="{{ route('admin.tag') }}" {{ Request::segment($segment) == 'tag' ? 'class=active' : '' }}><i class="glyphicon glyphicon-tags"></i>Tags</a></li>
+            <li><a href="{{ route('admin.category') }}" {{ Request::segment($segment) == 'category' ? 'class=active' : '' }}><i class="glyphicon glyphicon-list"></i>Categories</a></li>
+            <li><a href="{{ route('admin.report') }}" {{ Request::segment($segment) == 'report' ? 'class=active' : '' }}><i class="glyphicon glyphicon-stats"></i>Report</a></li>
+            <li><a href="{{ url('/'.App::getLocale().'/contact') }}" {{ Request::segment($segment) == 'contact' ? 'class=active' : '' }}><i class="glyphicon glyphicon-envelope"></i>Contact</a></li>
+            <li><a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="glyphicon glyphicon-log-out"></i>Logout</a></li>
         </ul>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -71,8 +79,8 @@
 </div>
 <!-- /#wrapper -->
 
-<script src="{{ elixir('js/functions.js') }}"></script>
 <script src="{{ elixir('js/app.js') }}"></script>
+<script src="{{ elixir('js/functions.js') }}"></script>
 <script>
     $.ajaxSetup({
         headers: {

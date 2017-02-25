@@ -1,8 +1,14 @@
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400,600);
+
 // Variables
 @import "variables";
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
-// Public theme
+// Bootstrap Tags
+@import "node_modules/bootstrap-tagsinput/dist/bootstrap-tagsinput";
+
+// Private theme
 @import "themes/private";

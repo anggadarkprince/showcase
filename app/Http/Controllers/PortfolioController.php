@@ -159,6 +159,8 @@ class PortfolioController extends Controller
 
         $portfolio = Portfolio::findOrFail($id);
 
+        $portfolio->increment('view');
+
         $portfolios = $portfolio->portfolioRelated($user);
 
         return view('portfolio.show', compact('user', 'portfolio', 'portfolios'));

@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="clearfix">
-                <h3 class="pull-left">@lang('page.welcome'),</h3>
+                <h1 class="page-title pull-left">@lang('page.welcome'),</h1>
                 <select class="pull-right locale" style="margin-top: 10px">
                     @foreach(config('app.locales') as $id => $lang)
                         <option value="{{ $id }}" @if(Request::segment(1) == $id) {{ "selected=true" }} @endif>
