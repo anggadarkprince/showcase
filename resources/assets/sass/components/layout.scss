@@ -2,6 +2,10 @@ a:hover {
   text-decoration: none;
 }
 
+.text-muted{
+  color: #999999;
+}
+
 .navbar-default .navbar-nav > li.active > a {
   background: transparent;
   border-bottom: 2px solid;
@@ -13,6 +17,11 @@ a:hover {
 
   small {
     margin-top: 6px;
+  }
+
+  .page-arrow {
+    color: #cccccc;
+    margin: 0 8px;
   }
 }
 

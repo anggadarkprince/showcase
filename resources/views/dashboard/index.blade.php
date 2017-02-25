@@ -5,23 +5,14 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            <div class="clearfix">
-                <h1 class="page-title pull-left">
-                    <button type="button" class="navbar-toggle" id="menu-toggle">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @lang('page.welcome'), <small class="hidden-xs text-primary">{{ Auth::user()->name }}</small></h1>
-                <select class="pull-right locale" style="margin-top: 10px">
-                    @foreach(config('app.locales') as $id => $lang)
-                        <option value="{{ $id }}" @if(Request::segment(1) == $id) {{ "selected=true" }} @endif>
-                            {{ $lang }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
+            @php
+                $title = [
+                    trans('page.welcome').', ',
+                    Auth::user()->name
+                ];
+            @endphp
+
+            @include('partials._admin_title', ['title' => implode(',', $title)])
 
             <p class="m-b-md">@lang('page.welcome_message')</p>
 
@@ -31,10 +22,19 @@
                 <div class="col-md-3">
                     <div class="panel panel-default stats-card">
                         <div class="panel-body">
-                            <p class="lead">CONTRIBUTORS</p>
-                            <h3 class="stats">{{ $users }} <small>{{ str_plural('USER', $users) }}</small></h3>
+                            <p class="lead">{{ strtoupper(trans('page.dashboard.contributors')) }}</p>
+                            <h3 class="stats">{{ $users }}
+                                <small>
+                                    @if(App::isLocale('en'))
+                                        {{ str_plural(trans('page.dashboard.user'), $users) }}
+                                    @else
+                                        {{ trans('page.dashboard.user') }}
+                                    @endif
+                                </small>
+                            </h3>
                             <a href="{{ route('admin.user') }}" class="text-primary">
-                                {{ number_format($users_activated/$users * 100, 1) }}% Active Account
+                                {{ number_format($users_activated/$users * 100, 1) }}%
+                                @lang('page.dashboard.active')
                             </a>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                 <div class="col-md-3">
                     <div class="panel panel-default stats-card">
                         <div class="panel-body">
-                            <p class="lead">SHOWCASES</p>
+                            <p class="lead">{{ strtoupper(trans('page.dashboard.showcases')) }}</p>
                             <?php
                             if($showcases >= 10000){
                                 $showcases = number_format($showcases/1000, 1).'K';
@@ -51,15 +51,30 @@
                                 $showcases = number_format($showcases);
                             }
                             ?>
-                            <h3 class="stats">{{ $showcases }} <small>{{ str_plural('PROJECT', $showcases) }}</small></h3>
-                            <a href="{{ route('admin.portfolio') }}" class="text-primary">{{ number_format($showcases_view) }} Views</a>
+                            <h3 class="stats">{{ $showcases }}
+                                <small>
+                                    @if(App::isLocale('en'))
+                                        {{ str_plural(trans('page.dashboard.project'), $showcases) }}
+                                    @else
+                                        {{ trans('page.dashboard.project') }}
+                                    @endif
+                                </small>
+                            </h3>
+                            <a href="{{ route('admin.portfolio') }}" class="text-primary">
+                                {{ number_format($showcases_view) }}
+                                @if(App::isLocale('en'))
+                                    {{ str_plural(trans('page.dashboard.view'), $showcases_view) }}
+                                @else
+                                    x {{ trans('page.dashboard.view') }}
+                                @endif
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="panel panel-default stats-card">
                         <div class="panel-body">
-                            <p class="lead">SCREENSHOTS</p>
+                            <p class="lead">{{ strtoupper(trans('page.dashboard.screenshots')) }}</p>
                             <?php
                             if($screenshots >= 10000){
                                 $screenshots = number_format($screenshots/1000, 1).'K';
@@ -68,15 +83,25 @@
                                 $screenshots = number_format($screenshots);
                             }
                             ?>
-                            <h3 class="stats">{{ $screenshots }} <small>{{ str_plural('IMAGE', $screenshots_size) }}</small></h3>
-                            <p class="text-primary">{{ $screenshots_size }} MB Storage</p>
+                            <h3 class="stats">{{ $screenshots }}
+                                <small>
+                                    @if(App::isLocale('en'))
+                                        {{ str_plural(trans('page.dashboard.image'), $screenshots_size) }}
+                                    @else
+                                        {{ trans('page.dashboard.image') }}
+                                    @endif
+                                </small>
+                            </h3>
+                            <p class="text-primary">{{ $screenshots_size }} MB
+                                @lang('page.dashboard.storage')
+                            </p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="panel panel-default stats-card">
                         <div class="panel-body">
-                            <p class="lead">COMPANIES</p>
+                            <p class="lead">{{ strtoupper(trans('page.dashboard.companies')) }}</p>
                             <?php
                             if($companies >= 10000){
                                 $companies = number_format($companies/1000, 1).'K';
@@ -85,17 +110,31 @@
                                 $companies = number_format($companies);
                             }
                             ?>
-                            <h3 class="stats">{{ $companies }} <small>UNIQUE</small></h3>
-                            <p class="text-primary">Of all portfolios</p>
+                            <h3 class="stats">{{ $companies }}
+                                <small>
+                                    {{ trans('page.dashboard.unique') }}
+                                </small>
+                            </h3>
+                            <p class="text-primary">@lang('page.dashboard.all')</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="panel panel-default stats-card">
                         <div class="panel-body">
-                            <p class="lead">CATEGORIES</p>
-                            <h3 class="stats">{{ number_format($categories) }} <small>{{ str_plural('ITEM', $categories) }}</small></h3>
-                            <a href="{{ route('admin.category') }}" class="text-primary">Group of fields</a>
+                            <p class="lead">{{ strtoupper(trans('page.dashboard.categories')) }}</p>
+                            <h3 class="stats">{{ number_format($categories) }}
+                                <small>
+                                    @if(App::isLocale('en'))
+                                        {{ str_plural(trans('page.dashboard.item'), $categories) }}
+                                    @else
+                                        {{ trans('page.dashboard.item') }}
+                                    @endif
+                                </small>
+                            </h3>
+                            <a href="{{ route('admin.category') }}" class="text-primary">
+                                @lang('page.dashboard.group')
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -111,15 +150,25 @@
                                 $tags = number_format($tags);
                             }
                             ?>
-                            <h3 class="stats">{{ $tags }} <small>{{ str_plural('KEY', $tags) }}</small></h3>
-                            <a href="{{ route('admin.tag') }}" class="text-primary">Design is the most popular</a>
+                            <h3 class="stats">{{ $tags }}
+                                <small>
+                                    @if(App::isLocale('en'))
+                                        {{ str_plural(trans('page.dashboard.key'), $tags) }}
+                                    @else
+                                        {{ trans('page.dashboard.key') }}
+                                    @endif
+                                </small>
+                            </h3>
+                            <a href="{{ route('admin.tag') }}" class="text-primary">
+                                @lang('page.dashboard.popular', ['tag' => 'Design'])
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="panel panel-default stats-card">
                         <div class="panel-body">
-                            <p class="lead">CLEANER</p>
+                            <p class="lead">{{ strtoupper(trans('page.dashboard.cleaner')) }}</p>
                             <?php
                             if($portfolios_deleted >= 10000){
                                 $portfolios_deleted = number_format($portfolios_deleted/1000, 1).'K';
@@ -128,8 +177,19 @@
                                 $portfolios_deleted = number_format($portfolios_deleted);
                             }
                             ?>
-                            <h3 class="stats">{{ $portfolios_deleted }} <small>{{ str_plural('ITEM', $portfolios_deleted) }}</small></h3>
-                            <a href="#" class="text-primary" onclick="return clearTrash(event)">Clear trash</a>
+                            <h3 class="stats">{{ $portfolios_deleted }}
+                                <small>
+                                    @if(App::isLocale('en'))
+                                        @if($portfolios_deleted == 0) <?php $portfolios_deleted = 1 ?> @endif
+                                        {{ str_plural(trans('page.dashboard.item'), $portfolios_deleted) }}
+                                    @else
+                                        {{ trans('page.dashboard.item') }}
+                                    @endif
+                                </small>
+                            </h3>
+                            <a href="#" class="text-primary" onclick="return clearTrash(event)">
+                                @lang('page.dashboard.clear')
+                            </a>
                             <form action="{{ url('trash/empty') }}" method="post" id="empty-form">
                                 {{ csrf_field() }}
                             </form>
@@ -139,7 +199,7 @@
                 <div class="col-md-3">
                     <div class="panel panel-default stats-card">
                         <div class="panel-body">
-                            <p class="lead">ERROR</p>
+                            <p class="lead">{{ strtoupper(trans('page.dashboard.error')) }}</p>
                             <?php
                             if($log_lines >= 10000){
                                 $log_lines = '+'.number_format($log_lines/1000, 1).'K';
@@ -148,8 +208,18 @@
                                 $log_lines = number_format($log_lines);
                             }
                             ?>
-                            <h3 class="stats">{{ $log_lines }} <small>{{ str_plural('LINE', $log_lines) }}</small></h3>
-                            <a href="{{ url('download/laravel.log') }}" class="text-primary">Download log file</a>
+                            <h3 class="stats">{{ $log_lines }}
+                                <small>
+                                    @if(App::isLocale('en'))
+                                        {{ str_plural(trans('page.dashboard.line'), $log_lines) }}
+                                    @else
+                                        {{ trans('page.dashboard.line') }}
+                                    @endif
+                                </small>
+                            </h3>
+                            <a href="{{ url('download/laravel.log') }}" class="text-primary">
+                                @lang('page.dashboard.download')
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -172,25 +242,6 @@
                 var form = document.getElementById('empty-form');
                 form.submit();
             }
-        }
-
-        window.onload = function () {
-            $('.locale').on('change', function () {
-                var locales = <?php echo json_encode(config('app.locales')) ?>;
-                var lang = this.value;
-                var pathname = window.location.pathname.replace(/^\//, "").split('/');
-                if(pathname.length > 0){
-                    if(locales[pathname[0]] != undefined){
-                        pathname.splice(0, 1, lang);
-                    }
-                    else{
-                        pathname.unshift(lang);
-                    }
-                }
-                var url = pathname.join('/');
-                var destUrl = window.location.protocol + "//" + window.location.host + '/' + url;
-                window.location.href = destUrl;
-            });
         }
     </script>
 @endsection

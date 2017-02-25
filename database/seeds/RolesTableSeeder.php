@@ -20,5 +20,10 @@ class RolesTableSeeder extends Seeder
             'role' => 'admin',
             'description' => 'Web Administrator',
         ]);
+
+        DB::table('roles')->insert([
+            'role' => 'member',
+            'description' => 'Showcase Contributor',
+        ]);
     }
 }

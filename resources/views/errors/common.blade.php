@@ -10,7 +10,7 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-        <p><strong>Whoops! Something went wrong!</strong></p>
+        <p><strong>@lang('page.message.error')</strong></p>
         <ul style="padding-left: 15px">
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>

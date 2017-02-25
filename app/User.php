@@ -69,9 +69,10 @@ class User extends Authenticatable
     public function members()
     {
         return $this->select('id', 'name', 'username', 'email', 'avatar', 'status')
-            ->whereHas('roles', function ($query) {
-                $query->where('role', 'member');
-            })
+            //->whereHas('roles', function ($query) {
+            //    $query->where('role', 'member');
+            //})
+            ->latest()
             ->paginate(10);
     }
 

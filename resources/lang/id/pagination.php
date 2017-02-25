@@ -13,8 +13,8 @@ return [
     |
     */
 
-    'previous' => '&laquo; Previous',
-    'next'     => 'Next &raquo;',
-    'show'     => 'Shown data :current of :total'
+    'previous' => '&laquo; Sebelumnya',
+    'next'     => 'Selanjutnya &raquo;',
+    'show'     => 'Menampilkan data :current dari :total'
 
 ];
