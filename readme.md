@@ -17,6 +17,16 @@ Run `npm install`
 #### Compile Assets
 Run `gulp` or `gulp --production`
 
+#### Setting Host File
+Configure virtual host for:
+* laravel.dev
+* account.laravel.dev
+* admin.laravel.dev
+
+#### Session Domain
+Set session domain in .env to<br>
+SESSION_DOMAIN=.laravel.dev
+
 ## Contributing
 
 Thank you for considering contributing to the Showcase App.
