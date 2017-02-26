@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Events\PortfolioCreated;
 use App\Portfolio;
 use App\Tag;
 use App\User;
@@ -130,6 +131,9 @@ class PortfolioController extends Controller
 
                 // insert screenshot
                 $this->uploadScreenshots($portfolio, $request->file('screenshots'));
+
+                // trigger event portfolio was created
+                event(new PortfolioCreated($portfolio));
 
                 // all good, send success message
                 return redirect()->route('account.portfolio', [$user->username])->with([

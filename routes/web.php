@@ -19,6 +19,21 @@ Route::match(['get', 'post'], '/about', ['domain' => 'laravel.dev', function () 
     return view('welcome');
 }])->name('page.about');
 
+Route::get('/secret', function(\Illuminate\Http\Request $request){
+    $encrypted = encrypt($request->all());
+    try {
+        $decrypted = decrypt($encrypted);
+    } catch (DecryptException $e) {
+        return $e->getMessage();
+    }
+
+    return [
+        'data' => $request->all(),
+        'encrypt' => $encrypted,
+        'decrypt' => $decrypted,
+    ];
+});
+
 // Download Route
 Route::get('download/{filename}', function($filename)
 {
