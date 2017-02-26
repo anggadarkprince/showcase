@@ -14,7 +14,7 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         'App\Events\PortfolioCreated' => [
-            'App\Listeners\SendDiscoveryNotification',
+            'App\Listeners\PortfolioDiscoveryObserver',
         ],
     ];
 
