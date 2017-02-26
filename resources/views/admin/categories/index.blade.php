@@ -10,7 +10,7 @@
         ];
     @endphp
 
-    @include('partials._admin_title', ['title' => implode(',', $title)])
+    @include('partials._admin_title', ['title' => collect($title), 'isBreadcrumb' => true])
 
     <div class="panel panel-default panel-table">
         <div class="panel-body">

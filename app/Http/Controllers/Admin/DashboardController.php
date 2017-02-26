@@ -40,21 +40,22 @@ class DashboardController extends Controller
         $file = storage_path('logs/laravel.log');
         $log_lines = 0;
         $handle = fopen($file, "r");
-        while(!feof($handle)){
+        while (!feof($handle)) {
             // $line = fgets($handle);
             $log_lines++;
-            if($log_lines == 10000){
+            if ($log_lines == 10000) {
                 break;
             }
         }
         fclose($handle);
 
-        return view('dashboard.index', compact('users', 'users_activated', 'showcases',
+        return view('admin.dashboard.index', compact('users', 'users_activated', 'showcases',
             'showcases_view', 'screenshots', 'screenshots_size', 'companies',
             'categories', 'tags', 'log_lines', 'portfolios_deleted'));
     }
 
-    public function getScreenshotSize() {
+    public function getScreenshotSize()
+    {
         $files_with_size = array();
         $files = Storage::disk('local')->files('public/screenshots');
 
@@ -63,11 +64,11 @@ class DashboardController extends Controller
             $files_with_size[$key]['size'] = Storage::disk('local')->size($file);
         }
 
-        $total = array_sum(array_map(function($item) {
+        $total = array_sum(array_map(function ($item) {
             return $item['size'];
         }, $files_with_size));
 
-        return number_format($total / 1048576,2);
+        return number_format($total / 1048576, 2);
     }
 
 }

@@ -5,6 +5,7 @@ return [
     'welcome' => 'Welcome',
     'welcome_message' => 'This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.',
     'menu' => [
+        'home' => 'Home',
         'dashboard' => 'Dashboard',
         'user' => 'User',
         'portfolio' => 'Portfolio',
@@ -13,17 +14,30 @@ return [
         'report' => 'Report',
         'contact' => 'Contact',
         'logout' => 'Logout',
+        'login' => 'Login',
+        'explore' => 'Explore',
+        'discover' => 'Discover',
+        'about' => 'About',
+        'help' => 'Help',
+        'register' => 'Register',
+        'my_portfolio' => 'My Portfolio',
+        'setting' => 'Settings',
+        'search' => 'Search',
     ],
     'title' => [
         'user' => 'Account Management',
         'tag' => 'Tags Management',
         'category' => 'Category Management',
+        'portfolio' => 'Portfolio Management',
+        'contact' => 'Contact Us',
     ],
     'subtitle' => [
         'user' => 'Create and modify user account',
         'user_form' => 'Public account who shared their portfolio',
         'tag' => 'Create and modify tag',
         'category' => 'Create and modify showcase\'s topic',
+        'portfolio' => 'Populate all showcases',
+        'contact' => 'Feel free to contact us',
     ],
     'action' => [
         'create' => 'Create',
@@ -60,6 +74,7 @@ return [
         'tag' => 'Tag',
         'category' => 'Category',
         'detail' => 'Detail',
+        'remember' => 'Remember Me',
     ],
     'dashboard' => [
         'contributors' => 'CONTRIBUTORS',
@@ -104,5 +119,7 @@ return [
         'error_related' => 'You cannot delete tag with existing related data',
         'delete' => 'Are you sure want to delete this :item?',
         'deleted' => ':item was successfully deleted',
+        'contact' => 'All question about this code please ask me at',
+        'about' => 'This program is skeleton of Showcase App and for very first version just sandbox and learning app of Laravel 5.3 in January 2017',
     ]
 ];

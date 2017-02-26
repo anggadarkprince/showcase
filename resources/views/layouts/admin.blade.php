@@ -34,7 +34,7 @@
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
                 <a href="{{ route('index') }}">
-                    Showcase.dev
+                    {{ config('app.name', 'Laravel') }}
                 </a>
             </li>
             <?php
@@ -69,11 +69,6 @@
             <li {{ Request::segment($segment) == 'categories' ? 'class=active' : '' }}>
                 <a href="{{ route('admin.category') }}">
                     <i class="glyphicon glyphicon-list"></i>@lang('page.menu.category')
-                </a>
-            </li>
-            <li {{ Request::segment($segment) == 'report' ? 'class=active' : '' }}>
-                <a href="{{ route('admin.report') }}">
-                    <i class="glyphicon glyphicon-stats"></i>@lang('page.menu.report')
                 </a>
             </li>
             <li {{ Request::segment($segment) == 'contact' ? 'class=active' : '' }}>

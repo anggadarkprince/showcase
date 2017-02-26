@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,600" rel="stylesheet" type="text/css">
@@ -121,7 +121,7 @@
     <body>
         <div class="flex-center position-ref full-height">
             <div class="top-left links">
-                <a href="{{ route('page.explore') }}">Explore</a>
+                <a href="{{ route('page.explore') }}">@lang('page.menu.explore')</a>
             </div>
             @if (Route::has('account.login'))
                 <div class="top-right links">
@@ -129,8 +129,8 @@
                         <a href="{{ route('account.portfolio.create', [Auth::user()->username]) }}" class="btn-create">Create Portfolio</a>
                         <a href="{{ route('account.show', [Auth::user()->username]) }}">My Account</a>
                     @else
-                        <a href="{{ route('account.login') }}">Login</a>
-                        <a href="{{ route('account.register') }}">Register</a>
+                        <a href="{{ route('account.login') }}">@lang('page.menu.login')</a>
+                        <a href="{{ route('account.register') }}">@lang('page.menu.logout')</a>
                     @endif
                 </div>
             @endif
@@ -150,19 +150,19 @@
                             </a>
                         </small>
                     @else
-                        Showcase.dev
+                        {{ config('app.name', 'Laravel') }}
                     @endif
                 </div>
 
                 <div class="links">
-                    <a href="{{ route('page.explore') }}">Discover</a>
-                    <a href="{{ route('page.about') }}">About</a>
-                    <a href="{{ route('page.help') }}">Help</a>
+                    <a href="{{ route('page.explore') }}">@lang('page.menu.discover')</a>
+                    <a href="{{ route('page.about') }}">@lang('page.menu.about')</a>
+                    <a href="{{ route('page.help') }}">@lang('page.menu.help')</a>
                     <a href="https://github.com/anggadarkprince/showcase">GitHub</a>
                 </div>
             </div>
 
-            <footer>&copy {{ date('Y') }} <strong>Showcase.dev</strong> all rights reserved.</footer>
+            <footer>&copy {{ date('Y') }} @lang('page.footer')</footer>
         </div>
     </body>
 </html>

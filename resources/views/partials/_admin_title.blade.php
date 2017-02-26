@@ -7,7 +7,6 @@
             <span class="icon-bar"></span>
         </button>
         @php
-            $title = explode(',', $title);
             $isFirst = true;
         @endphp
         @foreach($title as $section)
@@ -16,7 +15,10 @@
                 @php $isFirst = false; @endphp
             @else
                 <small class="hidden-xs text-primary">
-                    <span class="page-arrow">></span>{!! $section or '' !!}
+                    @if(isset($isBreadcrumb) && $isBreadcrumb)
+                        <span class="page-arrow">/</span>
+                    @endif
+                    {!! $section or '' !!}
                 </small>
             @endif
         @endforeach

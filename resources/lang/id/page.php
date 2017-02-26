@@ -3,8 +3,9 @@
 return [
 
     'welcome' => 'Selamat Datang',
-    'welcome_message' => 'Template ini memiliki sebuah menu responsive. Menu akan menutup otomatis di layar yang lebih kecil, dan akan muncul kembali di layar yang lebih besar. Ketika click tombol di bawah ini menu akan beralih dari posisi muncul dan menutup, di layar kecil konten akan mendorong keluar sehingga tampilan lebih lebar.',
+    'welcome_message' => 'Template ini memiliki sebuah menu responsive. Menu akan menutup otomatis di layar yang lebih kecil, dan akan muncul kembali di layar yang lebih besar. Ketika click tombol burger di atas samping dashbor, tampilan akan beralih dari posisi muncul dan menutup, di layar kecil konten akan mendorong keluar sehingga tampilan lebih lebar.',
     'menu' => [
+        'home' => 'Depan',
         'dashboard' => 'Dasbor',
         'user' => 'Akun',
         'portfolio' => 'Portofolio',
@@ -13,17 +14,30 @@ return [
         'report' => 'Laporan',
         'contact' => 'Kontak',
         'logout' => 'Keluar',
+        'login' => 'Masuk',
+        'explore' => 'Jelajahi',
+        'discover' => 'Temukan',
+        'about' => 'Tentang',
+        'help' => 'Bantuan',
+        'register' => 'Daftar',
+        'my_portfolio' => 'Portfolio Saya',
+        'setting' => 'Pengaturan',
+        'search' => 'Cari',
     ],
     'title' => [
         'user' => 'Pengelolaan Akun',
         'tag' => 'Pengelolaan Kata Kunci',
         'category' => 'Pengelolaan Kategori',
+        'portfolio' => 'Pengelolaan Portfolio',
+        'contact' => 'Kontak Kamu',
     ],
     'subtitle' => [
         'user' => 'Membuat dan menyunting akun pengguna',
         'user_form' => 'Anggota publik yang bisa mendaftarkan portfolionya',
         'tag' => 'Membuat dan menyunting akun pengguna',
         'category' => 'Membuat dan menyunting kategori kategori',
+        'portfolio' => 'Mengelola portofolio pengguna',
+        'contact' => 'Jangan ragu untuk menghubungi kami',
     ],
     'action' => [
         'create' => 'Buat',
@@ -59,6 +73,7 @@ return [
         'tag' => 'Kata Kunci',
         'category' => 'Kategori',
         'detail' => 'Rincian',
+        'remember' => 'Ingat Saya',
     ],
     'dashboard' => [
         'contributors' => 'PENGGUNA',
@@ -103,5 +118,7 @@ return [
         'error_related' => 'Data tidak bisa dihapus karena berkaitan dengan data lain',
         'delete' => 'Anda yakin ingin menghapus :item ini?',
         'deleted' => ':item telah berhasil dihapus',
+        'contact' => 'Semua pertanyaan tentang kode program ini tanyakan melalui',
+        'about' => 'Program ini merupakan purwarupa dari aplikasi Showcase dan versi pertama ini hanya sebuah contoh latihan menggunakan Laravel 5.3 per Januari tahun 2017',
     ]
 ];

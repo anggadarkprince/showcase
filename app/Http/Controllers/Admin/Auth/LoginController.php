@@ -45,7 +45,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('dashboard.login');
+        return view('admin.dashboard.login');
     }
 
     /**
@@ -72,6 +72,6 @@ class LoginController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect('/');
+        return redirect()->route('index');
     }
 }

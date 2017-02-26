@@ -11,7 +11,7 @@
         ];
     @endphp
 
-    @include('partials._admin_title', ['title' => implode(',', $title)])
+    @include('partials._admin_title', ['title' => collect($title), 'isBreadcrumb' => true])
 
     <div class="section-title">
         <h3>{{ trans('page.action.create') . ' ' . trans('page.menu.user') }}</h3>

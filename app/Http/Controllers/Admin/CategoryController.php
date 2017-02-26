@@ -27,7 +27,8 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = $this->category->latest()->paginate(10);
-        return view('categories.index', compact('categories'));
+
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -39,12 +40,14 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         $this->category->fill($request->all());
+
         if ($this->category->save()) {
             return redirect(route('admin.category'))->with([
                 'action' => 'success',
                 'message' => 'Category was created successfully'
             ]);
         }
+
         return redirect()->back()->withErrors([
             'error' => 'Create new category failed, Try again!'
         ]);
@@ -64,7 +67,9 @@ class CategoryController extends Controller
             if ($category->delete()) {
                 return redirect(route('admin.category'))->with([
                     'action' => 'success',
-                    'message' => Lang::get('page.message.deleted', ['item' => ucfirst($category->category)])
+                    'message' => Lang::get('page.message.deleted', [
+                        'item' => ucfirst($category->category)
+                    ])
                 ]);
             }
         } catch (QueryException $e) {
@@ -75,6 +80,7 @@ class CategoryController extends Controller
                 ]);
             }
         }
+
         return redirect()->back()->withErrors([
             'message' => 'Failed to perform delete category'
         ]);

@@ -51,8 +51,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{ route('index') }}">Home</a></li>
-                        <li><a href="{{ route('page.explore') }}">Explore</a></li>
+                        <li><a href="{{ route('index') }}">@lang('page.menu.home')</a></li>
+                        <li><a href="{{ route('page.explore') }}">@lang('page.menu.explore')</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -64,7 +64,7 @@
                                     <a href="{{ url('/logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        Logout
+                                        @lang('page.menu.logout')
                                     </a>
 
                                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
@@ -83,14 +83,15 @@
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Login</div>
+                    <div class="panel-heading">@lang('page.menu.login')</div>
                     <div class="panel-body" style="padding: 20px">
                         <form role="form" method="POST" action="{{ route('admin.login') }}">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label for="email" class="control-label">E-Mail Address</label>
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email address" required autofocus>
+                                <label for="email" class="control-label">@lang('page.field.email')</label>
+                                <input id="email" type="email" class="form-control" name="email"
+                                       value="{{ old('email') }}" placeholder="@lang('page.field.email')" required autofocus>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -100,8 +101,9 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label for="password" class="control-label">Password</label>
-                                <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
+                                <label for="password" class="control-label">@lang('page.field.password')</label>
+                                <input id="password" type="password" class="form-control"
+                                       name="password" placeholder="@lang('page.field.password')" required>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -113,14 +115,15 @@
                             <div class="form-group">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="remember" {{ old('remember', 0) ? 'checked' : '' }}> Remember Me
+                                        <input type="checkbox" name="remember" {{ old('remember', 0) ? 'checked' : '' }}>
+                                        @lang('page.field.remember')
                                     </label>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-block">
-                                    Login
+                                    @lang('page.menu.login')
                                 </button>
                             </div>
                         </form>
@@ -130,7 +133,7 @@
         </div>
     </div>
     <footer class="navbar navbar-default navbar-fixed-bottom">
-        &copy; {{ date('Y') }} Showcase.dev all rights reserved
+        &copy; {{ date('Y') }} @lang('page.footer')
     </footer>
 </div>
 

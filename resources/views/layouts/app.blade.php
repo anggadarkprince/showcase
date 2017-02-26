@@ -46,23 +46,37 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         @if (Auth::check())
-                        <li @if(isset($dashboard_active)) class='active' @endif>
-                            <a href="{{ route('account.show', [Auth::user()->username]) }}">Dashboard</a>
-                        </li>
 
-                            @if(url('/') == route('account.profile'))
+                            <li @if(isset($dashboard_active)) class='active' @endif>
+                                <a href="{{ route('account.show', [Auth::user()->username]) }}">
+                                    @lang('page.menu.dashboard')
+                                </a>
+                            </li>
+
+                            @php
+                                $url = parse_url(url('/'));
+
+                                $domain = $url['scheme'].'://'.$url['host'];
+                                if(isset($url['port'])){
+                                    $domain .= ':'.$url['port'];
+                                }
+                            @endphp
+
+                            @if(url('/') == $domain)
                                 <li @if(isset($portfolio_active)) class='active' @endif>
-                                    <a href="{{ route('account.portfolio', [Auth::user()->username]) }}">My Portfolio</a>
+                                    <a href="{{ route('account.portfolio', [Auth::user()->username]) }}">
+                                        @lang('page.menu.my_portfolio')
+                                    </a>
                                 </li>
                             @endif
 
                         @endif
                         <li @if(isset($explore_active)) class='active' @endif>
-                            <a href="{{ route('page.explore') }}">Explore</a>
+                            <a href="{{ route('page.explore') }}">@lang('page.menu.explore')</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                Categories <span class="caret"></span>
+                                @lang('page.menu.category') <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 @foreach($categoryMenu as $category)
@@ -81,19 +95,19 @@
                         <li>
                             <form action="{{ route('page.search') }}" method="get">
                                 <div class="form-search-wrapper">
-                                    <input type="search" name="q" value="{{ request('q') }}" placeholder="Search">
+                                    <input type="search" name="q" value="{{ request('q') }}" placeholder="@lang('page.menu.search')">
                                     <i class="glyphicon glyphicon-search"></i>
-                                    <button type="submit" style="display: none">Search</button>
+                                    <button type="submit" style="display: none">@lang('page.menu.search')</button>
                                 </div>
                             </form>
                             <a href="#" class="btn-icon-search"><i class="glyphicon glyphicon-search"></i>
-                                <span class="hidden-lg hidden-md hidden-sm">&nbsp;Search</span>
+                                <span class="hidden-lg hidden-md hidden-sm">&nbsp;@lang('page.menu.search')</span>
                             </a>
                         </li>
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('account.login') }}">Login</a></li>
-                            <li><a href="{{ route('account.register') }}">Register</a></li>
+                            <li><a href="{{ route('account.login') }}">@lang('page.menu.login')</a></li>
+                            <li><a href="{{ route('account.register') }}">@lang('page.menu.register')</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -102,11 +116,11 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="{{ route('account.show', [Auth::user()->username]) }}">Dashboard</a>
-                                        <a href="{{ route('account.portfolio', [Auth::user()->username]) }}">Portfolio</a>
-                                        <a href="{{ route('account.settings', [Auth::user()->username]) }}">Settings</a>
+                                        <a href="{{ route('account.show', [Auth::user()->username]) }}">@lang('page.menu.dashboard')</a>
+                                        <a href="{{ route('account.portfolio', [Auth::user()->username]) }}">@lang('page.menu.portfolio')</a>
+                                        <a href="{{ route('account.settings', [Auth::user()->username]) }}">@lang('page.menu.setting')</a>
                                         <a href="{{ route('account.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            Logout
+                                            @lang('page.menu.logout')
                                         </a>
 
                                         <form id="logout-form" action="{{ route('account.logout') }}" method="POST" style="display: none;">

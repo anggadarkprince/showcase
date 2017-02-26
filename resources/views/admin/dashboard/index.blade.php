@@ -12,7 +12,7 @@
                 ];
             @endphp
 
-            @include('partials._admin_title', ['title' => implode(',', $title)])
+            @include('partials._admin_title', ['title' => collect($title), 'isBreadcrumb' => false])
 
             <p class="m-b-md">@lang('page.welcome_message')</p>
 
