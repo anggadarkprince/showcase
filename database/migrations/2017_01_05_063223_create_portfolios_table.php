@@ -20,7 +20,7 @@ class CreatePortfoliosTable extends Migration
             $table->string('title', 100);
             $table->string('description', 2000);
             $table->string('reference');
-            $table->string('date');
+            $table->date('date')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->string('company');
             $table->integer('view')->default(0);
             $table->softDeletes();

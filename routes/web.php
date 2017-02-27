@@ -34,6 +34,8 @@ Route::get('/secret', function(\Illuminate\Http\Request $request){
     ];
 });
 
+Route::get('/helper', ['uses' => 'HelperController']);
+
 // Download Route
 Route::get('download/{filename}', function($filename)
 {
@@ -247,4 +249,3 @@ Route::group(['domain' => 'account.laravel.dev'], function () {
         ]);
     });
 });
-

@@ -32,7 +32,7 @@
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control" name="email"
-                                       value="{{ old('email') }}" placeholder="@lang('page.field.password')" required autofocus>
+                                       value="{{ old('email') }}" placeholder="@lang('page.field.email')" required autofocus>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
