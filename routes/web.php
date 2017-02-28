@@ -119,6 +119,7 @@ Route::group(['domain' => 'admin.laravel.dev', 'namespace' => 'Admin'], function
 
     Route::post('/trash/empty', function () {
         App\Portfolio::onlyTrashed()->forceDelete();
+        Cache::flush();
         return redirect('dashboard')->with([
             'action' => 'warning',
             'message' => 'All trashed data was deleted permanently'

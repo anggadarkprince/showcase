@@ -8,7 +8,7 @@
             @php
                 $title = [
                     trans('page.welcome').', ',
-                    Auth::user()->name
+                    $admin
                 ];
             @endphp
 

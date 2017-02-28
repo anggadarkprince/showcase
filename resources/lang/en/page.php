@@ -90,7 +90,7 @@ return [
         'item' => 'ITEM',
         'key' => 'KEY',
         'unique' => 'UNIQUE',
-        'image' => 'IMAGES',
+        'image' => 'IMAGE',
         'project' => 'PROJECT',
         'user' => 'USER',
 
