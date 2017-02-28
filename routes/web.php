@@ -35,6 +35,7 @@ Route::get('/secret', function(\Illuminate\Http\Request $request){
 });
 
 Route::get('/helper', ['uses' => 'HelperController']);
+Route::get('/collection', ['uses' => 'CollectionController']);
 
 // Download Route
 Route::get('download/{filename}', function($filename)
