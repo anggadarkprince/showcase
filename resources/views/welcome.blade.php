@@ -130,7 +130,7 @@
                         <a href="{{ route('account.show', [Auth::user()->username]) }}">My Account</a>
                     @else
                         <a href="{{ route('account.login') }}">@lang('page.menu.login')</a>
-                        <a href="{{ route('account.register') }}">@lang('page.menu.logout')</a>
+                        <a href="{{ route('account.register') }}">@lang('page.menu.register')</a>
                     @endif
                 </div>
             @endif
