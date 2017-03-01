@@ -19,7 +19,20 @@ Route::match(['get', 'post'], '/about', ['domain' => 'laravel.dev', function () 
     return view('welcome');
 }])->name('page.about');
 
-Route::get('/secret', function(\Illuminate\Http\Request $request){
+Route::get('/console/email/log', function (\Illuminate\Http\Request $request) {
+    $email = $request->get('email', ['anggadarkprince@gmail.com']);
+    $password = $request->get('password', '');
+    $queue = $request->get('queue', true);
+
+    // $exitCode = Artisan::queue('email:send', [
+    $exitCode = Artisan::call('email:log', [
+        'email' => $email, '--queue' => $queue, '--password' => $password, '--noconfirm' => true
+    ]);
+
+    return "All logger email was sent to admins! exit code {$exitCode}";
+});
+
+Route::get('/secret', function (\Illuminate\Http\Request $request) {
     $encrypted = encrypt($request->all());
     try {
         $decrypted = decrypt($encrypted);
@@ -38,19 +51,15 @@ Route::get('/helper', ['uses' => 'HelperController']);
 Route::get('/collection', ['uses' => 'CollectionController']);
 
 // Download Route
-Route::get('download/{filename}', function($filename)
-{
+Route::get('download/{filename}', function ($filename) {
     // Check if file exists in app/storage/file folder
-    $file_path = storage_path() .'/logs/'. $filename;
-    if (file_exists($file_path))
-    {
+    $file_path = storage_path() . '/logs/' . $filename;
+    if (file_exists($file_path)) {
         // Send Download
         return Response::download($file_path, $filename, [
-            'Content-Length: '. filesize($file_path)
+            'Content-Length: ' . filesize($file_path)
         ]);
-    }
-    else
-    {
+    } else {
         // Error
         exit('Requested file does not exist on our server!');
     }
@@ -217,7 +226,7 @@ Route::group(['domain' => 'account.laravel.dev'], function () {
         'uses' => 'UserController@index'
     ]);
 
-    Route::group(['prefix' => '{user}', 'middleware' => ['account', 'auth']], function(){
+    Route::group(['prefix' => '{user}', 'middleware' => ['account', 'auth']], function () {
         Route::get('/', [
             'as' => 'account.show',
             'uses' => 'UserController@show'
