@@ -20,21 +20,38 @@ class Kernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param  \Illuminate\Console\Scheduling\Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('inspire')
-            ->appendOutputTo(storage_path('logs/inspirations.log'))
+            ->sendOutputTo(storage_path('logs/inspirations.log'))
             ->everyMinute();
 
         // Run once a minute
-        $schedule->command('queue:work')->everyMinute();
+        $schedule->command('queue:work')
+            ->before(function () {
+                // Task is about to start...
+            })
+            ->after(function () {
+                // Task is complete...
+            })
+            ->withoutOverlapping();
         // the run php artisan schedule:run 1>> /dev/null 2>&1 or setting the crontab
+
+        $schedule->command('email:log all --queue --password=loggersecret --noconfirm=1')
+            ->weekdays()
+            ->hourly()
+            ->timezone('Asia/Jakarta')
+            ->between('8:00', '13:00')
+            ->withoutOverlapping()
+            ->evenInMaintenanceMode()
+            ->appendOutputTo(storage_path('logs/email.log'));
 
         $schedule->exec('echo "Hello World"')
             ->appendOutputTo(storage_path('logs/hello.log'))
+            ->withoutOverlapping()
             ->everyMinute();
     }
 

@@ -16,7 +16,7 @@ class SendEmailLogs extends Command
     {email* : Email of registered admin} 
     {--Q|queue : Whether the job should be queued} 
     {--P|password= : Whether password is required}
-    {--N|noconfirm=1 : Whether need to be confirmed}';
+    {--N|noconfirm=0 : Whether need to be confirmed}';
 
     /**
      * The console command description.

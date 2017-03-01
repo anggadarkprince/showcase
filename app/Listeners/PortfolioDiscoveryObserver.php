@@ -36,7 +36,8 @@ class PortfolioDiscoveryObserver implements ShouldQueue
         $admins = Admin::all();
         foreach ($admins as $admin) {
             // do inside job rather than direct action
-            dispatch((new SendDiscoveryEmail($portfolio, $admin))->delay(Carbon::now()->addSeconds(30)));
+            dispatch((new SendDiscoveryEmail($portfolio, $admin))
+                ->delay(Carbon::now()->addSeconds(15)));
             //Mail::to($admin)->send(new NewPortfolio($portfolio, $admin));
         }
     }

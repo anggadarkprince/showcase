@@ -11,6 +11,10 @@ class LogSender extends Model
 {
     public function send(array $admins, array $options, string $operator, string $greeting, string $footer)
     {
+        if ($admins['email'][0] == 'all') {
+            $admins['email'] = Admin::all()->pluck('email');
+        }
+
         collect($admins['email'])->each(function ($value, $key) use ($options, $operator, $greeting, $footer) {
             $admin = Admin::whereEmail($value)->first();
             if (!is_null($admin)) {
