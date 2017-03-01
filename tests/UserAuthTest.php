@@ -6,8 +6,10 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UserAuthTest extends TestCase
 {
+    use DatabaseTransactions;
+
     /**
-     * A basic test example.
+     * Valid credential authorize account to enter dashboard.
      *
      * @return void
      */
@@ -25,6 +27,9 @@ class UserAuthTest extends TestCase
             ->isRedirect(route('index'));
     }
 
+    /**
+     * Invalid credentials combination.
+     */
     public function testAccountLoginWrongCredentials()
     {
         $this->visitRoute('account.login')
@@ -42,5 +47,43 @@ class UserAuthTest extends TestCase
             ->press('Login')
             ->seePageIs(route('account.login'))
             ->see('credentials do not match');
+    }
+
+    /**
+     * User login a pending account,
+     * tell them to activate via email first.
+     */
+    public function testLoginWithStatusPending()
+    {
+        $user = factory(App\User::class)->create([
+            'status' => 'pending',
+        ]);
+
+        $this->visitRoute('account.login')
+            ->type($user->email, 'email')
+            ->type('secret', 'password')
+            ->press('Login')
+            ->seePageIs(route('account.login'))
+            ->see('Please activate your account first')
+            ->see('Inactive account');
+    }
+
+    /**
+     * User login a suspended account,
+     * tell them to contact support for more information about their account status.
+     */
+    public function testLoginWithStatusSuspended()
+    {
+        $user = factory(App\User::class)->create([
+            'status' => 'suspended',
+        ]);
+
+        $this->visitRoute('account.login')
+            ->type($user->email, 'email')
+            ->type('secret', 'password')
+            ->press('Login')
+            ->seePageIs(route('account.login'))
+            ->see('Your account was suspended')
+            ->see('Suspended account');
     }
 }

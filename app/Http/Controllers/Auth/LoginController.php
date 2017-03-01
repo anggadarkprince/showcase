@@ -67,12 +67,20 @@ class LoginController extends Controller
 
         if (!is_null($user)) {
             if (Hash::check($request->input('password'), $user->password)) {
-                if ($user->status != 'activated') {
+                if ($user->status == 'pending') {
                     return redirect()->back()
                         ->with('warning', 'Please activate your account first')
                         ->withInput($request->only($this->username(), 'remember'))
                         ->withErrors([
                             $this->username() => 'Inactive account',
+                        ]);
+                }
+                if ($user->status == 'suspended') {
+                    return redirect()->back()
+                        ->with('warning', 'Your account was suspended, please contact our support')
+                        ->withInput($request->only($this->username(), 'remember'))
+                        ->withErrors([
+                            $this->username() => 'Suspended account',
                         ]);
                 }
             }

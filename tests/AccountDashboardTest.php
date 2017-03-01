@@ -7,11 +7,14 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AccountDashboardTest extends TestCase
 {
+    use DatabaseTransactions;
+
     /**
      * Test if user visit account sub domain then redirect to their dashboard.
      */
     public function testDashboardAfterLogin()
     {
+        // use ->make instead of create to create object without persist in database
         $user = factory(User::class)->create();
 
         // visit http://account.domain.dev/username should show the dashboard
@@ -21,7 +24,7 @@ class AccountDashboardTest extends TestCase
             ->see('Showcase Today')// only in dashboard page
             ->see('Logout')// indicate after login
             ->see('My Portfolio')// in account page only
-            ->see('Create Portfolio') // account dashboard
+            ->see('Create Portfolio')// account dashboard
             ->assertResponseOk(); // all good
     }
 
