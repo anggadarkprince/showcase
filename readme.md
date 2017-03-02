@@ -25,7 +25,13 @@ Configure virtual host for:
 
 #### Session Domain
 Set session domain in .env to<br>
-SESSION_DOMAIN=.laravel.dev
+
+`SESSION_DOMAIN=.laravel.dev`
+
+Setup Algolia search service with your api
+
+`ALGOLIA_APP_ID=your_own_algolia_app_id`<br>
+`ALGOLIA_SECRET=your_own_algolia_api_key`
 
 ## Contributing
 
