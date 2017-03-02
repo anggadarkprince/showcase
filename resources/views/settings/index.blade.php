@@ -39,7 +39,7 @@
                             <div class="form-group {{ $errors->has('birthday') ? 'has-error' : '' }}">
                                 <label for="birthday" class="control-label">Birthday</label>
                                 <input type="date" class="form-control" name="birthday" id="birthday"
-                                       value="{{ old('birthday', $user->birthday) }}" placeholder="Birthday">
+                                       value="{{ old('birthday', $user->birthday->format('Y-m-d')) }}" placeholder="Birthday">
                                 {!! $errors->first('birthday', '<span class="help-block">:message</span>') !!}
                             </div>
                             <div class="form-group {{ $errors->has('avatar') ? 'has-error' : '' }}">
@@ -62,11 +62,11 @@
                                 <div>
                                     <label class="radio-inline">
                                         <input type="radio" id="male" name="gender" value="male"
-                                               @if(old('gender', 'male') == 'male') checked @endif> Male
+                                               @if(old('gender', $user->gender) == 'male') checked @endif> Male
                                     </label>
                                     <label class="radio-inline">
                                         <input type="radio" id="female" name="gender" value="female"
-                                               @if(old('gender') == 'female') checked @endif> Female
+                                               @if(old('gender', $user->gender) == 'female') checked @endif> Female
                                     </label>
                                 </div>
                                 {!! $errors->first('gender', '<span class="help-block">:message</span>') !!}

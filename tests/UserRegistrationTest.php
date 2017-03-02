@@ -88,7 +88,7 @@ class UserRegistrationTest extends TestCase
             ->see(trans('validation.max.string', ['attribute' => Lang::get('validation.attributes.email'), 'max' => 100]))
             ->see(trans('validation.min.string', ['attribute' => 'password', 'min' => 6]));
 
-        // username must match pattern /[a-zA-Z0-9-_\.]{5,20}/
+        // username must match pattern /^[a-zA-Z0-9-_\.]{5,20}$/
         // username pattern invalid (too short, less than 5) and email invalid format
         $this->type('an', 'username')
             ->type('angga_email23.com', 'email')

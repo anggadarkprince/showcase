@@ -50,7 +50,7 @@ class UserController extends Controller
 
         $this->validate($request, [
             'name' => 'required|max:255',
-            'username' => 'required|regex:/[a-zA-Z0-9-_\.]{5,20}/|unique:users,username,' . $user->id,
+            'username' => 'required|regex:/^[a-zA-Z0-9-_\.]{5,20}$/|unique:users,username,' . $user->id,
             'email' => 'required|email|max:100|unique:users,email,' . $user->id,
             'gender' => 'required|in:male,female',
             'about' => 'required|max:500',

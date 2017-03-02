@@ -37,7 +37,7 @@ class PublicProfileTest extends TestCase
             $this->click($portfolio->title)
                 ->seePageIs(route('profile.portfolio.show', [$user->username, str_slug($portfolio->title) . '-' . $portfolio->id]))
                 ->see($portfolio->title)
-                ->see($portfolio->view)
+                ->see($portfolio->view + 1)
                 ->see($portfolio->description)
                 ->see('SCREENSHOTS')
                 ->assertResponseOk();
