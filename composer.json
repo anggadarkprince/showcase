@@ -6,9 +6,11 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "algolia/algoliasearch-client-php": "^1.16",
         "guzzlehttp/guzzle": "^6.2",
         "laravel/browser-kit-testing": "^1.0",
-        "laravel/framework": "5.4.*"
+        "laravel/framework": "5.4.*",
+        "laravel/scout": "^3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

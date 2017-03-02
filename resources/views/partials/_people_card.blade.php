@@ -1,4 +1,4 @@
-@foreach($users as $user)
+@forelse($users as $user)
 
     <div class="{{ $columns }}">
         <div class="panel panel-default people-item">
@@ -17,4 +17,7 @@
             </div>
         </div>
     </div>
-@endforeach
+
+@empty
+    <p class="text-center">Query not found, try another keyword</p>
+@endforelse

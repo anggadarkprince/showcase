@@ -43,12 +43,14 @@ class SearchController extends Controller
         $type = $request->get('type', 'showcase');
 
         if ($type == 'showcase') {
-            $portfolio = new Portfolio();
-            $portfolios = $portfolio->search($query);
+            //$portfolio = new Portfolio();
+            //$portfolios = $portfolio->searchManual($query);
+            $portfolios = Portfolio::search($query)->paginate(12);
             return view('misc.search', compact('portfolios'));
         } else {
-            $user = new User();
-            $users = $user->search($query);
+            //$user = new User();
+            //$users = $user->searchManual($query);
+            $users = User::search($query)->paginate(12);
             return view('misc.search', compact('users'));
         }
     }

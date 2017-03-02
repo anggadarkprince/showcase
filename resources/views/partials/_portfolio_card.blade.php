@@ -1,4 +1,4 @@
-@foreach($portfolios as $portfolio)
+@forelse($portfolios as $portfolio)
 
     <div class="{{ $columns }}">
         <div class="panel panel-default portfolio-item">
@@ -55,4 +55,6 @@
             </div>
         </div>
     </div>
-@endforeach
+@empty
+    <p class="text-center">Query not found, try another keyword</p>
+@endforelse

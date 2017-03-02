@@ -4,10 +4,13 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Scout\Searchable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+
+    use Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -76,7 +79,23 @@ class User extends Authenticatable
             ->paginate(10);
     }
 
-    public function search($query)
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        return [
+            'name' => $this->name,
+            'username' => $this->username,
+            'email' => $this->email,
+            'about' => $this->about,
+            'status' => $this->status,
+        ];
+    }
+
+    public function searchManual($query)
     {
         return $this->where('username', 'like', "%{$query}%")
             ->orWhere('email', 'like', "%{$query}%")

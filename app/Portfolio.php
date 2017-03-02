@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Laravel\Scout\Searchable;
 
 class Portfolio extends Model
 {
     use SoftDeletes;
+
+    use Searchable;
 
     /**
      * The attributes that should be mutated to dates.
@@ -110,7 +113,23 @@ class Portfolio extends Model
         return $this->latest()->take(6)->get();
     }
 
-    public function search($query)
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        return [
+            'title' => $this->title,
+            'description' => $this->description,
+            'company' => $this->company,
+            'category' => $this->category->category,
+            'tags' => implode(',', $this->tags->pluck('tag')->toArray())
+        ];
+    }
+
+    public function searchManual($query)
     {
         return $this->select(DB::raw('portfolios.*'))
             ->join('portfolio_tags', 'portfolios.id', '=', 'portfolio_tags.portfolio_id')
