@@ -147,5 +147,61 @@
     <!-- Scripts -->
     <script src="{{ elixir('js/app.js') }}"></script>
     <script src="{{ elixir('js/functions.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
+    <script>
+        var client = algoliasearch('RNFZPR9FI1', '315c2894dfa77b222aa373e4b2983c2e');
+        var portfolio = client.initIndex('portfolios');
+        var people = client.initIndex('users');
+
+        /*
+        $('input[name=q]').on('keyup', function(){
+            var query = $(this).val();
+         portfolio.search(query, function(err, content) {
+                console.log(content.hits);
+            });
+        });
+        */
+        autocomplete('input[name=q]', { hint: false }, [
+                {
+                    source: autocomplete.sources.hits(portfolio, {hitsPerPage: 5}),
+                    //value to be displayed in input control after user's suggestion selection
+                    displayKey: 'title',
+                    //hash of templates used when rendering dataset
+                    templates: {
+                        header: '<div class="aa-suggestions-category">Portfolio</div>',
+                        //'suggestion' templating function used to render a single suggestion
+                        suggestion: function(suggestion) {
+                            return '<p>' +
+                                    suggestion._highlightResult.title.value + '</p><small class="text-muted">' +
+                                    suggestion._highlightResult.company.value + '</small>';
+                        }
+                    }
+                },
+            {
+                source: autocomplete.sources.hits(people, {hitsPerPage: 5}),
+                //value to be displayed in input control after user's suggestion selection
+                displayKey: 'name',
+                //hash of templates used when rendering dataset
+                templates: {
+                    header: '<div class="aa-suggestions-category">People</div>',
+                    //'suggestion' templating function used to render a single suggestion
+                    suggestion: function(suggestion) {
+                        return '<p>' +
+                                suggestion._highlightResult.name.value + '<small class="text-muted pull-right">' +
+                                suggestion._highlightResult.username.value + '</small></p>';
+                    }
+                }
+            }
+        ]).on('autocomplete:selected', function (dataset, suggestion) {
+            if (suggestion.title != null) {
+                window.location.href = "http://laravel.dev:8080/search?q=" + encodeURIComponent(suggestion.title);
+            }
+            else {
+                window.location.href = "http://account.laravel.dev:8080/" + (suggestion.username);
+            }
+        });
+    </script>
+
 </body>
 </html>
