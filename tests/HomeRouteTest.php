@@ -92,6 +92,13 @@ class HomeRouteTest extends TestCase
             ->see('Discover Masterpiece');
     }
 
+    public function testCategory()
+    {
+        $this->visit('/explore')
+            ->click('Education')
+            ->seePageIs(route('portfolio.search.category', ['education-2']));
+    }
+
     /**
      * Test public portfolio profile
      */
