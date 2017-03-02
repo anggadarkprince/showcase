@@ -5,7 +5,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class AccountDashboardTest extends TestCase
+class AccountDashboardTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 

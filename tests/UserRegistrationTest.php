@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Mail;
 
-class UserRegistrationTest extends TestCase
+class UserRegistrationTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 

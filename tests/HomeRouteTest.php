@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class HomeRouteTest extends TestCase
+class HomeRouteTest extends BrowserKitTestCase
 {
     /**
      * A basic functional if home links.

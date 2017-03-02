@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ShowcaseRouteTest extends TestCase
+class ShowcaseRouteTest extends BrowserKitTestCase
 {
     /**
      * Test visiting portfolio detail

@@ -187,9 +187,9 @@ class CollectionController extends Controller
         $this->print_data($collection->all());
         // [1, 2, 3, 4, 5]
 
-        $this->print_title("every() creates a new collection consisting of every n-th element (with offset)");
-        $this->print_code("\$collection = collect(['a', 'b', 'c', 'd', 'e', 'f'])->every(4);");
-        $collection = collect(['a', 'b', 'c', 'd', 'e', 'f'])->every(4, 1);
+        $this->print_title("nth() creates a new collection consisting of every n-th element (with offset)");
+        $this->print_code("\$collection = collect(['a', 'b', 'c', 'd', 'e', 'f'])->nth(4);");
+        $collection = collect(['a', 'b', 'c', 'd', 'e', 'f'])->nth(4, 1);
         $this->print_data($collection->all());
         // ['a', 'e'] / ['b', 'f'] (with offset)
 
