@@ -6,6 +6,58 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ShowcaseRouteTest extends TestCase
 {
+    /**
+     * Test visiting portfolio detail
+     */
+    public function testPortfolioRoute()
+    {
+        $portfolio = \App\Portfolio::find(1);
+        $tags = $portfolio->tags;
+
+        $this->visit(route('profile.portfolio.show', [
+            $portfolio->user->username,
+            str_slug($portfolio->title) . '-' . $portfolio->id
+        ]))
+            ->see($portfolio->title)
+            ->see($portfolio->company)
+            ->see($portfolio->date->format('d F Y'))
+            ->see($portfolio->description)
+            ->see($portfolio->view + 1);
+
+        $tags->each(function ($tag) {
+            $this->see($tag->tag);
+        });
+    }
+
+    /**
+     * Test when portfolio does not exist
+     */
+    public function testPortfolioNotFound()
+    {
+        $user = \App\User::find(1);
+        $this->get(route('profile.portfolio.show', [
+            'user' => $user->username,
+            'portfolio' => 'not-existed-portfolio-title-000'
+        ]))
+            ->seeStatusCode(404)
+            ->see('Page Not Found');
+    }
+
+    /**
+     * Visitor should able to navigate filter company from detail of portfolio.
+     */
+    public function testVisitCompanyFromPortfolio()
+    {
+        $portfolio = \App\Portfolio::find(1);
+        $this->visit(route('profile.portfolio.show', [
+            'user' => $portfolio->user->username,
+            'portfolio' => str_slug($portfolio->title) . '-' . $portfolio->id
+        ]))
+            ->click($portfolio->category->category)
+            ->seePageIs(route('portfolio.search.category', [
+                'category' => str_slug($portfolio->category->category) . '-' . $portfolio->category->id
+            ]));
+    }
 
     /**
      * Discover category in main menu.
@@ -14,7 +66,9 @@ class ShowcaseRouteTest extends TestCase
     {
         $category = \App\Category::find(1);
 
-        $this->visitRoute('portfolio.search.category', [str_slug($category->category) . '-' . $category->id])
+        $this->visitRoute('portfolio.search.category', [
+            str_slug($category->category) . '-' . $category->id
+        ])
             ->see('Category')
             ->see($category->category);
     }

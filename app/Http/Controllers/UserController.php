@@ -101,7 +101,7 @@ class UserController extends Controller
 
     public function portfolio(User $user)
     {
-        $portfolios = $user->portfolios()->paginate(12);
+        $portfolios = $user->portfolios()->latest('date')->paginate(12);
         return view('users.profile', compact('user', 'portfolios'));
     }
 }

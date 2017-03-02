@@ -98,15 +98,4 @@ class HomeRouteTest extends TestCase
             ->click('Education')
             ->seePageIs(route('portfolio.search.category', ['education-2']));
     }
-
-    /**
-     * Test public portfolio profile
-     */
-    public function testAccountProfileByUsername()
-    {
-        $this->visitRoute('profile.show', ['user' => 'anggadarkprince'])
-            ->see('Angga Ari Wijaya')
-            ->see('@anggadarkprince')
-            ->see('Showcases');
-    }
 }
