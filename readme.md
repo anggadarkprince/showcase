@@ -23,7 +23,7 @@ Configure virtual host for:
 * account.laravel.dev
 * admin.laravel.dev
 
-#### Session Domain
+#### Environment File Config
 Set session domain in .env to<br>
 
 `SESSION_DOMAIN=.laravel.dev`
@@ -32,6 +32,10 @@ Setup Algolia search service with your api
 
 `ALGOLIA_APP_ID=your_own_algolia_app_id`<br>
 `ALGOLIA_SECRET=your_own_algolia_api_key`
+
+Setup OAuth social api
+
+Take a look file `.env.example` and fill your own app ID and app secret key.
 
 ## Contributing
 

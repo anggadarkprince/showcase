@@ -211,6 +211,22 @@ Route::group(['domain' => 'account.laravel.dev'], function () {
     $this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('account.register');
     $this->post('register', 'Auth\RegisterController@register');
 
+    // Social Auth Github
+    Route::get('login/github', 'OAuth\GithubController@redirectToProvider')->name('github.provider');
+    Route::get('login/github/callback', 'OAuth\GithubController@handleProviderCallback')->name('github.callback');
+
+    // Social Auth Twitter
+    Route::get('login/twitter', 'OAuth\TwitterController@redirectToProvider')->name('twitter.provider');
+    Route::get('login/twitter/callback', 'OAuth\TwitterController@handleProviderCallback')->name('twitter.callback');
+
+    // Social Auth Facebook
+    Route::get('login/facebook', 'OAuth\FacebookController@redirectToProvider')->name('facebook.provider');
+    Route::get('login/facebook/callback', 'OAuth\FacebookController@handleProviderCallback')->name('facebook.callback');
+
+    // Social Auth Google
+    Route::get('login/google', 'OAuth\GoogleController@redirectToProvider')->name('google.provider');
+    Route::get('login/google/callback', 'OAuth\GoogleController@handleProviderCallback')->name('google.callback');
+
     // Password Reset Routes...
     $this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
     $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');

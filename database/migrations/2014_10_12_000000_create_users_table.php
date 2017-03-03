@@ -28,6 +28,8 @@ class CreateUsersTable extends Migration
             $table->enum('status', ['activated', 'pending', 'suspended'])->default('pending');
             $table->string('api_token', 60)->unique();
             $table->string('token', 50)->unique();
+            $table->string('provider', 50)->default('web');
+            $table->string('provider_id', 200)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

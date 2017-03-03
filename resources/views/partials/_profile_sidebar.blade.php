@@ -5,7 +5,7 @@
             <a href="{{ route('profile.show', [$user->username]) }}" class="name">{{ $user->name }}</a>
             <p class="username">{{ "@{$user->username}" }}</p>
             <p class="location"><span class="glyphicon glyphicon-map-marker"></span> {{ $user->location }}</p>
-            <p class="about hidden-xs">{{ $user->about }}</p>
+            <p class="about hidden-xs">{!! $user->about !!}</p>
         </div>
         @if(Auth::check())
             <?php $loggedUser = Auth::user(); ?>
@@ -21,7 +21,7 @@
         </li>
         <li class="list-group-item">
             <strong>Email</strong>
-            <p>{{ $user->email }}</p>
+            <p><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></p>
         </li>
         <li class="list-group-item">
             <strong>Birthday</strong>
@@ -29,11 +29,11 @@
         </li>
         <li class="list-group-item">
             <strong>Contact</strong>
-            <p>{{ $user->contact }}</p>
+            <p>{{ $user->contact or "-" }}</p>
         </li>
         <li class="list-group-item">
             <strong>Gender</strong>
-            <p>{{ $user->gender }}</p>
+            <p>{{ $user->gender or "-" }}</p>
         </li>
     </ul>
 </div>
