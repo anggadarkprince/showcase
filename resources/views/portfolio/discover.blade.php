@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', '- Portfolios')
+
 @section('content')
     <div class="container">
         <h1 class="page-title">{!! $title !!}

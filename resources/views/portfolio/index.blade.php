@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', '- My Portfolio')
+
 @section('content')
     <div class="container">
         <h1 class="page-title">My Portfolio

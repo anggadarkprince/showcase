@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', '- Search Result of '.request('q'))
+
 @section('content')
     <div class="container search-container">
         <h1 class="page-title">Result of '{{ request('q') }}'
