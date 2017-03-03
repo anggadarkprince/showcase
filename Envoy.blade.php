@@ -8,13 +8,13 @@
     $release = 'release_' . date('YmdHis');
 @endsetup
 
-@macro('deploy', ['on' => 'web'])
+@story('deploy', ['on' => 'web', 'confirm' => true])
     fetch_repo
     run_composer
     update_permissions
     update_symlinks
     completion
-@endmacro
+@endstory
 
 @task('fetch_repo')
     echo "----";
@@ -57,3 +57,7 @@
     echo "----";
     echo "Complete!";
 @endtask
+
+@finished
+    @slack('webhook-url', '#bots')
+@endfinished
