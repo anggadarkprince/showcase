@@ -102,7 +102,7 @@ $style = [
                                            cellpadding="0" cellspacing="0">
                                         <tr>
                                             <td align="center">
-                                                <a href="{{ url('activation', $user->token) }}"
+                                                <a href="{{ route('account.activation', [$user->token]) }}"
                                                    style="{{ $fontFamily }} {{ $style['button'] }} {{ $style['button--green'] }}"
                                                    class="button"
                                                    target="_blank">
@@ -128,8 +128,8 @@ $style = [
 
                                                 <p style="{{ $style['paragraph-sub'] }}">
                                                     <a style="{{ $style['anchor'] }}"
-                                                       href="{{ url('activation', $user->token) }}" target="_blank">
-                                                        {{ url('activation', $user->token) }}
+                                                       href="{{ route('account.activation', [$user->token]) }}" target="_blank">
+                                                        {{ route('account.activation', [$user->token]) }}
                                                     </a>
                                                 </p>
                                             </td>

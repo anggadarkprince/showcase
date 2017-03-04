@@ -234,7 +234,7 @@ Route::group(['domain' => 'account.laravel.dev'], function () {
     $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
     // Activation Route...
-    Route::get('/activation/{token}', 'Auth\RegisterController@userActivation');
+    Route::get('/activation/{token}', 'Auth\RegisterController@userActivation')->name('account.activation');
 
     // After Login Route...
     Route::get('/', [
@@ -263,6 +263,11 @@ Route::group(['domain' => 'account.laravel.dev'], function () {
         Route::delete('/screenshot/delete/{screenshot}', [
             'as' => 'account.screenshot.destroy',
             'uses' => 'ScreenshotController@deleteScreenshot'
+        ]);
+
+        Route::get('/activities', [
+            'as' => 'account.activity',
+            'uses' => 'ActivityController@index'
         ]);
 
         Route::put('/settings', [

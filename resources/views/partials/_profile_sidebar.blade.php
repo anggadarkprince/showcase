@@ -4,7 +4,7 @@
         <div class="profile-wrapper">
             <a href="{{ route('profile.show', [$user->username]) }}" class="name">{{ $user->name }}</a>
             <p class="username">{{ "@{$user->username}" }}</p>
-            <p class="location"><span class="glyphicon glyphicon-map-marker"></span> {{ $user->location }}</p>
+            <p class="location"><span class="glyphicon glyphicon-map-marker"></span> {{ $user->location or "No location" }}</p>
             <p class="about hidden-xs">{!! $user->about !!}</p>
         </div>
         @if(Auth::check())
@@ -25,7 +25,7 @@
         </li>
         <li class="list-group-item">
             <strong>Birthday</strong>
-            <p>{{ $user->birthday->format('d F Y') }}</p>
+            <p>@if(is_null($user->birthday)){{ "-" }}@else{{ $user->birthday->format('d F Y') }}@endif</p>
         </li>
         <li class="list-group-item">
             <strong>Contact</strong>

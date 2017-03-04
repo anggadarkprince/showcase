@@ -118,6 +118,7 @@
                                     <li>
                                         <a href="{{ route('account.show', [Auth::user()->username]) }}">@lang('page.menu.dashboard')</a>
                                         <a href="{{ route('account.portfolio', [Auth::user()->username]) }}">@lang('page.menu.portfolio')</a>
+                                        <a href="{{ route('account.activity', [Auth::user()->username]) }}">@lang('page.menu.activity')</a>
                                         <a href="{{ route('account.settings', [Auth::user()->username]) }}">@lang('page.menu.setting')</a>
                                         <a href="{{ route('account.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             @lang('page.menu.logout')

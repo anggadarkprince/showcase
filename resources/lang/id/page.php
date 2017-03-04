@@ -9,6 +9,7 @@ return [
         'dashboard' => 'Dasbor',
         'user' => 'Akun',
         'portfolio' => 'Portofolio',
+        'activity' => 'Aktivitas',
         'tag' => 'Kata Kunci',
         'category' => 'Kategori',
         'report' => 'Laporan',

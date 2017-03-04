@@ -45,6 +45,36 @@ class User extends Authenticatable
     }
 
     /**
+     * Route notifications for the mail channel.
+     *
+     * @return string
+     */
+    public function routeNotificationForMail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Route notifications for the Nexmo channel.
+     *
+     * @return string
+     */
+    public function routeNotificationForNexmo()
+    {
+        return $this->contact;
+    }
+
+    /**
+     * Route notifications for the Slack channel.
+     *
+     * @return string
+     */
+    public function routeNotificationForSlack()
+    {
+        return env('SLACK_WEBHOOK_URL');
+    }
+
+    /**
      * Additional query scope, select published article only.
      *
      * @param $query

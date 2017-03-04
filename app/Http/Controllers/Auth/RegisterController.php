@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Mail\UserRegistered;
+use App\Notifications\WelcomeGreeting;
 use App\User;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -70,6 +72,7 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'contact' => $data['contact'],
             'api_token' => str_random(60),
             'token' => str_random(50),
         ]);
@@ -110,6 +113,10 @@ class RegisterController extends Controller
                     ->with('success', "User is already activated.");
             }
             $user->update(['status' => 'activated']);
+
+            $when = Carbon::now()->addSeconds(10);
+            $user->notify((new WelcomeGreeting($user))->delay($when));
+
             return redirect()->to('login')
                 ->with('success', "User active successfully.");
         }

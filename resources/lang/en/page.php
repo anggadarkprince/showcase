@@ -9,6 +9,7 @@ return [
         'dashboard' => 'Dashboard',
         'user' => 'User',
         'portfolio' => 'Portfolio',
+        'activity' => 'Activity',
         'tag' => 'Tag',
         'category' => 'Category',
         'report' => 'Report',

@@ -37,6 +37,10 @@ Setup OAuth social api
 
 Take a look file `.env.example` and fill your own app ID and app secret key.
 
+Setup notification
+
+Setting up your keys for NEXMO for SMS notification and Incoming WebHooks for Slack channel message
+
 ## Contributing
 
 Thank you for considering contributing to the Showcase App.

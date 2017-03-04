@@ -66,6 +66,24 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('contact') ? ' has-error' : '' }}">
+                            <label for="name" class="col-md-4 control-label">
+                                @lang('page.field.contact')
+                            </label>
+
+                            <div class="col-md-6">
+                                <input id="contact" type="tel" class="form-control"
+                                       name="contact" value="{{ old('contact', '+62') }}"
+                                       placeholder="@lang('page.field.contact')">
+
+                                @if ($errors->has('contact'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('contact') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">
                                 @lang('page.field.password')
