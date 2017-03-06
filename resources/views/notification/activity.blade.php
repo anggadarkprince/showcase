@@ -3,18 +3,26 @@
 @section('title', '- Activities')
 
 @section('content')
-    <div class="container">
+    <div class="container activity-wrapper" data-id="{{ Auth::user()->id }}">
         <h1 class="page-title">Activities</h1>
 
         @include('errors.common')
 
-        <ul class="list-unstyled">
+        <ul class="list-unstyled activity-unread-wrapper">
             <li class="text-primary m-b-sm">Unread Notifications</li>
             @forelse($user->unreadNotifications as $notification)
 
                 <li class="m-b-sm">
-                    Hi {{ $notification->data['name'] }},<br>
-                    {{ $notification->data['message'] }}
+                    @if($notification->type == \App\Notifications\WelcomeGreeting::class)
+                        Hi {{ $notification->data['name'] }},<br>
+                        {{ $notification->data['message'] }}
+                    @elseif($notification->type == \App\Notifications\UpdateActivityView::class)
+                        <a href="{{ route('profile.show', [$notification->data['username']]) }}">
+                            {{ '@'.$notification->data['username'] }}
+                        </a>
+                        {{ $notification->data['message'] }}
+                    @endif
+
                     @if(is_null($notification->read_at))
                         <span class="label label-primary m-l-sm">NEW</span>
                     @endif
@@ -31,8 +39,16 @@
                 @if(!is_null($notification->read_at))
                     @php $count++; @endphp
                     <li class="m-b-sm">
-                        Hi {{ $notification->data['name'] }},<br>
-                        {{ $notification->data['message'] }}
+                        @if($notification->type == \App\Notifications\WelcomeGreeting::class)
+                            Hi {{ $notification->data['name'] }},<br>
+                            {{ $notification->data['message'] }}
+                        @elseif($notification->type == \App\Notifications\UpdateActivityView::class)
+                            <a href="{{ route('profile.show', [$notification->data['username']]) }}">
+                                {{ '@'.$notification->data['username'] }}
+                            </a>
+                            {{ $notification->data['message'] }}
+                        @endif
+
                         @if(is_null($notification->read_at))
                             <span class="label label-primary m-l-sm">NEW</span>
                         @endif

@@ -41,6 +41,9 @@ Setup notification
 
 Setting up your keys for NEXMO for SMS notification and Incoming WebHooks for Slack channel message
 
+Setup Broadcasting Service
+
+Setting up pusher keys and secret to use broadcast service.
 ## Contributing
 
 Thank you for considering contributing to the Showcase App.

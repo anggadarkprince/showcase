@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Events\PortfolioCreated;
+use App\Notifications\UpdateActivityView;
 use App\Portfolio;
 use App\Tag;
 use App\User;
@@ -166,6 +167,8 @@ class PortfolioController extends Controller
         $portfolio->increment('view');
 
         $portfolios = $portfolio->portfolioRelated($user);
+
+        $portfolio->user->notify(new UpdateActivityView($user, $portfolio));
 
         return view('portfolio.show', compact('user', 'portfolio', 'portfolios'));
     }

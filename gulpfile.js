@@ -25,7 +25,7 @@ elixir((mix) => {
     mix.styles(['helper.css','misc.css'], 'public/css/support.css');
 
     // combine scripts
-    mix.scripts(['vendor/typeahead.bundle.js', 'scrollto.js', 'functions.js', 'scripts.js', 'dashboard.js'],
+    mix.scripts(['vendor/typeahead.bundle.js', 'scrollto.js', 'functions.js', 'scripts.js', 'pushmessages.js'],
         'public/js/functions.js');
 
     // copy file
