@@ -108,9 +108,17 @@ class Portfolio extends Model
         return $related;
     }
 
-    public function discover()
+    public function discover($user)
     {
-        return $this->latest()->take(6)->get();
+        $userInterest = Tag::whereHas('portfolios', function($query) use($user) {
+            $query->where('user_id', $user->id);
+        })->get()->pluck('id')->toArray();
+
+        $portfolios = Portfolio::whereHas('tags', function($query) use($userInterest){
+            $query->whereIn('tags.id', $userInterest);
+        })->latest()->take(6)->get();
+
+        return $portfolios;
     }
 
     /**

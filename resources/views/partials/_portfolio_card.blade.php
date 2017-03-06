@@ -56,5 +56,5 @@
         </div>
     </div>
 @empty
-    <p class="text-center">Query not found, try another keyword</p>
+    <p class="text-center">No result of portfolio discovery.</p>
 @endforelse

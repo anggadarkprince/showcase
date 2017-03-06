@@ -21,6 +21,7 @@
             'rootUrl' => route('index')
         ]); ?>
     </script>
+
 </head>
 <body>
     <div id="app">

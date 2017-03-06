@@ -133,7 +133,7 @@ class PortfolioController extends Controller
                 $this->uploadScreenshots($portfolio, $request->file('screenshots'));
 
                 // trigger event portfolio was created
-                event(new PortfolioCreated($portfolio));
+                broadcast(new PortfolioCreated($portfolio));
 
                 // all good, send success message
                 return redirect()->route('account.portfolio', [$user->username])->with([

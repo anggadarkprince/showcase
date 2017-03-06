@@ -17,9 +17,7 @@ require('laravel-elixir-vue-2');
 elixir((mix) => {
     mix.sass('app.scss')
        .webpack('app.js');
-});
 
-elixir(function(mix) {
     // compile and combine admin (+css) sass files
     mix.sass(['admin.scss', '../css/simple-sidebar.css'], 'public/css/admin.css');
 
@@ -27,7 +25,8 @@ elixir(function(mix) {
     mix.styles(['helper.css','misc.css'], 'public/css/support.css');
 
     // combine scripts
-    mix.scripts(['vendor/typeahead.bundle.js', 'scrollto.js', 'functions.js', 'scripts.js'], 'public/js/functions.js');
+    mix.scripts(['vendor/typeahead.bundle.js', 'scrollto.js', 'functions.js', 'scripts.js', 'dashboard.js'],
+        'public/js/functions.js');
 
     // copy file
     mix.copy('resources/assets/js/fontloader.js', 'public/js/fontloader.js')

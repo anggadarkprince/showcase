@@ -17,5 +17,9 @@
     "typeahead": "^0.2.2",
     "vue": "^2.0.1",
     "vue-resource": "^1.0.3"
+  },
+  "dependencies": {
+    "laravel-echo": "^1.2.5",
+    "pusher-js": "^4.0.0"
   }
 }

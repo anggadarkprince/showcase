@@ -22,5 +22,10 @@ class BroadcastServiceProvider extends ServiceProvider
         Broadcast::channel('App.User.*', function ($user, $userId) {
             return (int) $user->id === (int) $userId;
         });
+
+        /* all broadcast authorization route moved in routes/channels
+        Broadcast::channel('discovery.portfolio', function ($user) {
+            return true;
+        });*/
     }
 }

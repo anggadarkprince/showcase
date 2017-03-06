@@ -16,7 +16,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row showcase-today-wrapper">
                 @include('partials._portfolio_card', [
                     'columns' => 'col-sm-6 col-lg-4',
                     'showUserLink' => true

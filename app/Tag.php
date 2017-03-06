@@ -12,6 +12,6 @@ class Tag extends Model
 
     public function portfolios()
     {
-        return $this->belongsToMany(Tag::class, 'portfolio_tags');
+        return $this->belongsToMany(Portfolio::class, 'portfolio_tags');
     }
 }

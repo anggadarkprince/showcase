@@ -39,9 +39,15 @@
                                 {!! $errors->first('about', '<span class="help-block">:message</span>') !!}
                             </div>
                             <div class="form-group {{ $errors->has('birthday') ? 'has-error' : '' }}">
+                                @php
+                                    $birthday = '';
+                                    if (!is_null($user->birthday)){
+                                        $birthday = $user->birthday->format('Y-m-d');
+                                    }
+                                @endphp
                                 <label for="birthday" class="control-label">Birthday</label>
                                 <input type="date" class="form-control" name="birthday" id="birthday"
-                                       value="{{ old('birthday', $user->birthday->format('Y-m-d')) }}" placeholder="Birthday">
+                                       value="{{ old('birthday', $birthday) }}" placeholder="Birthday">
                                 {!! $errors->first('birthday', '<span class="help-block">:message</span>') !!}
                             </div>
                             <div class="form-group {{ $errors->has('avatar') ? 'has-error' : '' }}">
