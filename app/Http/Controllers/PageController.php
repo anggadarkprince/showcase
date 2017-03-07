@@ -5,16 +5,32 @@ namespace App\Http\Controllers;
 use App\Portfolio;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class PageController extends Controller
 {
-    public function explore()
+    public function explore(Request $request)
     {
         $portfolios = new Portfolio();
         $portfolios = $portfolios->explore();
         $title = 'Discover Masterpiece';
         $explore_active = true;
-        return view('portfolio.discover', compact('portfolios', 'title', 'explore_active'));
+
+        $page = $request->get('page', 1);
+
+        // Check cache first
+        $pageCached = Cache::tags('discover')->get('explore_page_' . $page);
+
+        if ($pageCached != null) {
+            return $pageCached;
+        }
+
+        $renderedView = view('portfolio.discover',
+            compact('portfolios', 'title', 'explore_active'))->render();
+
+        Cache::tags('discover')->put('explore_page_' . $page, $renderedView, 60);
+
+        return $renderedView;
     }
 
     public function help()
