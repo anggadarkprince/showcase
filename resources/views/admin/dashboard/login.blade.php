@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }} Administrator</title>
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -50,7 +50,7 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
-                    @if (Auth::guest())
+                    @if (Auth::guard('admin')->guest())
                         <li><a href="{{ route('index') }}">@lang('page.menu.home')</a></li>
                         <li><a href="{{ route('page.explore') }}">@lang('page.menu.explore')</a></li>
                     @else
@@ -138,7 +138,7 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{ elixir('js/app.js') }}"></script>
-<script src="{{ elixir('js/functions.js') }}"></script>
+<script src="{{ mix('js/app.js') }}"></script>
+<script src="{{ mix('js/functions.js') }}"></script>
 </body>
 </html>

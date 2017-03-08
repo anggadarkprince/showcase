@@ -121,6 +121,6 @@ return [
         'delete' => 'Are you sure want to delete this :item?',
         'deleted' => ':item was successfully deleted',
         'contact' => 'All question about this code please ask me at',
-        'about' => 'This program is skeleton of Showcase App and for very first version just sandbox and learning app of Laravel 5.3 in January 2017',
+        'about' => 'This program is skeleton of Showcase App and for very first version just sandbox and learning app of Laravel 5.4 in March 2017',
     ]
 ];

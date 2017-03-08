@@ -120,6 +120,6 @@ return [
         'delete' => 'Anda yakin ingin menghapus :item ini?',
         'deleted' => ':item telah berhasil dihapus',
         'contact' => 'Semua pertanyaan tentang kode program ini tanyakan melalui',
-        'about' => 'Program ini merupakan purwarupa dari aplikasi Showcase dan versi pertama ini hanya sebuah contoh latihan menggunakan Laravel 5.3 per Januari tahun 2017',
+        'about' => 'Program ini merupakan purwarupa dari aplikasi Showcase dan versi pertama ini hanya sebuah contoh latihan menggunakan Laravel 5.4 per Maret tahun 2017',
     ]
 ];
