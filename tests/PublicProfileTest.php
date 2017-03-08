@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Notification;
 
 class PublicProfileTest extends BrowserKitTestCase
 {
@@ -12,6 +13,8 @@ class PublicProfileTest extends BrowserKitTestCase
      */
     public function testAccountProfileByUsername()
     {
+        Notification::fake();
+
         // visit an user
         $user = \App\User::find(1);
         $this->visitRoute('profile.show', ['user' => $user->username])
@@ -26,7 +29,7 @@ class PublicProfileTest extends BrowserKitTestCase
             ->see('Showcases');
 
         // check if they have portfolio, if they have, check content of portfolio
-        $portfolio = $user->portfolios()->latest()->first();
+        $portfolio = $user->portfolios()->latest('date')->first();
 
         if ($portfolio->count() > 0) {
             $this->see($portfolio->title);
