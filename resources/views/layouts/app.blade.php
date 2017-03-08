@@ -11,8 +11,8 @@
     <title>{{ config('app.name', 'Laravel') }} @yield('title')</title>
 
     <!-- Styles -->
-    <link href="{{ elixir('css/support.css') }}" rel="stylesheet">
-    <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/support.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -147,8 +147,10 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ elixir('js/app.js') }}"></script>
-    <script src="{{ elixir('js/functions.js') }}"></script>
+    <script src="{{ mix('js/manifest.js') }}"></script>
+    <script src="{{ mix('js/vendor.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('js/functions.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
     <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
     <script>

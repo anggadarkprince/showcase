@@ -11,8 +11,8 @@
 
     <title>Showcase - @yield('title')</title>
 
-    <link href="{{ elixir('css/support.css') }}" rel="stylesheet">
-    <link href="{{ elixir('css/admin.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/support.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/admin.css') }}" rel="stylesheet">
 
     <script>
         window.Showcase = <?php echo json_encode([
@@ -27,7 +27,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body id="app">
+<body>
 <div id="wrapper">
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
@@ -38,11 +38,11 @@
                 </a>
             </li>
             <?php
-                $segment = 1;
-                $locale = Request::segment(1, '');
-                if(array_key_exists($locale, config('app.locales'))){
-                    $segment = 2;
-                }
+            $segment = 1;
+            $locale = Request::segment(1, '');
+            if(array_key_exists($locale, config('app.locales'))){
+                $segment = 2;
+            }
             ?>
             <li {{ Request::segment($segment) == 'dashboard' ? 'class=active' : '' }}>
                 <a href="{{ route('admin.dashboard') }}">
@@ -50,11 +50,11 @@
                 </a>
             </li>
             @can('view', \App\User::class)
-            <li {{ Request::segment($segment) == 'users' ? 'class=active' : '' }}>
-                <a href="{{ route('admin.user') }}">
-                    <i class="glyphicon glyphicon-user"></i>@lang('page.menu.user')
-                </a>
-            </li>
+                <li {{ Request::segment($segment) == 'users' ? 'class=active' : '' }}>
+                    <a href="{{ route('admin.user') }}">
+                        <i class="glyphicon glyphicon-user"></i>@lang('page.menu.user')
+                    </a>
+                </li>
             @endcan
             <li {{ Request::segment($segment) == 'portfolios' ? 'class=active' : '' }}>
                 <a href="{{ route('admin.portfolio') }}">
@@ -101,8 +101,10 @@
 </div>
 <!-- /#wrapper -->
 
-<script src="{{ elixir('js/app.js') }}"></script>
-<script src="{{ elixir('js/functions.js') }}"></script>
+<script src="{{ mix('js/manifest.js') }}"></script>
+<script src="{{ mix('js/vendor.js') }}"></script>
+<script src="{{ mix('js/app.js') }}"></script>
+<script src="{{ mix('js/functions.js') }}"></script>
 <script>
     $.ajaxSetup({
         headers: {
