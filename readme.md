@@ -15,7 +15,7 @@ Make sure you have installed NodeJS and NPM,
 Run `npm install`
 
 #### Compile Assets
-Run `gulp` or `gulp --production`
+Run `npm run dev`
 
 #### Setting Host File
 Configure virtual host for:
@@ -24,26 +24,19 @@ Configure virtual host for:
 * admin.laravel.dev
 
 #### Environment File Config
-Set session domain in .env to<br>
+1. Set session domain in .env to<br>
 
 `SESSION_DOMAIN=.laravel.dev`
 
-Setup Algolia search service with your api
+2. Setup Algolia search service with your api
 
-`ALGOLIA_APP_ID=your_own_algolia_app_id`<br>
-`ALGOLIA_SECRET=your_own_algolia_api_key`
+3. Setup OAuth social api
 
-Setup OAuth social api
+4. Setup notification
 
-Take a look file `.env.example` and fill your own app ID and app secret key.
+5. Setting up your keys for NEXMO for SMS notification and Incoming WebHooks for Slack channel message
 
-Setup notification
-
-Setting up your keys for NEXMO for SMS notification and Incoming WebHooks for Slack channel message
-
-Setup Broadcasting Service
-
-Setting up pusher keys and secret to use broadcast service.
+6. Setup Broadcasting Service: Setting up pusher keys and secret to use broadcast service.
 ## Contributing
 
 Thank you for considering contributing to the Showcase App.
