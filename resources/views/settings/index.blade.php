@@ -5,8 +5,17 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-lg-10 col-lg-offset-1">
-                <h1 class="page-title">Settings</h1>
+            <div class="col-md-4 col-lg-3">
+                @include('partials._profile_sidebar')
+            </div>
+            <div class="col-md-8 col-lg-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Settings</div>
+                        </div>
+                    </div>
+                </div>
 
                 @include('errors.common')
 
@@ -14,13 +23,13 @@
                     {{ method_field('put') }}
                     {{ csrf_field() }}
                     <div class="row field-group">
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <div class="form-title">
                                 <h4>Profile</h4>
                                 <p>Change user account information</p>
                             </div>
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-md-8">
                             <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                                 <label for="name" class="control-label">Name</label>
                                 <input type="text" class="form-control" name="name" id="name"
@@ -82,13 +91,13 @@
                         </div>
                     </div>
                     <div class="row field-group">
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <div class="form-title">
                                 <h4>Contact</h4>
                                 <p>Reach phone and address</p>
                             </div>
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-md-8">
                             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                                 <label for="email" class="control-label">Email address</label>
                                 <input type="email" class="form-control" name="email" id="email"
@@ -110,13 +119,13 @@
                         </div>
                     </div>
                     <div class="row field-group">
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <div class="form-title">
                                 <h4>Password</h4>
                                 <p>Organize your security profile</p>
                             </div>
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-md-8">
                             <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
                                 <label for="password" class="control-label">Password</label>
                                 <input type="password" class="form-control" name="password" id="password" placeholder="Password">
@@ -135,11 +144,12 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-7 col-md-push-5">
+                        <div class="col-md-8 col-md-push-4">
                             <button type="submit" class="btn btn-primary">Save Settings</button>
                         </div>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
