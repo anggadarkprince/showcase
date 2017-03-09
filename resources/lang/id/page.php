@@ -10,6 +10,7 @@ return [
         'user' => 'Akun',
         'portfolio' => 'Portofolio',
         'activity' => 'Aktivitas',
+        'developer' => 'Pengembang',
         'tag' => 'Kata Kunci',
         'category' => 'Kategori',
         'report' => 'Laporan',

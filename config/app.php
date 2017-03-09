@@ -167,6 +167,7 @@ return [
 
         Laravel\Scout\ScoutServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
         /*
          * Package Service Providers...
          */

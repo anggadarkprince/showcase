@@ -10,6 +10,7 @@ return [
         'user' => 'User',
         'portfolio' => 'Portfolio',
         'activity' => 'Activity',
+        'developer' => 'Developer',
         'tag' => 'Tag',
         'category' => 'Category',
         'report' => 'Report',

@@ -120,6 +120,7 @@
                                         <a href="{{ route('account.show', [Auth::user()->username]) }}">@lang('page.menu.dashboard')</a>
                                         <a href="{{ route('account.portfolio', [Auth::user()->username]) }}">@lang('page.menu.portfolio')</a>
                                         <a href="{{ route('account.activity', [Auth::user()->username]) }}">@lang('page.menu.activity')</a>
+                                        <a href="{{ route('account.developer', [Auth::user()->username]) }}">@lang('page.menu.developer')</a>
                                         <a href="{{ route('account.settings', [Auth::user()->username]) }}">@lang('page.menu.setting')</a>
                                         <a href="{{ route('account.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             @lang('page.menu.logout')
@@ -151,6 +152,12 @@
     <script src="{{ mix('js/vendor.js') }}"></script>
     <script src="{{ mix('js/app.js') }}"></script>
     <script src="{{ mix('js/functions.js') }}"></script>
+    <script>
+        axios.get('/api/user')
+                .then(response => {
+                    console.log(response.data);
+                });
+    </script>
     <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
     <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
     <script>

@@ -187,11 +187,6 @@ Route::group(['domain' => 'admin.laravel.dev', 'namespace' => 'Admin'], function
             ]
         ]);
 
-        Route::get('report', [
-            'as' => 'admin.report',
-            'uses' => 'ReportController@index'
-        ]);
-
         Route::any('contact', [
             'as' => 'admin.contact',
             'uses' => 'ContactController'
@@ -268,6 +263,11 @@ Route::group(['domain' => 'account.laravel.dev'], function () {
         Route::get('/activities', [
             'as' => 'account.activity',
             'uses' => 'ActivityController@index'
+        ]);
+
+        Route::get('/developer', [
+            'as' => 'account.developer',
+            'uses' => 'DeveloperController@index'
         ]);
 
         Route::put('/settings', [
